@@ -3,6 +3,33 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Carent brand colors */
+  --carent-yellow: #FFD700;
+  --carent-dark: #111111;
+  --carent-text: #1a1a1a;
+  --carent-gray: #f5f5f5;
+  
+  /* Gray scale */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  /* Additional colors */
+  --dark-bg: #111111;
+  --dark-secondary: #1C1C1C;
+  --dark-border: #222;
+  --dark-border-light: #333;
+  
+  /* Yellow variants */
+  --yellow-400: #facc15;
 }
 
 @theme inline {
@@ -24,3 +51,97 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Custom scrollbar styles */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Color utility classes */
+.bg-white { background-color: #ffffff; }
+.bg-black { background-color: #000000; }
+.text-white { color: #ffffff; }
+.text-black { color: #000000; }
+
+/* Carent brand colors */
+.bg-carent-yellow { background-color: var(--carent-yellow); }
+.bg-carent-dark { background-color: var(--carent-dark); }
+.bg-carent-text { background-color: var(--carent-text); }
+.bg-carent-gray { background-color: var(--carent-gray); }
+
+.text-carent-yellow { color: var(--carent-yellow); }
+.text-carent-dark { color: var(--carent-dark); }
+.text-carent-text { color: var(--carent-text); }
+
+.border-carent-yellow { border-color: var(--carent-yellow); }
+.border-carent-dark { border-color: var(--carent-dark); }
+
+/* Gray colors */
+.bg-gray-50 { background-color: var(--gray-50); }
+.bg-gray-100 { background-color: var(--gray-100); }
+.bg-gray-200 { background-color: var(--gray-200); }
+.bg-gray-300 { background-color: var(--gray-300); }
+.bg-gray-400 { background-color: var(--gray-400); }
+.bg-gray-500 { background-color: var(--gray-500); }
+.bg-gray-600 { background-color: var(--gray-600); }
+.bg-gray-700 { background-color: var(--gray-700); }
+.bg-gray-800 { background-color: var(--gray-800); }
+.bg-gray-900 { background-color: var(--gray-900); }
+
+.text-gray-50 { color: var(--gray-50); }
+.text-gray-100 { color: var(--gray-100); }
+.text-gray-200 { color: var(--gray-200); }
+.text-gray-300 { color: var(--gray-300); }
+.text-gray-400 { color: var(--gray-400); }
+.text-gray-500 { color: var(--gray-500); }
+.text-gray-600 { color: var(--gray-600); }
+.text-gray-700 { color: var(--gray-700); }
+.text-gray-800 { color: var(--gray-800); }
+.text-gray-900 { color: var(--gray-900); }
+
+.border-gray-50 { border-color: var(--gray-50); }
+.border-gray-100 { border-color: var(--gray-100); }
+.border-gray-200 { border-color: var(--gray-200); }
+.border-gray-300 { border-color: var(--gray-300); }
+.border-gray-400 { border-color: var(--gray-400); }
+.border-gray-500 { border-color: var(--gray-500); }
+.border-gray-600 { border-color: var(--gray-600); }
+.border-gray-700 { border-color: var(--gray-700); }
+.border-gray-800 { border-color: var(--gray-800); }
+
+/* Dark theme colors */
+.bg-dark-secondary { background-color: var(--dark-secondary); }
+.border-dark-border { border-color: var(--dark-border); }
+.border-dark-border-light { border-color: var(--dark-border-light); }
+
+/* Yellow variants */
+.bg-yellow-400 { background-color: var(--yellow-400); }
+.hover\:bg-yellow-400:hover { background-color: var(--yellow-400); }
+
+/* Hover states */
+.hover\:bg-carent-yellow:hover { background-color: var(--carent-yellow); }
+.hover\:text-carent-yellow:hover { color: var(--carent-yellow); }
+.hover\:text-white:hover { color: #ffffff; }
+.hover\:text-carent-dark:hover { color: var(--carent-dark); }
+.hover\:bg-black:hover { background-color: #000000; }
+.hover\:text-black:hover { color: #000000; }
+.hover\:bg-gray-800:hover { background-color: var(--gray-800); }
+.hover\:text-gray-300:hover { color: var(--gray-300); }
+
+/* Focus states */
+.focus\:border-carent-yellow:focus { border-color: var(--carent-yellow); }
+
+/* Opacity variants */
+.text-white\/80 { color: rgba(255, 255, 255, 0.8); }
+.bg-white\/5 { background-color: rgba(255, 255, 255, 0.05); }
+.bg-carent-yellow\/10 { background-color: rgba(255, 215, 0, 0.1); }
+
+/* Gradient */
+.from-black\/70 { --tw-gradient-from: rgba(0, 0, 0, 0.7); }
+.via-black\/40 { --tw-gradient-via: rgba(0, 0, 0, 0.4); }
+.to-transparent { --tw-gradient-to: transparent; }
