@@ -2,7 +2,15 @@
 
 import React from "react";
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, X } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  X,
+  MapPin,
+  Phone,
+  Mail,
+} from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
@@ -10,7 +18,7 @@ export const Footer: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-20 mb-16">
           {/* Left Column: Logo, Description & Newsletter */}
-          <div className="lg:w-5/12">
+          <div className="lg:w-4/12">
             <Link href="/" className="flex items-center gap-3 mb-6 w-fit">
               <div className="w-12 h-12 bg-carent-yellow rounded-full flex items-center justify-center">
                 <div className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[11px] border-b-black transform rotate-0" />
@@ -43,11 +51,11 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Links */}
-          <div className="lg:w-6/12 flex flex-col sm:flex-row gap-12 sm:gap-16">
+          {/* Right Column: Links & Location */}
+          <div className="lg:w-8/12 flex flex-col sm:flex-row gap-12 sm:gap-16">
             {/* Pages */}
             <div>
-              <h4 className="text-lg font-bold mb-6">Pages</h4>
+              <h4 className="text-lg font-bold mb-6 text-white">Pages</h4>
               <ul className="space-y-3 text-gray-400">
                 <li>
                   <Link
@@ -102,7 +110,7 @@ export const Footer: React.FC = () => {
 
             {/* Legal */}
             <div>
-              <h4 className="text-lg font-bold mb-6">Legal</h4>
+              <h4 className="text-lg font-bold mb-6 text-white">Legal</h4>
               <ul className="space-y-3 text-gray-400">
                 <li>
                   <Link
@@ -119,6 +127,44 @@ export const Footer: React.FC = () => {
                   >
                     Privacy Policy
                   </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Location & Contact Info */}
+            <div>
+              <h4 className="text-lg font-bold mb-6 text-white">Location</h4>
+              <ul className="space-y-4 text-gray-400">
+                <li className="flex items-start gap-3">
+                  <MapPin
+                    size={20}
+                    className="text-carent-yellow mt-0.5 shrink-0"
+                  />
+                  <span className="leading-relaxed">
+                    123 Main Street,
+                    <br />
+                    City Center, State 12345
+                    <br />
+                    United States
+                  </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone size={20} className="text-carent-yellow shrink-0" />
+                  <a
+                    href="tel:+1234567890"
+                    className="hover:text-carent-yellow transition-colors"
+                  >
+                    +1 (234) 567-890
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail size={20} className="text-carent-yellow shrink-0" />
+                  <a
+                    href="mailto:info@carent.com"
+                    className="hover:text-carent-yellow transition-colors"
+                  >
+                    info@carent.com
+                  </a>
                 </li>
               </ul>
             </div>
