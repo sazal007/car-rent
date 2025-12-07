@@ -53,7 +53,7 @@ export default function CarsDetailsView() {
       <div className="container mx-auto px-4 md:px-6 mb-20">
         <div className="flex flex-col lg:flex-row gap-12 relative items-start">
           {/* Left: Sticky Image */}
-          <div className="lg:w-1/2 w-full sticky top-36 self-start">
+          <div className="lg:w-1/2 w-full lg:sticky lg:top-36 self-start">
             <div className="bg-carent-gray rounded-lg overflow-hidden h-[400px] md:h-[500px]">
               <Image
                 src={car.image}
