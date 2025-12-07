@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { CARS } from "@/constants";
 import { CarFilter } from "@/components/cars/CarFilter";
@@ -9,7 +9,7 @@ import { CarPagination } from "@/components/cars/CarPagination";
 
 const ITEMS_PER_PAGE = 4;
 
-export default function VehiclesPage() {
+function VehiclesContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
 
@@ -53,6 +53,43 @@ export default function VehiclesPage() {
   }, []);
 
   return (
+    <>
+      {/* Filter */}
+      <CarFilter
+        activeCategory={activeCategory}
+        onCategoryChange={setActiveCategory}
+      />
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {currentCars.map((car) => (
+          <CarCard key={car.id} car={car} />
+        ))}
+      </div>
+
+      {/* Empty State */}
+      {currentCars.length === 0 && (
+        <div className="text-center py-20">
+          <p className="text-gray-500 text-lg">
+            No vehicles found in this category.
+          </p>
+        </div>
+      )}
+
+      {/* Pagination */}
+      {filteredCars.length > ITEMS_PER_PAGE && (
+        <CarPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      )}
+    </>
+  );
+}
+
+export default function VehiclesPage() {
+  return (
     <div className="pt-56 pb-20 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
@@ -60,36 +97,16 @@ export default function VehiclesPage() {
           <h1 className="text-6xl font-semibold text-carent-text mb-4">Cars</h1>
         </div>
 
-        {/* Filter */}
-        <CarFilter
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-        />
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {currentCars.map((car) => (
-            <CarCard key={car.id} car={car} />
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {currentCars.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">
-              No vehicles found in this category.
-            </p>
-          </div>
-        )}
-
-        {/* Pagination */}
-        {filteredCars.length > ITEMS_PER_PAGE && (
-          <CarPagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
-        )}
+        {/* Content with Suspense */}
+        <Suspense
+          fallback={
+            <div className="text-center py-20">
+              <p className="text-gray-500 text-lg">Loading...</p>
+            </div>
+          }
+        >
+          <VehiclesContent />
+        </Suspense>
       </div>
     </div>
   );
