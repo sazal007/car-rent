@@ -6,12 +6,12 @@ import { Facebook, Instagram, Linkedin, X } from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-carent-dark text-white pt-24 pb-10">
+    <footer className="bg-carent-dark text-white pt-20 pb-10">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-24 mb-20">
-          {/* Left Column: Logo & Newsletter */}
+        <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-20 mb-16">
+          {/* Left Column: Logo, Description & Newsletter */}
           <div className="lg:w-5/12">
-            <Link href="/" className="flex items-center gap-3 mb-10 w-fit">
+            <Link href="/" className="flex items-center gap-3 mb-6 w-fit">
               <div className="w-12 h-12 bg-carent-yellow rounded-full flex items-center justify-center">
                 <div className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[11px] border-b-black transform rotate-0" />
               </div>
@@ -20,7 +20,14 @@ export const Footer: React.FC = () => {
               </span>
             </Link>
 
-            <h3 className="text-2xl font-semibold mb-6">
+            <p className="text-gray-400 text-base mb-8 leading-relaxed max-w-md">
+              Your trusted partner for reliable car rentals. We offer a wide
+              selection of vehicles to suit your needs, from compact city cars
+              to spacious SUVs. Experience quality service and competitive
+              rates.
+            </p>
+
+            <h3 className="text-xl font-semibold mb-4">
               Subscribe to our newsletter
             </h3>
 
@@ -37,15 +44,15 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Right Column: Links */}
-          <div className="lg:w-6/12 flex flex-col sm:flex-row gap-16 sm:gap-24">
+          <div className="lg:w-6/12 flex flex-col sm:flex-row gap-12 sm:gap-16">
             {/* Pages */}
             <div>
-              <h4 className="text-xl font-bold mb-8">Pages</h4>
-              <ul className="space-y-4 text-gray-400 text-lg">
+              <h4 className="text-lg font-bold mb-6">Pages</h4>
+              <ul className="space-y-3 text-gray-400">
                 <li>
                   <Link
                     href="/"
-                    className="text-carent-yellow hover:text-white transition-colors"
+                    className="hover:text-carent-yellow transition-colors"
                   >
                     Home
                   </Link>
@@ -82,75 +89,35 @@ export const Footer: React.FC = () => {
                     Blog
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/faq"
+                    className="hover:text-carent-yellow transition-colors"
+                  >
+                    FAQ
+                  </Link>
+                </li>
               </ul>
             </div>
 
-            {/* Utility Pages */}
+            {/* Legal */}
             <div>
-              <h4 className="text-xl font-bold mb-8">Utility Pages</h4>
-              <ul className="space-y-4 text-gray-400 text-lg">
+              <h4 className="text-lg font-bold mb-6">Legal</h4>
+              <ul className="space-y-3 text-gray-400">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/terms"
                     className="hover:text-carent-yellow transition-colors"
                   >
-                    Style Guide
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-carent-yellow transition-colors"
-                  >
-                    Instructions
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-carent-yellow transition-colors"
-                  >
-                    Licenses
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-carent-yellow transition-colors"
-                  >
-                    Changelog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-carent-yellow transition-colors"
-                  >
-                    Link in Bio
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-carent-yellow transition-colors"
-                  >
-                    Coming Soon
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-carent-yellow transition-colors"
-                  >
-                    Password Protected
-                  </a>
+                    Terms & Conditions
+                  </Link>
                 </li>
                 <li>
                   <Link
-                    href="/404"
+                    href="/privacy"
                     className="hover:text-carent-yellow transition-colors"
                   >
-                    Error 404
+                    Privacy Policy
                   </Link>
                 </li>
               </ul>
@@ -160,44 +127,35 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-dark-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-white text-base">
-            Designed by{" "}
-            <a
-              href="#"
-              className="underline decoration-carent-yellow decoration-2 underline-offset-4 hover:text-carent-yellow text-white"
-            >
-              Webestica
-            </a>
-            , Powered by{" "}
-            <a
-              href="#"
-              className="underline decoration-carent-yellow decoration-2 underline-offset-4 hover:text-carent-yellow text-white"
-            >
-              Webflow
-            </a>
+          <p className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} Carent. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a
               href="#"
-              className="text-white hover:text-carent-yellow transition-colors"
+              className="text-gray-400 hover:text-carent-yellow transition-colors"
+              aria-label="Facebook"
             >
               <Facebook size={20} />
             </a>
             <a
               href="#"
-              className="text-white hover:text-carent-yellow transition-colors"
+              className="text-gray-400 hover:text-carent-yellow transition-colors"
+              aria-label="Instagram"
             >
               <Instagram size={20} />
             </a>
             <a
               href="#"
-              className="text-white hover:text-carent-yellow transition-colors"
+              className="text-gray-400 hover:text-carent-yellow transition-colors"
+              aria-label="LinkedIn"
             >
               <Linkedin size={20} />
             </a>
             <a
               href="#"
-              className="text-white hover:text-carent-yellow transition-colors"
+              className="text-gray-400 hover:text-carent-yellow transition-colors"
+              aria-label="X (Twitter)"
             >
               <X size={20} />
             </a>

@@ -23,16 +23,16 @@ export const Categories: React.FC = () => {
                 <Link
                   key={cat.id}
                   href={`/cars?category=${encodeURIComponent(cat.name)}`}
-                  className="bg-carent-gray rounded-[32px] py-10 px-6 flex flex-col items-center justify-center gap-8 cursor-pointer group hover:bg-carent-yellow transition-colors duration-300 h-full"
+                  className="bg-gray-50 rounded-lg py-5 px-4 flex flex-col items-center gap-3 cursor-pointer group hover:bg-carent-yellow transition-all duration-300"
                 >
-                  <div className="w-48 h-48 rounded-full overflow-hidden shadow-sm">
+                  <div className="w-36 h-36 rounded-full overflow-hidden flex-shrink-0">
                     <img
                       src={cat.image}
                       alt={cat.name}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <span className="text-2xl font-bold text-carent-text">
+                  <span className="text-lg font-bold text-carent-text text-center">
                     {cat.name}
                   </span>
                 </Link>

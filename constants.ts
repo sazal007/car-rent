@@ -13,19 +13,9 @@ import {
 
 export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  {
-    label: "Pages",
-    href: "#",
-    hasDropdown: true,
-    subLinks: [
-      { label: "Blog", href: "/blog" },
-      { label: "FAQ", href: "/faq" },
-      { label: "Terms & Conditions", href: "/terms" },
-      { label: "Privacy Policy", href: "/privacy" },
-    ],
-  },
   { label: "Cars", href: "/cars" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
