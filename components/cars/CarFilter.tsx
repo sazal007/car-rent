@@ -7,7 +7,13 @@ interface CarFilterProps {
   onCategoryChange: (category: string) => void;
 }
 
-const CATEGORIES = ["All cars", "Business", "Family", "Adventure", "Wedding"];
+const CATEGORIES = [
+  "All",
+  "Self-ride Scooter",
+  "Guide with Scooter",
+  "Ev Taxi",
+  "Tours",
+];
 
 export const CarFilter: React.FC<CarFilterProps> = ({
   activeCategory,

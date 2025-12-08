@@ -11,8 +11,8 @@ export const ContactHero: React.FC = () => {
         </h1>
         <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">
           Whether you have questions, feedback, or need assistance, our team is
-          here to help. Reach out to us through any of the channels below, and
-          we&apos;ll get back to you as soon as possible.
+          here to help. Call, WhatsApp, or drop a note—we&apos;ll confirm your
+          booking and next steps quickly.
         </p>
       </div>
     </div>

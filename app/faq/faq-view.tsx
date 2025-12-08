@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { FAQS } from "@/constants";
 import { FaqItem } from "@/components/faq/FaqItem";
+import { FAQS } from "@/constants";
 
 export default function FaqView() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);

@@ -1,4 +1,3 @@
-
 export interface Car {
   id: string;
   name: string;
@@ -6,7 +5,7 @@ export interface Car {
   price: number;
   image: string;
   seats: number;
-  transmission: 'Manual' | 'Automatic';
+  transmission: "Manual" | "Automatic";
   luggage: number;
   // New fields for detail page
   brand?: string;
@@ -15,7 +14,7 @@ export interface Car {
   description?: string;
   features?: string[];
   gallery?: string[];
-  category?: 'Business' | 'Family' | 'Adventure' | 'Wedding';
+  category?: "Self-ride Scooter" | "Guide with Scooter" | "Ev Taxi" | "Tours";
 }
 
 export interface Review {
@@ -67,7 +66,7 @@ export interface PolicySection {
   list?: string[];
 }
 
-export type BlogSectionType = 'paragraph' | 'heading' | 'list' | 'quote';
+export type BlogSectionType = "paragraph" | "heading" | "list" | "quote";
 
 export interface BlogContentSection {
   type: BlogSectionType;
@@ -83,3 +82,12 @@ export interface BlogPost {
   content: BlogContentSection[];
 }
 
+export interface Tour {
+  id: string;
+  title: string;
+  duration: string;
+  price: number;
+  image: string;
+  description: string;
+  includes: string[];
+}

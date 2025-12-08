@@ -14,7 +14,7 @@ interface CarCollectionProps {
 }
 
 export const CarCollection: React.FC<CarCollectionProps> = ({
-  title = "Our rental car collection",
+  title = "Our rental collection",
   limit,
   excludeId,
 }) => {

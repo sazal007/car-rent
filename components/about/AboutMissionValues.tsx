@@ -13,7 +13,7 @@ export const AboutMissionValues: React.FC = () => {
           <div>
             <h2 className="text-3xl font-semibold text-carent-text mb-6">Our mission</h2>
             <p className="text-gray-600 leading-relaxed text-lg">
-              Our mission is to provide exceptional car rental services that make urban travel easy, affordable, and enjoyable. We aim to create a seamless experience by offering a diverse fleet of vehicles, flexible rental options, and outstanding customer support. We are committed to being your trusted partner in city travel, ensuring every journey is smooth, convenient, and tailored to your needs.
+            Deliver eco-friendly, premium, and safe travel across Kathmandu. We pair electric scooters and comfortable EV taxis with local guides, transparent pricing, and reliable support so every ride feels effortless, sustainable, and welcoming.
             </p>
           </div>
 

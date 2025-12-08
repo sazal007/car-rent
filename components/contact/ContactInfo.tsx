@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Headphones, MapPin, Hourglass } from 'lucide-react';
+import { Headphones, MapPin, Hourglass, MessageCircle } from 'lucide-react';
 
 export const ContactInfo: React.FC = () => {
   return (
@@ -17,8 +17,20 @@ export const ContactInfo: React.FC = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-carent-text mb-2">Support</h3>
-            <p className="text-gray-600 mb-1">example@gmail.com</p>
-            <p className="text-gray-600">(+91) 125 888 666</p>
+            <p className="text-gray-600 mb-1">hello@kathmanduevrentals.com</p>
+            <p className="text-gray-600">Call: (+977) 980-1234567</p>
+          </div>
+        </div>
+
+        {/* WhatsApp */}
+        <div className="flex gap-4">
+          <div className="mt-1">
+             <MessageCircle size={28} className="text-carent-text" strokeWidth={1.5} />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-carent-text mb-2">WhatsApp</h3>
+            <p className="text-gray-600 mb-1">Chat for quick confirmations</p>
+            <p className="text-gray-600">(+977) 980-9876543</p>
           </div>
         </div>
 
@@ -29,8 +41,8 @@ export const ContactInfo: React.FC = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-carent-text mb-2">Address</h3>
-            <p className="text-gray-600 mb-1">Chicago HQ Estica Cop.</p>
-            <p className="text-gray-600">Macomb, MI 48042</p>
+            <p className="text-gray-600 mb-1">Kathmandu Durbar Square</p>
+            <p className="text-gray-600">Ward 18, Kathmandu 44600</p>
           </div>
         </div>
 
@@ -41,8 +53,8 @@ export const ContactInfo: React.FC = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-carent-text mb-2">Working hours</h3>
-            <p className="text-gray-600 mb-1">Mon - Thu: 11am - 7pm</p>
-            <p className="text-gray-600">Sat: 11am - 2pm</p>
+            <p className="text-gray-600 mb-1">Everyday: 7:00 AM - 9:00 PM</p>
+            <p className="text-gray-600">Airport pickups: 24/7 on request</p>
           </div>
         </div>
 

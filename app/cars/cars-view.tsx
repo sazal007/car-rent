@@ -13,9 +13,7 @@ function VehiclesContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
 
-  const [activeCategory, setActiveCategory] = useState(
-    categoryParam || "All cars"
-  );
+  const [activeCategory, setActiveCategory] = useState(categoryParam || "All");
   const [currentPage, setCurrentPage] = useState(1);
 
   // Update category if URL param changes
@@ -29,7 +27,7 @@ function VehiclesContent() {
 
   // Filter cars based on category
   const filteredCars = CARS.filter((car) => {
-    if (activeCategory === "All cars") return true;
+    if (activeCategory === "All") return true;
     return car.category === activeCategory;
   });
 
@@ -94,7 +92,9 @@ export default function CarsViewPage() {
       <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-6xl font-semibold text-carent-text mb-4">Cars</h1>
+          <h1 className="text-6xl font-semibold text-carent-text mb-4">
+            Our Collections
+          </h1>
         </div>
 
         {/* Content with Suspense */}

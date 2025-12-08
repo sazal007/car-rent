@@ -11,13 +11,12 @@ export const AboutHero: React.FC = () => {
         </h1>
         <div className="max-w-4xl mx-auto">
           <p className="text-gray-600 text-lg leading-relaxed">
-            Founded with a passion for making city travel easy and accessible,
-            we have grown to become a trusted car rental service in the area.
-            Our mission is to provide seamless and affordable transportation
-            options for every occasion, from daily commutes to special events.
-            With a fleet of diverse, well-maintained vehicles and a commitment
-            to customer satisfaction, we strive to make every rental experience
-            smooth and stress-free.
+            We started in Kathmandu to make eco-friendly travel simple, premium,
+            and safe. Today we run an all-electric fleet of scooters with guides
+            and comfortable EV taxis so travelers and locals can explore the
+            valley responsibly. Our team of local experts focuses on reliable
+            service, transparent pricing, and sustainable tourism for the city
+            we call home.
           </p>
         </div>
       </div>

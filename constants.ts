@@ -9,11 +9,12 @@ import {
   FaqItem,
   PolicySection,
   BlogPost,
+  Tour,
 } from "./types";
 
 export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "Cars", href: "/cars" },
+  { label: "Collections", href: "/cars" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -22,164 +23,204 @@ export const NAV_LINKS: NavLink[] = [
 export const CARS: Car[] = [
   {
     id: "1",
-    name: "Compact city cruiser",
-    type: "Compact",
-    brand: "Fiat",
-    year: 2022,
-    fuel: "Petrol",
-    price: 150,
-    image: "https://picsum.photos/seed/car1/600/350",
-    seats: 4,
-    transmission: "Manual",
-    luggage: 2,
+    name: "EV Scooter - City Lite",
+    type: "EV Scooter",
+    brand: "NIU",
+    year: 2024,
+    fuel: "Electric",
+    price: 1800,
+    image:
+      "https://images.unsplash.com/photo-1554223789-df81106a45ed?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Nvb3RlcnxlbnwwfHwwfHx8MA%3D%3D",
+    seats: 2,
+    transmission: "Automatic",
+    luggage: 1,
     description:
-      "Perfect for navigating tight city streets with ease and style. This compact cruiser offers great mileage and easy parking.",
-    features: ["Bluetooth", "A/C", "Power steering", "ABS", "Air bags"],
-    gallery: [
-      "https://picsum.photos/seed/car1g1/600/400",
-      "https://picsum.photos/seed/car1g2/600/400",
-      "https://picsum.photos/seed/car1g3/600/400",
+      "Ideal for solo or couple city rides. Lightweight EV scooter with strong pickup, easy handling, and a comfortable seat height.",
+    features: [
+      "90-110 km range",
+      "Dual disc brakes",
+      "LED headlamp",
+      "USB charging port",
+      "Helmet included",
     ],
-    category: "Family",
+    gallery: [
+      "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
+    ],
+    category: "Self-ride Scooter",
   },
   {
     id: "2",
-    name: "Spacious SUV",
-    type: "Suv car",
-    brand: "Toyota",
-    year: 2020,
-    fuel: "CNG",
-    price: 195,
-    image: "https://picsum.photos/seed/car2/800/500",
-    seats: 7,
+    name: "EV Scooter - Dual Battery",
+    type: "EV Scooter",
+    brand: "Horwin",
+    year: 2024,
+    fuel: "Electric",
+    price: 2400,
+    image:
+      "https://images.unsplash.com/photo-1648204834832-78e68052c04f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZWxlY3RyaWMlMjBzY29vdGVyfGVufDB8fDB8fHww",
+    seats: 2,
     transmission: "Automatic",
-    luggage: 4,
+    luggage: 1,
     description:
-      "Whether you're on a business trip or a family getaway, this mid-size sedan offers spacious interiors, advanced safety features, and excellent fuel efficiency. Drive confidently with a car that delivers smooth handling, modern tech.",
+      "Long-range dual battery setup perfect for day trips around Kathmandu Valley. Smooth acceleration with regen braking.",
     features: [
-      "Bluetooth",
-      "Wireless charging",
-      "Cruise control",
-      "ABS",
-      "A/C",
-      "Built-in GPS",
-      "Parking sensors",
-      "HD audio system",
-      "Air bags",
-      "Power steering",
+      "130-150 km range",
+      "Fast charger ready",
+      "CBS brakes",
+      "Anti-theft alarm",
+      "2 helmets included",
     ],
     gallery: [
-      "https://picsum.photos/seed/suvinterior/800/500",
-      "https://picsum.photos/seed/suvdash/800/500",
-      "https://picsum.photos/seed/suvexterior/800/500",
+      "https://images.unsplash.com/photo-1529429617124-aee3c7c2f2ad?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
     ],
-    category: "Family",
+    category: "Guide with Scooter",
   },
   {
     id: "3",
-    name: "Luxury Sedan",
-    type: "Sedan",
-    brand: "Audi",
-    year: 2023,
-    fuel: "Diesel",
-    price: 175,
-    image: "https://picsum.photos/seed/car3/600/350",
-    seats: 5,
+    name: "Guided EV Scooter Ride",
+    type: "EV Scooter + Rider",
+    brand: "Ather",
+    year: 2024,
+    fuel: "Electric",
+    price: 2800,
+    image:
+      "https://nepaldrives.com/wp-content/uploads/2023/06/TVS-iQube-Electric-Scooter-Nepal-1.jpg",
+    seats: 2,
     transmission: "Automatic",
-    luggage: 3,
+    luggage: 1,
     description:
-      "Experience premium comfort and performance. Ideally suited for business travel or special occasions where style matters.",
+      "Ride pillion while our local rider navigates. Perfect if you don’t hold a license or prefer hands-free sightseeing.",
     features: [
-      "Bluetooth",
-      "Leather seats",
-      "Cruise control",
-      "GPS",
-      "Climate control",
+      "Licensed rider provided",
+      "2 DOT helmets",
+      "Rain poncho",
+      "Phone mount",
+      "Insurance included",
     ],
     gallery: [
-      "https://picsum.photos/seed/car3g1/600/400",
-      "https://picsum.photos/seed/car3g2/600/400",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1502877828070-33b167ad6860?auto=format&fit=crop&w=900&q=80",
     ],
-    category: "Business",
+    category: "Guide with Scooter",
   },
   {
     id: "4",
-    name: "Mercedes-Benz S-Class",
-    type: "Sedan",
-    brand: "Mercedes",
+    name: "EV Taxi - Sedan (AC)",
+    type: "EV Sedan",
+    brand: "Hyundai Ioniq",
     year: 2023,
-    fuel: "Hybrid",
-    price: 250,
-    image: "https://picsum.photos/seed/car4/600/350",
-    seats: 5,
+    fuel: "Electric",
+    price: 3500,
+    image:
+      "https://www.fiscalnepal.com/wp-content/uploads/2025/04/taxi-nepal.jpg",
+    seats: 4,
     transmission: "Automatic",
     luggage: 3,
     description:
-      "The epitome of luxury and status. This vehicle offers a smooth ride with top-tier technology and comfort features.",
+      "Comfortable AC sedan for airport runs, business travel, and small family trips within the valley.",
     features: [
-      "Massage seats",
-      "Rear entertainment",
-      "Ambient lighting",
-      "Burmester Sound",
+      "Fast charging ready",
+      "A/C with rear vents",
+      "Child seat on request",
+      "Bottled water",
+      "Professional company driver",
     ],
-    category: "Business",
+    gallery: [
+      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80",
+    ],
+    category: "Ev Taxi",
   },
   {
     id: "5",
-    name: "Range Rover Sport",
-    type: "SUV",
-    brand: "Land Rover",
-    year: 2022,
-    fuel: "Diesel",
-    price: 220,
-    image: "https://picsum.photos/seed/car5/600/350",
-    seats: 5,
+    name: "EV Taxi - SUV / MPV",
+    type: "EV SUV",
+    brand: "Kia Niro",
+    year: 2023,
+    fuel: "Electric",
+    price: 5200,
+    image:
+      "https://www.fiscalnepal.com/wp-content/uploads/2025/04/taxi-nepal.jpg",
+    seats: 6,
     transmission: "Automatic",
     luggage: 5,
     description:
-      "Go anywhere in style. The Range Rover Sport combines off-road capability with on-road luxury.",
-    features: ["4WD", "Panoramic roof", "Air suspension", "Terrain response"],
-    category: "Adventure",
+      "Spacious EV with captain seats ideal for families or small groups. Great for day-long sightseeing and airport transfers.",
+    features: [
+      "Tri-zone A/C",
+      "USB-C charging ports",
+      "Roof rails",
+      "Bottled water & tissues",
+      "Professional company driver",
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1502877828070-33b167ad6860?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80",
+    ],
+    category: "Ev Taxi",
   },
   {
     id: "6",
-    name: "Vintage Convertible",
-    type: "Convertible",
-    brand: "Rolls Royce",
-    year: 1975,
-    fuel: "Petrol",
-    price: 400,
-    image: "https://picsum.photos/seed/car6/600/350",
+    name: "Kathmandu Heritage Tour (EV Taxi)",
+    type: "Guided Tour",
+    brand: "Guided",
+    year: 2024,
+    fuel: "Electric",
+    price: 6500,
+    image:
+      "https://www.en.meroauto.com/wp-content/uploads/2025/04/EV-EASY-Taxi.jpg",
     seats: 4,
     transmission: "Automatic",
     luggage: 2,
     description:
-      "Make your special day unforgettable with this classic beauty. Perfect for weddings and photo shoots.",
-    features: ["Classic leather", "Soft top", "Chauffeur available"],
-    category: "Wedding",
+      "6-hour curated circuit covering Swayambhu, Patan, and Boudha in a comfortable EV with a certified city guide.",
+    features: [
+      "Guide included",
+      "Monument tickets",
+      "A/C EV taxi",
+      "Bottled water",
+      "Flexible pickup points",
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1502877828070-33b167ad6860?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
+    ],
+    category: "Tours",
   },
 ];
 
 export const CATEGORIES: Category[] = [
   {
     id: "1",
-    name: "Business",
-    image: "https://picsum.photos/seed/business/300/300",
+    name: "Self-ride Scooter",
+    image:
+      "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "2",
-    name: "Family",
-    image: "https://picsum.photos/seed/family/300/300",
+    name: "Guide with Scooter",
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "3",
-    name: "Adventure",
-    image: "https://picsum.photos/seed/adventure/300/300",
+    name: "Ev Taxi",
+    image:
+      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "4",
-    name: "Wedding",
-    image: "https://picsum.photos/seed/wedding/300/300",
+    name: "Tours",
+    image:
+      "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=600&q=80",
   },
 ];
 
@@ -252,106 +293,94 @@ export const REVIEWS: Review[] = [
 export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: "1",
-    name: "Emily Johnson",
-    role: "Customer Service Manager",
-    image: "https://picsum.photos/seed/emily/200/200",
+    name: "Anish Shrestha",
+    role: "Fleet & Safety Lead",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
   },
   {
     id: "2",
-    name: "Michael Smith",
-    role: "Fleet Operations Supervisor",
-    image: "https://picsum.photos/seed/michael/200/200",
+    name: "Sujata Karki",
+    role: "Guest Experience",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
   },
   {
     id: "3",
-    name: "Sarah Davis",
-    role: "Marketing Director",
-    image: "https://picsum.photos/seed/sarah/200/200",
+    name: "Rabindra Lama",
+    role: "Guided Tours Lead",
+    image:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=400&q=80",
   },
   {
     id: "4",
-    name: "David Lee",
-    role: "Business Development Manager",
-    image: "https://picsum.photos/seed/david/200/200",
+    name: "Priyanka Gurung",
+    role: "Operations & Support",
+    image:
+      "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=400&q=80",
   },
 ];
 
 export const COMPANY_VALUES: ValueItem[] = [
   {
-    title: "Customer Focus",
+    title: "Sustainability",
     description:
-      "We put our customers at the heart of everything we do. Your satisfaction is our top priority, and we strive to exceed your expectations with every rental experience.",
+      "We operate an all-electric fleet and promote responsible routes to keep Kathmandu’s air cleaner while you explore.",
   },
   {
-    title: "Integrity",
+    title: "Safety First",
     description:
-      "Honesty and transparency are the cornerstones of our business. We believe in building trust through clear communication and fair pricing without hidden fees.",
+      "Helmets, safety kits, licensed guides, and trained drivers come standard so every ride feels secure.",
+  },
+  {
+    title: "Local Expertise",
+    description:
+      "Kathmandu locals lead our operations, crafting routes and support that respect the city and its culture.",
+  },
+  {
+    title: "Hospitality",
+    description:
+      "Friendly, responsive service with clear communication, upfront pricing, and flexible options for guests and locals.",
   },
   {
     title: "Reliability",
     description:
-      "Our customers rely on us for safe and dependable transportation. We maintain our vehicles to the highest standards to ensure you have a worry-free driving experience.",
-  },
-  {
-    title: "Innovation",
-    description:
-      "We embrace new technologies and ideas to enhance our services. From easy online booking to vehicle tracking, we are always looking for ways to improve.",
-  },
-  {
-    title: "Sustainability",
-    description:
-      "We are committed to reducing our environmental impact. Our fleet includes eco-friendly vehicles, and we promote responsible driving practices to protect our planet.",
+      "Well-maintained EVs, on-time pickups, and dedicated support ensure smooth journeys every time.",
   },
 ];
 
 export const ABOUT_STATS: Stat[] = [
-  { value: "15+", label: "Happy customers who have trusted us" },
-  { value: "99%", label: "Our customers agree with our offer value" },
-  { value: "5,000+", label: "Trusted by thousands of satisfied clients" },
-  { value: "24/7", label: "Our dedicated support team is available" },
+  { value: "1,500+", label: "Electric rides completed in Kathmandu" },
+  { value: "120+", label: "Guided scooter experiences delivered" },
+  { value: "25 t", label: "CO₂ emissions avoided via EV fleet" },
+  { value: "24/7", label: "Local support for bookings and changes" },
 ];
 
 export const FAQS: FaqItem[] = [
   {
-    question: "What documents are required to rent a car?",
+    question: "What license do I need to rent a vehicle?",
     answer:
-      "You'll need a valid driver's license, a government-issued ID, and a credit or debit card. Some rentals may require additional documents based on location or vehicle type.",
+      "For self-ride scooters you need a valid two-wheeler license plus a government-issued ID. International riders should bring their passport and an International Driving Permit. Guided scooter rides do not require you to hold a license.",
   },
   {
-    question: "How do I book a car rental?",
+    question: "What areas are covered for pickups and rides?",
     answer:
-      "You can book directly through our website by selecting your vehicle and dates. Alternatively, you can call our support hotline for assistance with your reservation.",
+      "Pickups and drop-offs are available within Kathmandu Valley service zones shown at checkout. Rides should stay within the approved coverage area; cross-border or restricted-zone travel needs prior approval from our support team.",
   },
   {
-    question: "Is there a free trial available?",
+    question: "Is safety gear provided with the rental?",
     answer:
-      "We do not offer free trials for car rentals. However, we have flexible rental periods starting from just one day, so you can try out our service with minimal commitment.",
+      "Yes. Every booking includes a DOT-certified helmet for scooters and a basic safety kit for taxis (warning triangle, first-aid, spare tools). Extra helmets or child seats can be requested during booking, subject to availability.",
   },
   {
-    question: "Can someone else drive the rental car?",
+    question: "How do I book a vehicle?",
     answer:
-      "Yes, additional drivers can be added to the rental agreement. They must meet the same age and licensing requirements as the primary renter and be present at pick-up.",
+      "Choose your service (self-ride scooter, guided scooter, or EV taxi), select pickup time/location, upload your license if needed, add gear or add-ons, and confirm payment. A booking confirmation is sent instantly via email/WhatsApp.",
   },
   {
-    question:
-      "Can I take the rental car across state or international borders?",
+    question: "What is your cancellation policy?",
     answer:
-      "Cross-border travel depends on the specific vehicle and policy. Please check the terms for your specific booking or contact our support team for authorization.",
-  },
-  {
-    question: "What happens if I return the car late?",
-    answer:
-      "Returning the car late may incur additional charges. We typically offer a grace period of 29 minutes, after which hourly or daily rates may apply.",
-  },
-  {
-    question: "What is the minimum age to rent a car?",
-    answer:
-      "The minimum age is generally 21 years old. Drivers under 25 may be subject to a young driver surcharge. Luxury vehicles may have higher age requirements.",
-  },
-  {
-    question: "Are there any discounts available?",
-    answer:
-      "Yes, we offer discounts for long-term rentals, early bookings, and corporate clients. Check our website periodically for seasonal promotions.",
+      "Cancel at least 24 hours before pickup for a full refund. Cancellations within 24 hours or no-shows may incur up to one rental day as a fee. WhatsApp or call us if your plans change—we try to help with rescheduling first.",
   },
 ];
 
@@ -579,5 +608,41 @@ export const BLOG_POSTS: BlogPost[] = [
           "AI and automation are taking center stage. Leveraging these tools for routine tasks frees up your team to focus on strategic initiatives and relationship building.",
       },
     ],
+  },
+];
+
+export const TOURS: Tour[] = [
+  {
+    id: "t1",
+    title: "Heritage Site Tour",
+    duration: "6 Hours",
+    price: 6500,
+    image:
+      "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=900&q=80",
+    description:
+      "Visit Swayambhunath, Patan Durbar Square, and Boudhanath Stupa in one electric loop.",
+    includes: ["EV Scooter/Taxi", "Entry Fees", "Local Guide", "Lunch"],
+  },
+  {
+    id: "t2",
+    title: "Evening City Ride",
+    duration: "3 Hours",
+    price: 4200,
+    image:
+      "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80",
+    description:
+      "Experience the magic of Kathmandu at night. Visit lit-up temples and bustling night markets.",
+    includes: ["EV Scooter", "Safety Gear", "Tea/Coffee", "Night Guide"],
+  },
+  {
+    id: "t3",
+    title: "Authentic Food Tour",
+    duration: "4 Hours",
+    price: 4800,
+    image:
+      "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=900&q=80",
+    description:
+      "Ride to the best local spots for Momo, Bara, and JuJu Dhau. A culinary adventure on two wheels.",
+    includes: ["Food Tasting", "Guide", "Scooter Rental", "Beverages"],
   },
 ];

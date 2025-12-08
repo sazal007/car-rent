@@ -16,6 +16,17 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
+  const formatPrice = (value: number) =>
+    new Intl.NumberFormat("en-NP", {
+      style: "currency",
+      currency: "NPR",
+      maximumFractionDigits: 0,
+    }).format(value);
+
+  const priceLabel = car.category?.toLowerCase().includes("tour")
+    ? "Per tour"
+    : "Per day";
+
   return (
     <Link
       href={`/cars/${car.id}-${slug}`}
@@ -39,9 +50,9 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           </h3>
           <div className="text-right">
             <span className="text-xl md:text-2xl font-bold text-carent-text">
-              ${car.price}
+              {formatPrice(car.price)}
             </span>
-            <span className="text-sm text-gray-500 ml-1">/Per day</span>
+            <span className="text-sm text-gray-500 ml-1">/{priceLabel}</span>
           </div>
         </div>
 

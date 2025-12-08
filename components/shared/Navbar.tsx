@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
           <span
             className={`${logoTextColor} text-3xl md:text-5xl font-bold tracking-tight transition-colors duration-300`}
           >
-            Carent
+            Bato Ma
           </span>
         </Link>
 

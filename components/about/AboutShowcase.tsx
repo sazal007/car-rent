@@ -8,8 +8,8 @@ export const AboutShowcase: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="w-full h-[300px] md:h-[500px] rounded-2xl overflow-hidden relative">
           <img 
-            src="https://picsum.photos/seed/showroom/1600/900" 
-            alt="Car showroom" 
+            src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=80" 
+            alt="EV scooters in Kathmandu evening streets" 
             className="w-full h-full object-cover"
           />
           {/* Overlay gradient for depth */}
