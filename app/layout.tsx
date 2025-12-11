@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "../components/shared/Navbar";
 import { Footer } from "../components/shared/Footer";
+import QueryProvider from "@/providers/query-provider";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Carent - Quick and Affordable Car Rentals",
-  description: "Book your perfect rental car with ease. Quick, affordable, and reliable car rental services.",
+  title: "Batoma - Your Trusted EV Rental Partner",
+  description:
+    "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services.",
 };
 
 export default function RootLayout({
@@ -29,11 +32,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans text-carent-text bg-white overflow-x-hidden antialiased`}
       >
-        <Navbar />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <QueryProvider>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <Toaster
+            position="bottom-right"
+            richColors
+            closeButton
+            duration={3000}
+          />
+        </QueryProvider>
       </body>
     </html>
   );
