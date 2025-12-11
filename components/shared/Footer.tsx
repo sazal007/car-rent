@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
                 <div className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[11px] border-b-black transform rotate-0" />
               </div>
               <span className="text-white text-4xl font-medium tracking-tight">
-                Carent
+                Batoma
               </span>
             </Link>
 
