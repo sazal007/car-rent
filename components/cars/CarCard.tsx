@@ -30,59 +30,90 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
     : "Per day";
 
   return (
-    <Link
-      href={`/cars/${car.id}-${slug}`}
-      className="bg-white rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300 flex flex-col cursor-pointer h-full border border-gray-100"
-    >
-      {/* Car Image - Reduced height */}
-      <div className="relative h-64 md:h-80 w-full overflow-hidden bg-white">
-        <img
-          src={car.image}
-          alt={car.name}
-          className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
-        />
-      </div>
-
-      {/* Content Section */}
-      <div className="flex flex-col">
-        {/* Name and Price Section */}
-        <div className="flex justify-between items-end px-5 pt-5 pb-4">
-          <h3 className="text-xl md:text-2xl font-semibold text-carent-text leading-tight">
-            {car.name}
-          </h3>
-          <div className="text-right">
-            <span className="text-xl md:text-2xl font-bold text-carent-text">
-              {formatPrice(car.price)}
-            </span>
-            <span className="text-sm text-gray-500 ml-1">/{priceLabel}</span>
-          </div>
+    <Link href={`/cars/${car.id}-${slug}`} className="group block h-full">
+      <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-100">
+        {/* Car Image */}
+        <div className="relative h-56 w-full overflow-hidden bg-linear-to-b from-gray-50 to-white">
+          <img
+            src={car.image}
+            alt={car.name}
+            className="w-full h-full object-contain p-6 transform group-hover:scale-110 transition-transform duration-500"
+          />
         </div>
 
-        {/* Divider Line */}
-        <div className="border-t border-gray-200"></div>
+        {/* Content Section */}
+        <div className="flex flex-col grow p-6">
+          {/* Name and Price */}
+          <div className="mb-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-carent-primary transition-colors">
+              {car.name}
+            </h3>
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-gray-900">
+                {formatPrice(car.price)}
+              </span>
+              <span className="text-sm text-gray-500">/ {priceLabel}</span>
+            </div>
+          </div>
 
-        {/* Features Section */}
-        <div className="px-5 py-4 grid grid-cols-3 gap-4">
-          <div className="flex flex-col items-center gap-1">
-            <Armchair size={24} strokeWidth={1.5} className="text-gray-600" />
-            <span className="text-xs text-gray-600 mt-1">Seat</span>
-            <span className="text-base font-semibold text-carent-text">
-              {car.seats}
-            </span>
+          {/* Divider */}
+          <div className="border-t border-gray-100 mb-5"></div>
+
+          {/* Top 2 Features */}
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center shrink-0 group-hover:bg-carent-primary/10 transition-colors">
+                <Armchair
+                  size={20}
+                  className="text-gray-600 group-hover:text-carent-primary transition-colors"
+                />
+              </div>
+              <div className="flex-1">
+                <div className="text-xs text-gray-500 uppercase tracking-wide mb-0.5">
+                  Seats
+                </div>
+                <div className="text-sm font-semibold text-gray-900">
+                  {car.seats} Passengers
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center shrink-0 group-hover:bg-carent-primary/10 transition-colors">
+                <Settings
+                  size={20}
+                  className="text-gray-600 group-hover:text-carent-primary transition-colors"
+                />
+              </div>
+              <div className="flex-1">
+                <div className="text-xs text-gray-500 uppercase tracking-wide mb-0.5">
+                  Transmission
+                </div>
+                <div className="text-sm font-semibold text-gray-900">
+                  {car.transmission}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col items-center gap-1">
-            <Settings size={24} strokeWidth={1.5} className="text-gray-600" />
-            <span className="text-xs text-gray-600 mt-1">Gearbox</span>
-            <span className="text-base font-semibold text-carent-text">
-              {car.transmission}
-            </span>
-          </div>
-          <div className="flex flex-col items-center gap-1">
-            <Briefcase size={24} strokeWidth={1.5} className="text-gray-600" />
-            <span className="text-xs text-gray-600 mt-1">Luggage</span>
-            <span className="text-base font-semibold text-carent-text">
-              {car.luggage} bags
-            </span>
+
+          {/* Rest of Features */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center shrink-0 group-hover:bg-carent-primary/10 transition-colors">
+                <Briefcase
+                  size={20}
+                  className="text-gray-600 group-hover:text-carent-primary transition-colors"
+                />
+              </div>
+              <div className="flex-1">
+                <div className="text-xs text-gray-500 uppercase tracking-wide mb-0.5">
+                  Luggage
+                </div>
+                <div className="text-sm font-semibold text-gray-900">
+                  {car.luggage} Bags
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
