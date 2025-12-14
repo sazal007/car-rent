@@ -1,11 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
-import { CARS } from "@/constants";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/shared/Button";
 import { CarCollection } from "@/components/home/CarCollection";
+import { useCreateBooking } from "@/hooks/use-booking";
+import { useVehicleBySlug } from "@/hooks/use-vehicles";
+import { BookingData } from "@/types/booking";
+import { uploadToCloudinary } from "@/lib/cloudinary";
 import {
   Armchair,
   Settings,
@@ -36,28 +39,41 @@ const termsTabs = [
 
 type BookingStatus = "idle" | "submitting" | "success";
 
-export default function CarsDetailsView() {
+function CarsDetailsViewContent() {
   const params = useParams();
   const router = useRouter();
-  const slug = params.slug as string;
+  const searchParams = useSearchParams();
+  const slugParam = params.slug as string;
+  const { mutate: createBooking, isPending } = useCreateBooking();
 
-  // Extract car ID from slug (format: "id-slug")
-  const carId = slug.split("-")[0];
-  const car = CARS.find((c) => c.id === carId);
+  // Extract slug from URL (format might be "id-slug" or just "slug")
+  // Try to get the actual slug - if it contains a number prefix, extract the slug part
+  const actualSlug =
+    slugParam.includes("-") && /^\d+-/.test(slugParam)
+      ? slugParam.replace(/^\d+-/, "")
+      : slugParam;
+
+  const { data: car, isLoading } = useVehicleBySlug(actualSlug);
 
   const [activeTab, setActiveTab] = useState("requirements");
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [bookingStatus, setBookingStatus] = useState<BookingStatus>("idle");
+
   const initialServiceType = car?.category?.toLowerCase().includes("self-ride")
     ? "selfRide"
     : car?.category?.toLowerCase().includes("taxi")
     ? "taxi"
     : "guided";
 
+  // Read URL parameters
+  const urlDate = searchParams.get("date");
+  const urlGuests = searchParams.get("guests");
+  const urlLocation = searchParams.get("location");
+
   const [formData, setFormData] = useState({
     serviceType: initialServiceType as "selfRide" | "guided" | "taxi",
-    pickupDate: "",
-    returnDate: "",
+    pickupDate: urlDate ? `${urlDate}T10:00` : "",
+    returnDate: urlDate ? `${urlDate}T18:00` : "",
     fullName: "",
     email: "",
     phone: "",
@@ -65,17 +81,119 @@ export default function CarsDetailsView() {
     paymentMethod: "cash" as "cash" | "digital" | "card",
   });
 
+  // Update serviceType when car loads
+  useEffect(() => {
+    if (car) {
+      const serviceType = car.category?.toLowerCase().includes("self-ride")
+        ? "selfRide"
+        : car.category?.toLowerCase().includes("taxi")
+        ? "taxi"
+        : "guided";
+      setFormData((prev) => ({ ...prev, serviceType }));
+    }
+  }, [car]);
+
+  // Update dates when URL params change
+  useEffect(() => {
+    if (urlDate) {
+      setFormData((prev) => ({
+        ...prev,
+        pickupDate: `${urlDate}T10:00`,
+        returnDate: `${urlDate}T18:00`,
+      }));
+    }
+  }, [urlDate]);
+
+  // Auto-open booking form if URL params are present
+  useEffect(() => {
+    if (urlDate || urlGuests || urlLocation) {
+      setShowBookingForm(true);
+    }
+  }, [urlDate, urlGuests, urlLocation]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [carId]);
+  }, [actualSlug]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen pt-36 text-center">
+        <p className="text-gray-500 text-lg">Loading vehicle details...</p>
+      </div>
+    );
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!car || !totals) return;
+
     setBookingStatus("submitting");
 
-    setTimeout(() => {
-      setBookingStatus("success");
-    }, 2000);
+    try {
+      // Extract dates from datetime-local format
+      const pickupDateTime = new Date(formData.pickupDate);
+      const returnDateTime = new Date(formData.returnDate);
+      const rideDate = pickupDateTime.toISOString().split("T")[0]; // YYYY-MM-DD
+      const returnDate = returnDateTime.toISOString().split("T")[0]; // YYYY-MM-DD
+
+      // Upload license file to Cloudinary if present
+      let licenseImage: string | undefined;
+      if (formData.licenseFile) {
+        try {
+          licenseImage = await uploadToCloudinary(formData.licenseFile, {
+            folder: "licenses",
+            resourceType: "image",
+          });
+        } catch (uploadError) {
+          console.error("Failed to upload license image:", uploadError);
+          throw new Error("Failed to upload license image. Please try again.");
+        }
+      }
+
+      // Map serviceType to ride type (matching API format)
+      const rideTypeMap: Record<string, string> = {
+        selfRide: "self-ride",
+        guided: "guided",
+        taxi: "taxi",
+      };
+
+      // Convert phone number to number (remove non-digits)
+      const phoneDigits = formData.phone.replace(/\D/g, "");
+      const phoneNumber = phoneDigits ? parseInt(phoneDigits, 10) : 0;
+      if (!phoneNumber || isNaN(phoneNumber)) {
+        throw new Error("Invalid phone number");
+      }
+
+      // Get vehicle name (lowercase for consistency)
+      const vehicleName = car.name.toLowerCase();
+
+      // Prepare booking data matching API format
+      const bookingData: BookingData = {
+        name: formData.fullName,
+        "ride type": rideTypeMap[formData.serviceType] || formData.serviceType,
+        "ride date": rideDate,
+        "phone number": phoneNumber,
+        email: formData.email,
+        price: totals.total,
+        "payment method": formData.paymentMethod,
+        "payment status": "pending",
+        "return date": returnDate,
+        "vehicle name": vehicleName,
+        ...(licenseImage && { "license image": licenseImage }),
+      };
+
+      createBooking(bookingData, {
+        onSuccess: () => {
+          setBookingStatus("success");
+        },
+        onError: () => {
+          setBookingStatus("idle");
+        },
+      });
+    } catch (error) {
+      console.error("Error preparing booking data:", error);
+      setBookingStatus("idle");
+    }
   };
 
   const calculateTotal = () => {
@@ -92,9 +210,6 @@ export default function CarsDetailsView() {
 
   const isSelfRide = car?.category
     ? car.category.toLowerCase().includes("self-ride")
-    : false;
-  const isTaxi = car?.category
-    ? car.category.toLowerCase().includes("taxi")
     : false;
   const isSelfRideSelected = formData.serviceType === "selfRide";
   const selectedLabel =
@@ -119,7 +234,7 @@ export default function CarsDetailsView() {
   }
 
   return (
-    <div key={carId} className="pt-36 bg-white">
+    <div key={car.id} className="pt-56 bg-white">
       {/* Top Split Section */}
       <div className="container mx-auto px-4 md:px-6 mb-20">
         <div className="flex flex-col lg:flex-row gap-12 relative items-start">
@@ -204,10 +319,10 @@ export default function CarsDetailsView() {
                         Booking Confirmed!
                       </h4>
                       <p className="text-gray-600 mb-6 text-lg max-w-md">
-                            Thank you for choosing Kathmandu EV Rentals. We have
-                            sent a confirmation email to{" "}
-                            <strong>{formData.email}</strong> and a WhatsApp
-                            note to <strong>{formData.phone}</strong>.
+                        Thank you for choosing Kathmandu EV Rentals. We have
+                        sent a confirmation email to{" "}
+                        <strong>{formData.email}</strong> and a WhatsApp note to{" "}
+                        <strong>{formData.phone}</strong>.
                       </p>
                       <div className="bg-gray-50 p-4 rounded-lg text-left w-full mb-6">
                         <p className="font-semibold text-gray-800">
@@ -491,9 +606,11 @@ export default function CarsDetailsView() {
                             type="submit"
                             className="px-8"
                             icon={false}
-                            disabled={bookingStatus === "submitting"}
+                            disabled={
+                              bookingStatus === "submitting" || isPending
+                            }
                           >
-                            {bookingStatus === "submitting"
+                            {bookingStatus === "submitting" || isPending
                               ? "Processing..."
                               : "Confirm Booking"}
                           </Button>
@@ -562,8 +679,9 @@ export default function CarsDetailsView() {
                 Vehicle features
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
-                {(
-                  car.features || ["Bluetooth", "A/C", "GPS", "Power Windows"]
+                {(car.features && car.features.length > 0
+                  ? car.features
+                  : ["Bluetooth", "A/C", "GPS", "Power Windows"]
                 ).map((feature, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <CheckCircle
@@ -587,22 +705,23 @@ export default function CarsDetailsView() {
             Vehicle gallery
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {(car.gallery || [car.image, car.image, car.image]).map(
-              (img, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-2xl overflow-hidden h-64 hover:opacity-95 transition-opacity"
-                >
-                  <Image
-                    src={img}
-                    alt={`Gallery ${idx}`}
-                    width={600}
-                    height={400}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              )
-            )}
+            {(car.gallery && car.gallery.length > 0
+              ? car.gallery
+              : [car.image, car.image, car.image]
+            ).map((img, idx) => (
+              <div
+                key={idx}
+                className="rounded-2xl overflow-hidden h-64 hover:opacity-95 transition-opacity"
+              >
+                <Image
+                  src={img}
+                  alt={`Gallery ${idx}`}
+                  width={600}
+                  height={400}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -758,5 +877,19 @@ export default function CarsDetailsView() {
       {/* You May Also Like */}
       <CarCollection title="You may also like" limit={2} excludeId={car.id} />
     </div>
+  );
+}
+
+export default function CarsDetailsView() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen pt-36 text-center">
+          <p className="text-gray-500 text-lg">Loading vehicle details...</p>
+        </div>
+      }
+    >
+      <CarsDetailsViewContent />
+    </Suspense>
   );
 }

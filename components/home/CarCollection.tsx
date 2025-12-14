@@ -2,9 +2,9 @@
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
-import { CARS } from "../../constants";
 import { Button } from "../shared/Button";
 import { CarCard } from "../cars/CarCard";
+import { useVehicles } from "@/hooks/use-vehicles";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface CarCollectionProps {
@@ -18,10 +18,10 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
   limit,
   excludeId,
 }) => {
-  const filteredCars = CARS.filter((c) => c.id !== excludeId).slice(
-    0,
-    limit || CARS.length
-  );
+  const { data: vehicles = [], isLoading } = useVehicles();
+  const filteredCars = vehicles
+    .filter((c) => c.id !== excludeId)
+    .slice(0, limit || vehicles.length);
   const sliderRef = useRef<HTMLDivElement>(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -88,23 +88,35 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
         </div>
 
         {/* Cars Slider */}
-        <div
-          ref={sliderRef}
-          className="flex gap-8 overflow-x-auto no-scrollbar pb-8 -mx-4 px-4 md:-mx-6 md:px-6 cursor-grab active:cursor-grabbing select-none"
-          onMouseDown={handleMouseDown}
-          onMouseLeave={handleMouseLeave}
-          onMouseUp={handleMouseUp}
-          onMouseMove={handleMouseMove}
-        >
-          {filteredCars.map((car) => (
-            <div
-              key={car.id}
-              className="min-w-[90vw] sm:min-w-[450px] md:min-w-[550px] flex-shrink-0"
-            >
-              <CarCard car={car} />
-            </div>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="text-center py-20">
+            <p className="text-gray-500 text-lg">Loading vehicles...</p>
+          </div>
+        ) : (
+          <div
+            ref={sliderRef}
+            className="flex gap-8 overflow-x-auto no-scrollbar pb-8 -mx-4 px-4 md:-mx-6 md:px-6 cursor-grab active:cursor-grabbing select-none"
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+          >
+            {filteredCars.length > 0 ? (
+              filteredCars.map((car) => (
+                <div
+                  key={car.id}
+                  className="w-[90vw] sm:w-[400px] md:w-[450px] shrink-0"
+                >
+                  <CarCard car={car} />
+                </div>
+              ))
+            ) : (
+              <div className="text-center py-20 w-full">
+                <p className="text-gray-500 text-lg">No vehicles available.</p>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Bottom Controls */}
         <div className="flex items-center justify-between mt-6">

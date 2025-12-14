@@ -10,11 +10,13 @@ interface CarCardProps {
 }
 
 export const CarCard: React.FC<CarCardProps> = ({ car }) => {
-  // Create slug from car name
-  const slug = car.name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+  // Use slug from car if available, otherwise generate from name
+  const slug =
+    car.slug ||
+    car.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
 
   const formatPrice = (value: number) =>
     new Intl.NumberFormat("en-NP", {

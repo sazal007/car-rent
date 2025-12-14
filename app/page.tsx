@@ -7,11 +7,13 @@ import { Testimonials } from "@/components/home/Testimonials";
 import { AboutStats } from "@/components/home/AboutStats";
 import { TourPackages } from "@/components/home/TourPakages";
 import { Services } from "@/components/home/Services";
+import { BookingForm } from "@/components/home/BookingForm";
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <BookingForm />
       <Services />
       <Features />
       <Categories />

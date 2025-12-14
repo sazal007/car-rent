@@ -10,7 +10,7 @@ export const Hero: React.FC = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://lirp.cdn-website.com/2c9c39b9/dms3rep/multi/opt/ev+carsss-640w.png"
+          src="/images/kathmandu.jpeg"
           alt="Car on a forest road"
           className="w-full h-full object-cover"
         />
