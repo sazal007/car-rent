@@ -240,13 +240,13 @@ function CarsDetailsViewContent() {
         <div className="flex flex-col lg:flex-row gap-12 relative items-start">
           {/* Left: Sticky Image */}
           <div className="lg:w-1/2 w-full lg:sticky lg:top-36 self-start">
-            <div className="bg-carent-gray rounded-lg overflow-hidden h-[400px] md:h-[500px]">
+            <div className="relative h-64 md:h-80 w-full overflow-hidden bg-white rounded-lg">
               <Image
                 src={car.image}
                 alt={car.name}
                 width={800}
                 height={600}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
