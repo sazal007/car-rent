@@ -241,3 +241,154 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Blog content styles */
+.prose {
+  color: #4B5563;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: #1a1a1a;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.prose h1 {
+  font-size: 2.5rem;
+}
+
+.prose h2 {
+  font-size: 2rem;
+}
+
+.prose h3 {
+  font-size: 1.75rem;
+}
+
+.prose h4 {
+  font-size: 1.5rem;
+}
+
+.prose h5 {
+  font-size: 1.25rem;
+}
+
+.prose h6 {
+  font-size: 1.125rem;
+}
+
+.prose p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  color: #4B5563;
+}
+
+.prose ul,
+.prose ol {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+  color: #4B5563;
+}
+
+.prose blockquote {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: rgba(229, 231, 235, 0.6);
+  border-left: 4px solid #FFD700;
+  border-radius: 0.5rem;
+  font-style: italic;
+}
+
+.prose blockquote p {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.prose a {
+  color: #FFD700;
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: #FFA500;
+}
+
+.prose code {
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  color: #1a1a1a;
+}
+
+.prose pre {
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.prose th,
+.prose td {
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.prose th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 2rem 0;
+}
