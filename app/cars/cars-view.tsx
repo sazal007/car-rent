@@ -64,8 +64,8 @@ function VehiclesContent() {
 
   if (isLoading) {
     return (
-      <div className="text-center py-20">
-        <p className="text-gray-500 text-lg">Loading vehicles...</p>
+      <div className="text-center py-12 sm:py-16 md:py-20">
+        <p className="text-gray-500 text-sm sm:text-base md:text-lg">Loading vehicles...</p>
       </div>
     );
   }
@@ -80,7 +80,7 @@ function VehiclesContent() {
       />
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
         {currentCars.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}
@@ -88,8 +88,8 @@ function VehiclesContent() {
 
       {/* Empty State */}
       {currentCars.length === 0 && (
-        <div className="text-center py-20">
-          <p className="text-gray-500 text-lg">
+        <div className="text-center py-12 sm:py-16 md:py-20">
+          <p className="text-gray-500 text-sm sm:text-base md:text-lg">
             No vehicles found in this category.
           </p>
         </div>
@@ -109,11 +109,11 @@ function VehiclesContent() {
 
 export default function CarsViewPage() {
   return (
-    <div className="pt-56 pb-20 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
+    <div className="pt-24 sm:pt-32 md:pt-40 lg:pt-56 pb-12 sm:pb-16 md:pb-20 bg-white">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-6xl font-semibold text-carent-text mb-4">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-carent-text mb-3 sm:mb-4">
             Our Collections
           </h1>
         </div>
@@ -121,8 +121,8 @@ export default function CarsViewPage() {
         {/* Content with Suspense */}
         <Suspense
           fallback={
-            <div className="text-center py-20">
-              <p className="text-gray-500 text-lg">Loading...</p>
+            <div className="text-center py-12 sm:py-16 md:py-20">
+              <p className="text-gray-500 text-sm sm:text-base md:text-lg">Loading...</p>
             </div>
           }
         >

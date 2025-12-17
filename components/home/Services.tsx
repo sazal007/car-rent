@@ -51,50 +51,50 @@ const SERVICES = [
 
 export const Services: React.FC = () => {
   return (
-    <section className="py-24 bg-carent-gray">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-carent-gray">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-5 md:gap-6 mb-8 sm:mb-10 md:mb-12">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-semibold text-carent-text mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-carent-text mb-3 sm:mb-4">
               Services built for Kathmandu trips
             </h2>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg">
               Choose self-ride freedom, a guided scooter for stress-free
               exploring, or a comfortable EV taxi for family journeys.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 md:gap-8">
           {SERVICES.map((service) => (
             <div
               key={service.title}
-              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
+              className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-5 sm:p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-full bg-carent-yellow/20 text-carent-dark flex items-center justify-center">
-                  <service.icon size={22} />
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-carent-yellow/20 text-carent-dark flex items-center justify-center shrink-0">
+                  <service.icon size={20} className="sm:w-[22px] sm:h-[22px]" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-carent-text">
+                  <h3 className="text-lg sm:text-xl font-bold text-carent-text">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-carent-dark">{service.highlight}</p>
+                  <p className="text-xs sm:text-sm text-carent-dark">{service.highlight}</p>
                 </div>
               </div>
 
-              <ul className="space-y-3 text-gray-600 flex-1">
+              <ul className="space-y-2 sm:space-y-3 text-gray-600 flex-1 text-sm sm:text-base">
                 {service.points.map((point) => (
                   <li key={point} className="flex gap-2 items-start">
-                    <Shield className="w-4 h-4 mt-1 text-carent-yellow" />
+                    <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 mt-0.5 sm:mt-1 text-carent-yellow shrink-0" />
                     <span className="leading-relaxed">{point}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className="mt-8">
+              <div className="mt-6 sm:mt-7 md:mt-8">
                 <Link href={service.cta.href}>
-                  <Button className="w-full justify-center">
+                  <Button className="w-full justify-center text-sm sm:text-base">
                     {service.cta.label}
                   </Button>
                 </Link>
