@@ -12,6 +12,17 @@ export interface BookingData {
   "vehicle name": string;
 }
 
+export interface TourBookingData {
+  name: string;
+  "tour date": string; // ISO date string (YYYY-MM-DD)
+  "phone number": number;
+  email: string;
+  "payment method"?: string;
+  "payment status"?: string;
+  "pakage name": string;
+  price: number;
+}
+
 export interface BookingEntry {
   id: number;
   collection: number;

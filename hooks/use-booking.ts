@@ -1,6 +1,6 @@
-import { createBooking } from "@/services/booking.service";
+import { createBooking, createTourBooking } from "@/services/booking.service";
 import { useMutation } from "@tanstack/react-query";
-import { BookingData } from "@/types/booking";
+import { BookingData, TourBookingData } from "@/types/booking";
 import { toast } from "sonner";
 
 export const useCreateBooking = () => {
@@ -13,6 +13,21 @@ export const useCreateBooking = () => {
     onError: (error) => {
       toast.error("Failed to create booking");
       console.error("Failed to create booking:", error);
+    },
+  });
+};
+
+export const useCreateTourBooking = () => {
+  return useMutation({
+    mutationFn: (bookingData: TourBookingData) =>
+      createTourBooking(bookingData),
+    onSuccess: (data) => {
+      toast.success("Tour booking created successfully");
+      console.log("Tour booking created successfully:", data);
+    },
+    onError: (error) => {
+      toast.error("Failed to create tour booking");
+      console.error("Failed to create tour booking:", error);
     },
   });
 };
