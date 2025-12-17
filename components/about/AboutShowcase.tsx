@@ -4,9 +4,9 @@ import React from "react";
 
 export const AboutShowcase: React.FC = () => {
   return (
-    <section className="py-10 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="w-full h-[300px] md:h-[500px] rounded-2xl overflow-hidden relative">
+    <section className="py-6 sm:py-8 md:py-10 bg-white">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
+        <div className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] rounded-xl sm:rounded-2xl overflow-hidden relative">
           <img
             src="https://images.pexels.com/photos/2104882/pexels-photo-2104882.jpeg?_gl=1*t3h6pd*_ga*MTg3NDA4MjA3Mi4xNzY1Njk3NTgw*_ga_8JE65Q40S6*czE3NjU3MDk1MjMkbzMkZzEkdDE3NjU3MDk1MzgkajQ1JGwwJGgw"
             alt="EV scooters in Kathmandu evening streets"

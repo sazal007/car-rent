@@ -180,11 +180,11 @@ export const BookingForm: React.FC = () => {
   };
 
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-8 sm:py-10 md:py-12 bg-gray-50">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
         <form
           onSubmit={handleBookClick}
-          className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col lg:flex-row items-stretch gap-6"
+          className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-5 md:p-6 flex flex-col lg:flex-row items-stretch gap-4 sm:gap-5 md:gap-6"
         >
           <VehicleSelector
             vehicles={vehicles}
@@ -214,7 +214,7 @@ export const BookingForm: React.FC = () => {
             <button
               type="submit"
               disabled={!selectedVehicle || !departureDate || !returnDate}
-              className="bg-carent-yellow hover:bg-yellow-400 text-carent-dark rounded-xl px-8 py-4 font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-carent-yellow focus:ring-offset-2 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              className="bg-carent-yellow hover:bg-yellow-400 text-carent-dark rounded-lg sm:rounded-xl px-6 sm:px-8 py-3 sm:py-4 font-semibold text-sm sm:text-base transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-carent-yellow focus:ring-offset-2 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap w-full lg:w-auto"
             >
               Book Now
             </button>

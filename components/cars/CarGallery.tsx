@@ -15,16 +15,16 @@ export const CarGallery: React.FC<CarGalleryProps> = ({ vehicle }) => {
       : [vehicle.image, vehicle.image, vehicle.image];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-4xl font-semibold mb-12 text-center text-carent-text">
+    <section className="py-12 sm:py-14 md:py-16 bg-white">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-10 md:mb-12 text-center text-carent-text">
           Vehicle gallery
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
           {galleryImages.map((img, idx) => (
             <div
               key={idx}
-              className="rounded-2xl overflow-hidden h-64 hover:opacity-95 transition-opacity"
+              className="rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden h-48 sm:h-56 md:h-64 hover:opacity-95 transition-opacity"
             >
               <Image
                 src={img}

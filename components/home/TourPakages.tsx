@@ -29,20 +29,20 @@ export const TourPackages: React.FC<TourPackagesProps> = ({
       .slice(0, limit || tours.results.length) || [];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <div className="max-w-2xl mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+        <div className="max-w-2xl mb-8 sm:mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
             Optional Tour Packages
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-sm sm:text-base md:text-lg">
             Curated experiences to help you discover the soul of the city.
           </p>
         </div>
 
         {/* Tour Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {filteredTours.map((tour) => {
             const includes = JSON.parse(tour.data.includes || "[]") as string[];
             const slug = tour.data.slug || tour.id.toString();
@@ -53,57 +53,57 @@ export const TourPackages: React.FC<TourPackagesProps> = ({
                 href={`/tours/${tour.id}-${slug}`}
                 className="group block h-full"
               >
-                <div className="bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col border border-gray-100 h-full">
+                <div className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col border border-gray-100 h-full">
                   {/* Tour Image */}
-                  <div className="relative h-56 overflow-hidden">
+                  <div className="relative h-48 sm:h-52 md:h-56 overflow-hidden">
                     <img
                       src={tour.data.image}
                       alt={tour.data.name}
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute top-4 right-4 bg-white px-4 py-2 rounded-full shadow-md">
-                      <span className="text-lg font-bold text-gray-900">
+                    <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-md">
+                      <span className="text-base sm:text-lg font-bold text-gray-900">
                         {formatNpr(Number(tour.data.price))}
                       </span>
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col">
+                  <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                       {tour.data.name}
                     </h3>
 
                     {/* Duration */}
-                    <div className="flex items-center gap-2 text-gray-500 mb-4">
-                      <Clock size={18} />
-                      <span className="text-sm font-medium">
+                    <div className="flex items-center gap-2 text-gray-500 mb-3 sm:mb-4">
+                      <Clock size={16} className="sm:w-[18px] sm:h-[18px]" />
+                      <span className="text-xs sm:text-sm font-medium">
                         {tour.data.duration}
                       </span>
                     </div>
 
                     {/* Description */}
                     <div
-                      className="text-gray-600 text-sm leading-relaxed mb-6 grow [&_pre]:whitespace-normal [&_pre]:bg-transparent [&_pre]:border-0 [&_pre]:p-0 [&_pre]:m-0 [&_code]:text-gray-600 [&_code]:font-normal [&_code]:text-sm"
+                      className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5 md:mb-6 grow [&_pre]:whitespace-normal [&_pre]:bg-transparent [&_pre]:border-0 [&_pre]:p-0 [&_pre]:m-0 [&_code]:text-gray-600 [&_code]:font-normal [&_code]:text-xs [&_code]:sm:text-sm"
                       dangerouslySetInnerHTML={{ __html: tour.data.content }}
                     />
 
                     {/* Includes Section */}
                     {includes.length > 0 && (
-                      <div className="mb-6">
-                        <h4 className="text-xs font-semibold text-gray-900 uppercase tracking-wider mb-3">
+                      <div className="mb-4 sm:mb-5 md:mb-6">
+                        <h4 className="text-xs font-semibold text-gray-900 uppercase tracking-wider mb-2 sm:mb-3">
                           What&apos;s Included
                         </h4>
-                        <ul className="grid grid-cols-2 gap-x-3 gap-y-2">
+                        <ul className="grid grid-cols-2 gap-x-2 sm:gap-x-3 gap-y-1.5 sm:gap-y-2">
                           {includes.map((item, i) => (
                             <li
                               key={i}
-                              className="flex items-start gap-2 text-sm text-gray-600"
+                              className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600"
                             >
                               <Check
-                                size={16}
-                                className="text-carent-yellow shrink-0 mt-0.5"
+                                size={14}
+                                className="sm:w-4 sm:h-4 text-carent-yellow shrink-0 mt-0.5"
                               />
                               <span className="leading-snug">{item}</span>
                             </li>
@@ -113,7 +113,7 @@ export const TourPackages: React.FC<TourPackagesProps> = ({
                     )}
 
                     {/* CTA Button */}
-                    <Button className="w-full justify-center mt-auto group-hover:bg-carent-yellow group-hover:text-white transition-colors">
+                    <Button className="w-full justify-center mt-auto text-sm sm:text-base group-hover:bg-carent-yellow group-hover:text-white transition-colors">
                       Book This Tour
                     </Button>
                   </div>

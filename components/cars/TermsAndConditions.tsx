@@ -12,18 +12,18 @@ export const TermsAndConditions: React.FC = () => {
   const [activeTab, setActiveTab] = useState("requirements");
 
   return (
-    <section className="py-24 bg-carent-dark text-white rounded-t-[40px] md:rounded-t-[60px] mx-2 md:mx-4">
-      <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-4xl font-bold mb-16">Terms and Conditions</h2>
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-carent-dark text-white rounded-t-[20px] sm:rounded-t-[30px] md:rounded-t-[40px] lg:rounded-t-[60px] mx-1 sm:mx-2 md:mx-4">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 md:mb-16">Terms and Conditions</h2>
 
-        <div className="flex flex-col md:flex-row gap-12 lg:gap-24">
+        <div className="flex flex-col md:flex-row gap-8 sm:gap-10 md:gap-12 lg:gap-24">
           {/* Left: Tabs */}
-          <div className="w-full md:w-1/3 flex flex-col gap-2">
+          <div className="w-full md:w-1/3 flex flex-col gap-1.5 sm:gap-2">
             {termsTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`text-left text-xl py-2 pl-0 md:pl-6 border-l-2 transition-all duration-300 font-medium focus-visible:outline-none focus-visible:ring-0 ${
+                className={`text-left text-base sm:text-lg md:text-xl py-2 pl-0 md:pl-6 border-l-2 transition-all duration-300 font-medium focus-visible:outline-none focus-visible:ring-0 ${
                   activeTab === tab.id
                     ? "border-white text-white"
                     : "border-transparent text-gray-400 hover:text-gray-200"
@@ -37,30 +37,30 @@ export const TermsAndConditions: React.FC = () => {
           {/* Right: Content */}
           <div className="w-full md:w-2/3">
             {activeTab === "requirements" && (
-              <div className="space-y-10 transition-all duration-300 ease-out">
+              <div className="space-y-6 sm:space-y-8 md:space-y-10 transition-all duration-300 ease-out">
                 <div>
-                  <h4 className="font-bold text-lg mb-3 text-white">
+                  <h4 className="font-bold text-base sm:text-lg mb-2 sm:mb-3 text-white">
                     Driver age:
                   </h4>
-                  <p className="text-gray-400 leading-relaxed text-lg">
+                  <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg">
                     Renters must be at least 18 years old for Scooters and 21
                     for Cars.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-3 text-white">
+                  <h4 className="font-bold text-base sm:text-lg mb-2 sm:mb-3 text-white">
                     Driver&apos;s license:
                   </h4>
-                  <p className="text-gray-400 leading-relaxed text-lg">
+                  <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg">
                     A valid driver&apos;s license (International or Home
                     Country) is required for self-ride rentals.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-3 text-white">
+                  <h4 className="font-bold text-base sm:text-lg mb-2 sm:mb-3 text-white">
                     Security Deposit:
                   </h4>
-                  <p className="text-gray-400 leading-relaxed text-lg">
+                  <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg">
                     A refundable security deposit or original passport is
                     required during the rental period.
                   </p>
@@ -68,12 +68,12 @@ export const TermsAndConditions: React.FC = () => {
               </div>
             )}
             {activeTab === "insurance" && (
-              <div className="space-y-10 transition-all duration-300 ease-out">
+              <div className="space-y-6 sm:space-y-8 md:space-y-10 transition-all duration-300 ease-out">
                 <div>
-                  <h4 className="font-bold text-lg mb-3 text-white">
+                  <h4 className="font-bold text-base sm:text-lg mb-2 sm:mb-3 text-white">
                     Insurance and Coverage:
                   </h4>
-                  <p className="text-gray-400 leading-relaxed text-lg">
+                  <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg">
                     Our vehicles come with standard third-party insurance.
                     Damage to the rental vehicle is the responsibility of the
                     renter unless an additional waiver is purchased.
@@ -82,12 +82,12 @@ export const TermsAndConditions: React.FC = () => {
               </div>
             )}
             {activeTab === "cancellation" && (
-              <div className="space-y-10 transition-all duration-300 ease-out">
+              <div className="space-y-6 sm:space-y-8 md:space-y-10 transition-all duration-300 ease-out">
                 <div>
-                  <h4 className="font-bold text-lg mb-3 text-white">
+                  <h4 className="font-bold text-base sm:text-lg mb-2 sm:mb-3 text-white">
                     Cancellation Policy:
                   </h4>
-                  <p className="text-gray-400 leading-relaxed text-lg">
+                  <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg">
                     Free cancellation is available up to 24 hours before the
                     scheduled pickup time. Cancellations made within 24 hours
                     may be subject to a small booking fee.
