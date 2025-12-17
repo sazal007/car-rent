@@ -5,23 +5,20 @@ import React from "react";
 interface CarFilterProps {
   activeCategory: string;
   onCategoryChange: (category: string) => void;
+  categories: string[];
 }
-
-const CATEGORIES = [
-  "All",
-  "Self-ride Scooter",
-  "Guide with Scooter",
-  "Ev Taxi",
-  "Tours",
-];
 
 export const CarFilter: React.FC<CarFilterProps> = ({
   activeCategory,
   onCategoryChange,
+  categories,
 }) => {
+  // Always include "All" as the first option
+  const allCategories = ["All", ...categories];
+
   return (
     <div className="flex flex-wrap justify-center gap-4 mb-12">
-      {CATEGORIES.map((category) => {
+      {allCategories.map((category) => {
         const isActive = activeCategory === category;
         return (
           <button

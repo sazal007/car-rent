@@ -5,51 +5,51 @@ import React from "react";
 
 const images = [
   {
-    src: "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1605640840605-14ac1855827b?q=80&w=2833&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Boudhanath Stupa sunrise",
   },
   {
-    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1693025440505-c882d2796295?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "EV scooter on city street",
   },
   {
-    src: "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1717389279143-886425f42698?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "EV taxi interior",
   },
   {
-    src: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1592216114245-5104cb68a5ec?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Evening city ride",
   },
   {
-    src: "https://images.unsplash.com/photo-1502877828070-33b167ad6860?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1706188370039-e0cf9bd6ea16?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8a2F0aG1hbmR1fGVufDB8fDB8fHww",
     alt: "EV SUV for families",
   },
   {
-    src: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1589791933711-d68aae51e609?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGthdGhtYW5kdXxlbnwwfHwwfHx8MA%3D%3D",
     alt: "City scooter ride",
   },
   {
-    src: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1665435246333-48b2bc7a0018?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGthdGhtYW5kdXxlbnwwfHwwfHx8MA%3D%3D",
     alt: "EV dashboard",
   },
   {
-    src: "https://images.unsplash.com/photo-1529429617124-aee3c7c2f2ad?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1670486303115-5503fb9c5220?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8a2F0aG1hbmR1JTIwbmVwYWx8ZW58MHx8MHx8fDA%3D",
     alt: "Dual battery scooter",
   },
   {
-    src: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1665394183024-7a95b156d427?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGthdGhtYW5kdSUyMG5lcGFsfGVufDB8fDB8fHww",
     alt: "City lite scooter",
   },
   {
-    src: "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1731227102390-15f6200d625e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2F0aG1hbmR1JTIwdmFsbGV5fGVufDB8fDB8fHww",
     alt: "Local food stop on tour",
   },
   {
-    src: "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1611516491426-03025e6043c8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bmVwYWx8ZW58MHx8MHx8fDA%3D",
     alt: "Stupa sunset",
   },
   {
-    src: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80",
+    src: "https://images.unsplash.com/photo-1550642249-6e5605421172?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG5lcGFsfGVufDB8fDB8fHww",
     alt: "Heritage tour stop",
   },
 ];

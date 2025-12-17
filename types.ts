@@ -7,14 +7,15 @@ export interface Car {
   seats: number;
   transmission: "Manual" | "Automatic";
   luggage: number;
+  slug?: string;
   // New fields for detail page
   brand?: string;
-  year?: number;
+  year?: string | number;
   fuel?: string;
   description?: string;
   features?: string[];
   gallery?: string[];
-  category?: "Self-ride Scooter" | "Guide with Scooter" | "Ev Taxi" | "Tours";
+  category?: string;
 }
 
 export interface Review {

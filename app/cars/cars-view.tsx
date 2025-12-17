@@ -2,19 +2,31 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { CARS } from "@/constants";
 import { CarFilter } from "@/components/cars/CarFilter";
 import { CarCard } from "@/components/cars/CarCard";
 import { CarPagination } from "@/components/cars/CarPagination";
+import { useVehicles } from "@/hooks/use-vehicles";
 
 const ITEMS_PER_PAGE = 4;
 
 function VehiclesContent() {
+  const { data: vehicles = [], isLoading } = useVehicles();
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
 
   const [activeCategory, setActiveCategory] = useState(categoryParam || "All");
   const [currentPage, setCurrentPage] = useState(1);
+
+  // Extract unique categories from vehicles
+  const categories = React.useMemo(() => {
+    const uniqueCategories = new Set<string>();
+    vehicles.forEach((vehicle) => {
+      if (vehicle.category && vehicle.category.trim()) {
+        uniqueCategories.add(vehicle.category);
+      }
+    });
+    return Array.from(uniqueCategories).sort();
+  }, [vehicles]);
 
   // Update category if URL param changes
   useEffect(() => {
@@ -25,8 +37,8 @@ function VehiclesContent() {
     }
   }, [categoryParam]);
 
-  // Filter cars based on category
-  const filteredCars = CARS.filter((car) => {
+  // Filter vehicles based on category
+  const filteredCars = vehicles.filter((car) => {
     if (activeCategory === "All") return true;
     return car.category === activeCategory;
   });
@@ -50,12 +62,21 @@ function VehiclesContent() {
     window.scrollTo(0, 0);
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="text-center py-20">
+        <p className="text-gray-500 text-lg">Loading vehicles...</p>
+      </div>
+    );
+  }
+
   return (
     <>
       {/* Filter */}
       <CarFilter
         activeCategory={activeCategory}
         onCategoryChange={setActiveCategory}
+        categories={categories}
       />
 
       {/* Grid */}

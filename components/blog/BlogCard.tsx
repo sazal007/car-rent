@@ -2,26 +2,35 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { BlogPost } from '../../types';
+import Image from 'next/image';
+import { BlogPost } from '@/types/blog';
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
 export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
-  // Create slug from title
-  const slug = post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  // Format date from API
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  };
   
   return (
     <Link 
-      href={`/blog/${post.id}-${slug}`}
+      href={`/blog/${post.slug}`}
       className="group cursor-pointer flex flex-col gap-4"
     >
       <div className="rounded-2xl overflow-hidden aspect-[4/3] w-full relative">
-        <img 
-          src={post.image} 
-          alt={post.title} 
-          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+        <Image
+          src={post.thumbnail_image || '/images/kathmandu.jpeg'}
+          alt={post.thumbnail_image_alt_description || post.title}
+          fill
+          className="object-cover transform group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300" />
       </div>
@@ -31,7 +40,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           {post.title}
         </h3>
         <p className="text-gray-500 text-sm">
-          {post.date}
+          {formatDate(post.created_at)}
         </p>
       </div>
     </Link>

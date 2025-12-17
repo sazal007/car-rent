@@ -200,27 +200,18 @@ export const CARS: Car[] = [
 export const CATEGORIES: Category[] = [
   {
     id: "1",
-    name: "Self-ride Scooter",
-    image:
-      "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80",
+    name: "Scooter",
+    image: "/images/self-ride.jpeg",
   },
   {
     id: "2",
-    name: "Guide with Scooter",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80",
+    name: "Ev Taxi",
+    image: "/images/batoma-cab.jpeg",
   },
   {
     id: "3",
-    name: "Ev Taxi",
-    image:
-      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "4",
     name: "Tours",
-    image:
-      "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=600&q=80",
+    image: "/images/roads.jpg",
   },
 ];
 
