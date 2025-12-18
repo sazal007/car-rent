@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/shared/Button";
 import { Clock, Check } from "lucide-react";
 import { useTours } from "@/hooks/use-tours";
+import { Loader } from "@/components/shared/loader";
 
 const formatNpr = (value: number) =>
   new Intl.NumberFormat("en-NP", {
@@ -21,7 +22,15 @@ export const TourPackages: React.FC<TourPackagesProps> = ({
   excludeId,
   limit,
 }) => {
-  const { data: tours } = useTours();
+  const { data: tours, isLoading } = useTours();
+
+  if (isLoading) {
+    return (
+      <div className="text-center py-20 flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
 
   const filteredTours =
     tours?.results

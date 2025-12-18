@@ -6,6 +6,7 @@ import { CarFilter } from "@/components/cars/CarFilter";
 import { CarCard } from "@/components/cars/CarCard";
 import { CarPagination } from "@/components/cars/CarPagination";
 import { useVehicles } from "@/hooks/use-vehicles";
+import { Loader } from "@/components/shared/loader";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -64,8 +65,8 @@ function VehiclesContent() {
 
   if (isLoading) {
     return (
-      <div className="text-center py-20">
-        <p className="text-gray-500 text-lg">Loading vehicles...</p>
+      <div className="text-center py-20 flex items-center justify-center">
+        <Loader />
       </div>
     );
   }
@@ -121,8 +122,8 @@ export default function CarsViewPage() {
         {/* Content with Suspense */}
         <Suspense
           fallback={
-            <div className="text-center py-20">
-              <p className="text-gray-500 text-lg">Loading...</p>
+            <div className="text-center py-20 flex items-center justify-center">
+              <Loader />
             </div>
           }
         >

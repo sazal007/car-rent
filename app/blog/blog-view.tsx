@@ -2,6 +2,7 @@
 
 import { BlogCard } from "@/components/blog/BlogCard";
 import { useGetBlogs } from "@/hooks/use-blogs";
+import { Loader } from "@/components/shared/loader";
 
 export default function BlogView() {
   const { data: blogsResponse, isLoading, isError } = useGetBlogs();
@@ -16,7 +17,7 @@ export default function BlogView() {
             </h1>
           </div>
           <div className="flex justify-center items-center py-20">
-            <div className="text-gray-500 text-lg">Loading blogs...</div>
+            <Loader />
           </div>
         </div>
       </div>

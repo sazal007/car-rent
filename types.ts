@@ -23,7 +23,6 @@ export interface Review {
   text: string;
   author: string;
   avatar: string;
-  rating: number;
 }
 
 export interface Category {

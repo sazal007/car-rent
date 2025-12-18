@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "../shared/Button";
 import { CarCard } from "../cars/CarCard";
 import { useVehicles } from "@/hooks/use-vehicles";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader } from "lucide-react";
 
 interface CarCollectionProps {
   title?: string;
@@ -89,8 +89,8 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
 
         {/* Cars Slider */}
         {isLoading ? (
-          <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">Loading vehicles...</p>
+          <div className="text-center py-20 flex items-center justify-center">
+            <Loader />
           </div>
         ) : (
           <div

@@ -17,6 +17,7 @@ import { TermsAndConditions } from "@/components/cars/TermsAndConditions";
 import { CarFeedback } from "@/components/cars/CarFeedback";
 import { ServiceType } from "@/components/booking/ServiceTypeSelector";
 import { PaymentMethod } from "@/components/booking/PaymentMethodSelector";
+import { Loader } from "@/components/shared/loader";
 
 const formatNpr = (value: number) =>
   new Intl.NumberFormat("en-NP", {
@@ -110,8 +111,8 @@ function CarsDetailsViewContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen pt-36 text-center">
-        <p className="text-gray-500 text-lg">Loading vehicle details...</p>
+      <div className="min-h-screen pt-36 text-center flex items-center justify-center">
+        <Loader />
       </div>
     );
   }
@@ -329,8 +330,8 @@ export default function CarsDetailsView() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen pt-36 text-center">
-          <p className="text-gray-500 text-lg">Loading vehicle details...</p>
+        <div className="min-h-screen pt-36 text-center flex items-center justify-center">
+          <Loader />
         </div>
       }
     >
