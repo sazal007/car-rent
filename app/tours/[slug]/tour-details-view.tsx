@@ -17,6 +17,7 @@ import {
 import { BookingSummary } from "@/components/booking/BookingSummary";
 import { BookingSuccess } from "@/components/booking/BookingSuccess";
 import { TourPackages } from "@/components/home/TourPakages";
+import { Loader } from "@/components/shared/loader";
 
 const formatNpr = (value: number) =>
   new Intl.NumberFormat("en-NP", {
@@ -80,8 +81,8 @@ function TourDetailsViewContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen pt-36 text-center">
-        <p className="text-gray-500 text-lg">Loading tour details...</p>
+      <div className="min-h-screen pt-36 text-center flex items-center justify-center">
+        <Loader />
       </div>
     );
   }
@@ -339,7 +340,7 @@ export default function TourDetailsView() {
     <Suspense
       fallback={
         <div className="min-h-screen pt-36 text-center">
-          <p className="text-gray-500 text-lg">Loading tour details...</p>
+          <Loader />
         </div>
       }
     >
