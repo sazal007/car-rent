@@ -40,10 +40,12 @@ export default function BlogDetailView() {
 
   if (isLoadingPost) {
     return (
-      <div className="bg-white min-h-screen pt-56 pb-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex justify-center items-center py-20">
-            <div className="text-gray-500 text-lg">Loading blog post...</div>
+      <div className="bg-white min-h-screen pt-24 sm:pt-32 md:pt-40 lg:pt-56 pb-12 sm:pb-16 md:pb-24">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6">
+          <div className="flex justify-center items-center py-12 sm:py-16 md:py-20">
+            <div className="text-gray-500 text-sm sm:text-base md:text-lg">
+              Loading blog post...
+            </div>
           </div>
         </div>
       </div>
@@ -52,10 +54,12 @@ export default function BlogDetailView() {
 
   if (isErrorPost || !post) {
     return (
-      <div className="min-h-screen pt-56 text-center">
-        <h2 className="text-3xl font-bold">Post not found</h2>
+      <div className="min-h-screen pt-24 sm:pt-32 md:pt-40 lg:pt-56 text-center px-3 sm:px-4">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+          Post not found
+        </h2>
         <Link href="/blog">
-          <Button className="mt-4">Go to Blog</Button>
+          <Button className="mt-4 sm:mt-6">Go to Blog</Button>
         </Link>
       </div>
     );
@@ -65,19 +69,19 @@ export default function BlogDetailView() {
   const sanitizedContent = sanitizeContent(post.content);
 
   return (
-    <div className="bg-white min-h-screen pt-56 pb-24">
+    <div className="bg-white min-h-screen pt-24 sm:pt-32 md:pt-40 lg:pt-56 pb-12 sm:pb-16 md:pb-24">
       {/* Article Content */}
-      <article className="container mx-auto px-4 md:px-6 max-w-4xl">
+      <article className="container mx-auto px-3 sm:px-4 md:px-6 max-w-4xl">
         {/* Header info */}
-        <div className="mb-8">
-          <span className="inline-block bg-carent-yellow px-4 py-1.5 rounded-full text-sm font-medium mb-4">
+        <div className="mb-6 sm:mb-7 md:mb-8">
+          <span className="inline-block bg-carent-yellow px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
             {formatDate(post.created_at)}
           </span>
-          <h1 className="text-3xl md:text-4xl font-bold text-carent-text mb-6 leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-carent-text mb-4 sm:mb-5 md:mb-6 leading-tight">
             {post.title}
           </h1>
           {/* {post.meta_description && (
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
               {post.meta_description}
             </p>
           )} */}
@@ -85,7 +89,7 @@ export default function BlogDetailView() {
 
         {/* Main Image */}
         {post.thumbnail_image && (
-          <div className="rounded-2xl overflow-hidden w-full h-[300px] md:h-[500px] mb-12">
+          <div className="rounded-xl sm:rounded-2xl overflow-hidden w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] mb-8 sm:mb-10 md:mb-12">
             <Image
               src={post.thumbnail_image}
               alt={post.thumbnail_image_alt_description || post.title}
@@ -98,18 +102,19 @@ export default function BlogDetailView() {
 
         {/* Content - Render sanitized HTML */}
         <div
-          className="max-w-none"
+          className="max-w-none prose prose-headings:text-carent-text prose-a:text-carent-yellow prose-img:rounded-xl"
+          style={{ fontSize: "clamp(0.875rem, 2vw, 1.125rem)" }}
           dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
       </article>
 
       {/* Recent Blog Section */}
       {recentPosts.length > 0 && (
-        <div className="container mx-auto px-4 md:px-6 mt-32">
-          <h2 className="text-4xl font-semibold mb-12 text-carent-text border-b border-gray-200 pb-4">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 mt-16 sm:mt-20 md:mt-24 lg:mt-32">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-10 md:mb-12 text-carent-text border-b border-gray-200 pb-3 sm:pb-4">
             Recent Blog
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 gap-y-8 sm:gap-y-10 md:gap-y-12">
             {recentPosts.map((recent) => (
               <BlogCard key={recent.id} post={recent} />
             ))}

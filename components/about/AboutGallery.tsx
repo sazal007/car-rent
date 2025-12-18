@@ -56,23 +56,23 @@ const images = [
 
 export const AboutGallery: React.FC = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-4xl font-semibold text-center text-carent-text mb-12">
+    <section className="py-12 sm:py-16 md:py-20 bg-white">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center text-carent-text mb-8 sm:mb-10 md:mb-12">
           Our Journey in Pictures
         </h2>
 
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 max-w-6xl mx-auto">
+        <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 max-w-6xl mx-auto">
           {images.map((image, idx) => (
             <div
               key={image.src + idx}
-              className="relative overflow-hidden rounded-2xl shadow-sm bg-gray-50 aspect-4/3"
+              className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-sm bg-gray-50 aspect-4/3"
             >
               <Image
                 src={image.src}
                 alt={image.alt}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
                 className="object-cover transition-transform duration-500 hover:scale-105"
                 priority={idx === 0}
               />

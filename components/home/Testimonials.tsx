@@ -12,7 +12,7 @@ export const Testimonials: React.FC = () => {
         </h2>
 
         {/* Masonry Layout approximation using CSS columns */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-4 sm:gap-5 md:gap-6 space-y-4 sm:space-y-5 md:space-y-6">
           {REVIEWS.map((review) => (
             <div
               key={review.id}

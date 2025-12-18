@@ -218,9 +218,9 @@ function CarsDetailsViewContent() {
 
   if (!car) {
     return (
-      <div className="min-h-screen pt-36 text-center">
-        <h2 className="text-3xl font-bold">Car not found</h2>
-        <Button onClick={() => router.push("/cars")} className="mt-4">
+      <div className="min-h-screen pt-24 sm:pt-32 md:pt-36 text-center px-3 sm:px-4">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Car not found</h2>
+        <Button onClick={() => router.push("/cars")} className="mt-4 sm:mt-6">
           Go Back
         </Button>
       </div>
@@ -228,13 +228,13 @@ function CarsDetailsViewContent() {
   }
 
   return (
-    <div key={car.id} className="pt-56 bg-white">
+    <div key={car.id} className="pt-24 sm:pt-32 md:pt-40 lg:pt-56 bg-white">
       {/* Top Split Section */}
-      <div className="container mx-auto px-4 md:px-6 mb-20">
-        <div className="flex flex-col lg:flex-row gap-12 relative items-start">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 mb-12 sm:mb-16 md:mb-20">
+        <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 relative items-start">
           {/* Left: Sticky Image */}
-          <div className="lg:w-1/2 w-full lg:sticky lg:top-36 self-start">
-            <div className="relative h-64 md:h-80 w-full overflow-hidden bg-white rounded-lg">
+          <div className="lg:w-1/2 w-full lg:sticky lg:top-24 xl:top-36 self-start">
+            <div className="relative h-48 sm:h-64 md:h-80 w-full overflow-hidden bg-white rounded-lg sm:rounded-xl">
               <Image
                 src={car.image}
                 alt={car.name}
@@ -246,43 +246,43 @@ function CarsDetailsViewContent() {
           </div>
 
           {/* Right: Details */}
-          <div className="lg:w-1/2 w-full pt-2">
-            <h1 className="text-4xl md:text-5xl font-bold text-carent-text mb-3">
+          <div className="lg:w-1/2 w-full pt-0 sm:pt-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carent-text mb-2 sm:mb-3">
               {car.name}
             </h1>
-            <p className="text-gray-500 mb-6 font-medium text-lg">
+            <p className="text-gray-500 mb-4 sm:mb-5 md:mb-6 font-medium text-sm sm:text-base md:text-lg">
               {car.brand || "Brand"}
-              <span className="mx-2 text-gray-300">|</span> {car.type}
-              <span className="mx-2 text-gray-300">|</span> {car.year || "2023"}
+              <span className="mx-1.5 sm:mx-2 text-gray-300">|</span> {car.type}
+              <span className="mx-1.5 sm:mx-2 text-gray-300">|</span> {car.year || "2023"}
             </p>
 
-            <p className="text-gray-600 leading-relaxed mb-8 text-lg">
+            <p className="text-gray-600 leading-relaxed mb-6 sm:mb-7 md:mb-8 text-sm sm:text-base md:text-lg">
               {car.description ||
                 "Experience the ultimate comfort and performance with our premium rental vehicles. Perfect for any journey."}
             </p>
 
-            <div className="flex items-end gap-2 mb-8">
-              <span className="text-4xl font-bold text-carent-text">
+            <div className="flex items-end gap-1.5 sm:gap-2 mb-6 sm:mb-7 md:mb-8">
+              <span className="text-3xl sm:text-4xl font-bold text-carent-text">
                 {formatNpr(car.price)}
               </span>
-              <span className="text-gray-500 mb-1">/{priceUnit}</span>
+              <span className="text-gray-500 mb-1 text-sm sm:text-base">/{priceUnit}</span>
             </div>
 
             {/* Booking Section */}
-            <div className="mb-12">
+            <div className="mb-8 sm:mb-10 md:mb-12">
               {!showBookingForm ? (
-                <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-stretch animate-in fade-in duration-300">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-stretch animate-in fade-in duration-300">
                   <Button
                     onClick={() => setShowBookingForm(true)}
-                    className="w-full sm:w-auto h-14 text-lg"
+                    className="w-full sm:w-auto h-12 sm:h-14 text-base sm:text-lg"
                   >
                     Book Now
                   </Button>
-                  <div className="flex items-center gap-2 px-2 py-3">
-                    <span className="text-carent-text font-medium text-lg">
+                  <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 px-2 py-2 sm:py-3">
+                    <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
                       Or call to book
                     </span>
-                    <span className="text-carent-text font-medium text-lg">
+                    <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
                       (+977) 980-1234567
                     </span>
                   </div>

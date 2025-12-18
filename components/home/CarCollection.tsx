@@ -26,12 +26,18 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
 
   const scroll = (direction: "left" | "right") => {
     if (sliderRef.current) {
       const { current } = sliderRef;
-      const scrollAmount = 600;
+      // Calculate scroll amount based on viewport width (one card per screen)
+      // Account for padding: 24px on mobile (12px each side), 32px on sm (16px each side)
+      const isMobile = window.innerWidth < 640;
+      const padding = isMobile ? 24 : 32;
+      const cardWidth = window.innerWidth - padding;
+      const gap = isMobile ? 24 : 28; // gap-6 = 24px, gap-7 = 28px
+      const scrollAmount = cardWidth + gap;
+
       const targetScroll =
         direction === "left"
           ? current.scrollLeft - scrollAmount
@@ -47,7 +53,6 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!sliderRef.current) return;
     setIsDown(true);
-    setIsDragging(false);
     setStartX(e.pageX - sliderRef.current.offsetLeft);
     setScrollLeft(sliderRef.current.scrollLeft);
   };
@@ -58,7 +63,6 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
 
   const handleMouseUp = () => {
     setIsDown(false);
-    setTimeout(() => setIsDragging(false), 50);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -66,23 +70,25 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
     e.preventDefault();
     const x = e.pageX - sliderRef.current.offsetLeft;
     const walk = (x - startX) * 1.5;
-    if (Math.abs(x - startX) > 5) {
-      setIsDragging(true);
-    }
     sliderRef.current.scrollLeft = scrollLeft - walk;
   };
 
   return (
-    <section id="cars" className="py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
+    <section
+      id="cars"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden"
+    >
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <div className="flex flex-row items-end justify-between mb-12 gap-6">
-          <h2 className="text-4xl md:text-5xl font-semibold text-carent-text max-w-xl leading-tight">
+        <div className="flex flex-row items-end justify-between mb-8 sm:mb-10 md:mb-12 gap-4 sm:gap-5 md:gap-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-carent-text max-w-xl leading-tight">
             {title}
           </h2>
           <div className="hidden md:block">
             <Link href="/cars">
-              <Button icon={true}>View all vehicles</Button>
+              <Button icon={true} className="text-sm sm:text-base">
+                View all vehicles
+              </Button>
             </Link>
           </div>
         </div>
@@ -95,7 +101,7 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
         ) : (
           <div
             ref={sliderRef}
-            className="flex gap-8 overflow-x-auto no-scrollbar pb-8 -mx-4 px-4 md:-mx-6 md:px-6 cursor-grab active:cursor-grabbing select-none"
+            className="flex gap-6 sm:gap-7 md:gap-8 overflow-x-auto no-scrollbar pb-6 sm:pb-7 md:pb-8 -mx-3 sm:-mx-4 px-3 sm:px-4 md:-mx-6 md:px-6 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory"
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
@@ -105,43 +111,47 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
               filteredCars.map((car) => (
                 <div
                   key={car.id}
-                  className="w-[90vw] sm:w-[400px] md:w-[450px] shrink-0"
+                  className="w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] md:w-[400px] lg:w-[450px] shrink-0 snap-center"
                 >
                   <CarCard car={car} />
                 </div>
               ))
             ) : (
-              <div className="text-center py-20 w-full">
-                <p className="text-gray-500 text-lg">No vehicles available.</p>
+              <div className="text-center py-12 sm:py-16 md:py-20 w-full">
+                <p className="text-gray-500 text-sm sm:text-base md:text-lg">
+                  No vehicles available.
+                </p>
               </div>
             )}
           </div>
         )}
 
         {/* Bottom Controls */}
-        <div className="flex items-center justify-between mt-6">
+        <div className="flex items-center justify-between mt-4 sm:mt-5 md:mt-6">
           {/* Navigation Arrows */}
-          <div className="flex gap-4">
+          <div className="flex gap-3 sm:gap-4">
             <button
               onClick={() => scroll("left")}
-              className="w-14 h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
               aria-label="Scroll left"
             >
-              <ArrowLeft size={24} />
+              <ArrowLeft size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="w-14 h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
               aria-label="Scroll right"
             >
-              <ArrowRight size={24} />
+              <ArrowRight size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
             </button>
           </div>
 
           {/* Mobile View All Button */}
           <div className="md:hidden">
             <Link href="/cars">
-              <Button className="px-6 py-2 text-sm">View all</Button>
+              <Button className="px-4 sm:px-5 md:px-6 py-2 text-xs sm:text-sm">
+                View all
+              </Button>
             </Link>
           </div>
         </div>

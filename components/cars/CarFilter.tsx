@@ -17,7 +17,7 @@ export const CarFilter: React.FC<CarFilterProps> = ({
   const allCategories = ["All", ...categories];
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 mb-12">
+    <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-10 md:mb-12">
       {allCategories.map((category) => {
         const isActive = activeCategory === category;
         return (
@@ -25,7 +25,7 @@ export const CarFilter: React.FC<CarFilterProps> = ({
             key={category}
             onClick={() => onCategoryChange(category)}
             className={`
-              px-8 py-3 rounded-sm font-medium transition-colors duration-300 cursor-pointer
+              px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-sm font-medium text-sm sm:text-base transition-colors duration-300 cursor-pointer
               ${
                 isActive
                   ? "bg-carent-dark text-white"

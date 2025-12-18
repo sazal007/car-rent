@@ -16,18 +16,18 @@ export const CarFeatures: React.FC<CarFeaturesProps> = ({ vehicle }) => {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold mb-6 text-carent-text">
+      <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-carent-text">
         Vehicle features
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 sm:gap-y-4 gap-x-4 sm:gap-x-6 md:gap-x-8">
         {features.map((feature, idx) => (
-          <div key={idx} className="flex items-center gap-3">
+          <div key={idx} className="flex items-center gap-2 sm:gap-3">
             <CheckCircle
-              size={20}
-              className="text-carent-text fill-transparent"
+              size={18}
+              className="sm:w-5 sm:h-5 text-carent-text fill-transparent shrink-0"
               strokeWidth={2}
             />
-            <span className="text-gray-700 font-medium">{feature}</span>
+            <span className="text-sm sm:text-base text-gray-700 font-medium">{feature}</span>
           </div>
         ))}
       </div>
