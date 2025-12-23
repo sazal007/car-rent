@@ -18,6 +18,7 @@ import { BookingSummary } from "@/components/booking/BookingSummary";
 import { BookingSuccess } from "@/components/booking/BookingSuccess";
 import { TourPackages } from "@/components/home/TourPakages";
 import { Loader } from "@/components/shared/loader";
+import { PriceTier } from "@/types/tours";
 
 const formatNpr = (value: number) =>
   new Intl.NumberFormat("en-NP", {
@@ -25,6 +26,28 @@ const formatNpr = (value: number) =>
     currency: "NPR",
     maximumFractionDigits: 0,
   }).format(value);
+
+// Parse price JSON string and get price tiers
+const parsePriceTiers = (priceString: string): PriceTier[] => {
+  try {
+    const priceTiers: PriceTier[] = JSON.parse(priceString || "[]");
+    return priceTiers.sort((a, b) => a.min_group_size - b.min_group_size);
+  } catch {
+    // Fallback: try to parse as number for backward compatibility
+    const numPrice = Number(priceString);
+    if (!isNaN(numPrice) && numPrice > 0) {
+      return [{ min_group_size: 1, max_group_size: 999, price_per_person: numPrice }];
+    }
+    return [];
+  }
+};
+
+// Get the starting price (highest price for smallest group)
+const getStartingPrice = (priceString: string): number => {
+  const tiers = parsePriceTiers(priceString);
+  if (tiers.length === 0) return 0;
+  return Math.max(...tiers.map((tier) => tier.price_per_person));
+};
 
 type BookingStatus = "idle" | "submitting" | "success";
 
@@ -45,6 +68,7 @@ function TourDetailsViewContent() {
 
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [bookingStatus, setBookingStatus] = useState<BookingStatus>("idle");
+  const [selectedGroupSize, setSelectedGroupSize] = useState<number>(1);
 
   // Read URL parameters
   const urlDate = searchParams.get("date");
@@ -107,13 +131,28 @@ function TourDetailsViewContent() {
       // Get tour name (lowercase for consistency)
       const tourName = tour.data.name.toLowerCase();
 
+      // Calculate price based on selected group size
+      const priceTiers = parsePriceTiers(tour.data.price);
+      let bookingPrice = getStartingPrice(tour.data.price);
+      
+      // Find the appropriate price tier for selected group size
+      const selectedTier = priceTiers.find(
+        (tier) => selectedGroupSize >= tier.min_group_size && selectedGroupSize <= tier.max_group_size
+      );
+      if (selectedTier) {
+        bookingPrice = selectedTier.price_per_person * selectedGroupSize;
+      } else if (priceTiers.length > 0) {
+        // Fallback to highest tier price
+        bookingPrice = priceTiers[priceTiers.length - 1].price_per_person * selectedGroupSize;
+      }
+
       // Prepare booking data matching API format
       const bookingData: TourBookingData = {
         name: formData.fullName,
         "tour date": tourDate,
         "phone number": phoneNumber,
         email: formData.email,
-        price: Number(tour.data.price),
+        price: bookingPrice,
         "payment method": formData.paymentMethod,
         "payment status": "pending",
         "pakage name": tourName,
@@ -151,6 +190,16 @@ function TourDetailsViewContent() {
   }
 
   const includes = JSON.parse(tour.data.includes || "[]") as string[];
+  const excludes = tour.data.excludes || "";
+  const priceTiers = parsePriceTiers(tour.data.price);
+  const startingPrice = getStartingPrice(tour.data.price);
+  
+  // Calculate total price for selected group size
+  const selectedTier = priceTiers.find(
+    (tier) => selectedGroupSize >= tier.min_group_size && selectedGroupSize <= tier.max_group_size
+  );
+  const currentPricePerPerson = selectedTier?.price_per_person || startingPrice;
+  const totalPrice = currentPricePerPerson * selectedGroupSize;
 
   return (
     <div key={tour.id} className="pt-24 sm:pt-32 md:pt-40 lg:pt-56 bg-white">
@@ -191,13 +240,41 @@ function TourDetailsViewContent() {
             />
 
             {/* Price */}
-            <div className="flex items-end gap-1.5 sm:gap-2 mb-6 sm:mb-7 md:mb-8">
-              <span className="text-3xl sm:text-4xl font-bold text-carent-text">
-                {formatNpr(Number(tour.data.price))}
-              </span>
-              <span className="text-gray-500 mb-1 text-sm sm:text-base">
-                /per person
-              </span>
+            <div className="mb-6 sm:mb-7 md:mb-8">
+              <div className="flex items-end gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                <span className="text-3xl sm:text-4xl font-bold text-carent-text">
+                  From {formatNpr(startingPrice)}
+                </span>
+                <span className="text-gray-500 mb-1 text-sm sm:text-base">
+                  /per person
+                </span>
+              </div>
+              
+              {/* Pricing Tiers Table */}
+              {priceTiers.length > 0 && (
+                <div className="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-5 border border-gray-200">
+                  <h4 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4">
+                    Group Pricing
+                  </h4>
+                  <div className="space-y-2 sm:space-y-2.5">
+                    {priceTiers.map((tier, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between text-sm sm:text-base"
+                      >
+                        <span className="text-gray-600">
+                          {tier.min_group_size === tier.max_group_size
+                            ? `${tier.min_group_size} ${tier.min_group_size === 1 ? "person" : "people"}`
+                            : `${tier.min_group_size}-${tier.max_group_size} people`}
+                        </span>
+                        <span className="font-semibold text-gray-900">
+                          {formatNpr(tier.price_per_person)}/person
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Includes Section */}
@@ -220,6 +297,18 @@ function TourDetailsViewContent() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            )}
+
+            {/* Excludes Section */}
+            {excludes && (
+              <div className="mb-6 sm:mb-7 md:mb-8">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
+                  What&apos;s Not Included
+                </h3>
+                <div className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                  {excludes}
+                </div>
               </div>
             )}
 
@@ -286,6 +375,32 @@ function TourDetailsViewContent() {
                         required
                       />
 
+                      {/* Group Size Selector */}
+                      {priceTiers.length > 0 && (
+                        <div className="flex flex-col gap-2">
+                          <label className="text-sm sm:text-base font-medium text-gray-900">
+                            Number of People
+                          </label>
+                          <select
+                            value={selectedGroupSize}
+                            onChange={(e) => setSelectedGroupSize(Number(e.target.value))}
+                            className="w-full px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-carent-yellow focus:border-transparent"
+                            required
+                          >
+                            {Array.from({ length: 10 }, (_, i) => i + 1).map((size) => (
+                              <option key={size} value={size}>
+                                {size} {size === 1 ? "person" : "people"}
+                              </option>
+                            ))}
+                          </select>
+                          {selectedTier && (
+                            <p className="text-xs sm:text-sm text-gray-500">
+                              Price: {formatNpr(currentPricePerPerson)} per person
+                            </p>
+                          )}
+                        </div>
+                      )}
+
                       <ContactDetailsForm
                         fullName={formData.fullName}
                         email={formData.email}
@@ -310,9 +425,9 @@ function TourDetailsViewContent() {
                       />
 
                       <BookingSummary
-                        pricePerDay={Number(tour.data.price)}
-                        days={1}
-                        total={Number(tour.data.price)}
+                        pricePerDay={currentPricePerPerson}
+                        days={selectedGroupSize}
+                        total={totalPrice}
                         formatPrice={formatNpr}
                         isSubmitting={
                           bookingStatus === "submitting" || isPending

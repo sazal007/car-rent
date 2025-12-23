@@ -13,12 +13,19 @@ export interface TourEntry {
   updated_at: string; // ISO timestamp
 }
 
+export interface PriceTier {
+  min_group_size: number;
+  max_group_size: number;
+  price_per_person: number;
+}
+
 export interface TourData {
   name: string;
   slug: string;
   image: string;
-  price: string; // stored as string in your response
+  price: string; // JSON string array of PriceTier objects
   content: string; // HTML string
   duration: string;
   includes: string; // JSON string: e.g. "[\"EV Scooter/Taxi\",\"Entry Fees\"]"
+  excludes?: string; // Optional string field
 }

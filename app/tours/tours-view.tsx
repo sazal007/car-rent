@@ -6,6 +6,7 @@ import { Button } from "@/components/shared/Button";
 import { Clock, Check } from "lucide-react";
 import { useTours } from "@/hooks/use-tours";
 import { Loader } from "@/components/shared/loader";
+import { PriceTier } from "@/types/tours";
 
 const formatNpr = (value: number) =>
   new Intl.NumberFormat("en-NP", {
@@ -13,6 +14,20 @@ const formatNpr = (value: number) =>
     currency: "NPR",
     maximumFractionDigits: 0,
   }).format(value);
+
+// Parse price JSON string and get the starting price (highest price for smallest group)
+const getStartingPrice = (priceString: string): number => {
+  try {
+    const priceTiers: PriceTier[] = JSON.parse(priceString || "[]");
+    if (priceTiers.length === 0) return 0;
+    // Return the highest price (usually for smallest group size)
+    return Math.max(...priceTiers.map((tier) => tier.price_per_person));
+  } catch {
+    // Fallback: try to parse as number for backward compatibility
+    const numPrice = Number(priceString);
+    return isNaN(numPrice) ? 0 : numPrice;
+  }
+};
 
 export default function ToursViewPage() {
   const { data: tours, isLoading } = useTours();
@@ -78,7 +93,7 @@ export default function ToursViewPage() {
                       />
                       <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-md">
                         <span className="text-base sm:text-lg font-bold text-gray-900">
-                          {formatNpr(Number(tour.data.price))}
+                          From {formatNpr(getStartingPrice(tour.data.price))}
                         </span>
                       </div>
                     </div>
