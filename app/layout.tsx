@@ -5,6 +5,7 @@ import { Navbar } from "../components/shared/Navbar";
 import { Footer } from "../components/shared/Footer";
 import QueryProvider from "@/providers/query-provider";
 import { Toaster } from "sonner";
+import { WhatsApp } from "@/components/whatsapp/whatsapp";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />
+          <WhatsApp />
           <Toaster
             position="bottom-right"
             richColors
