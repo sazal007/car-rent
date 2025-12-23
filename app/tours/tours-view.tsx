@@ -8,10 +8,10 @@ import { useTours } from "@/hooks/use-tours";
 import { Loader } from "@/components/shared/loader";
 import { PriceTier } from "@/types/tours";
 
-const formatNpr = (value: number) =>
-  new Intl.NumberFormat("en-NP", {
+const formatUsd = (value: number) =>
+  new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "NPR",
+    currency: "USD",
     maximumFractionDigits: 0,
   }).format(value);
 
@@ -74,7 +74,9 @@ export default function ToursViewPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {tourList.map((tour) => {
-              const includes = JSON.parse(tour.data.includes || "[]") as string[];
+              const includes = JSON.parse(
+                tour.data.includes || "[]"
+              ) as string[];
               const slug = tour.data.slug || tour.id.toString();
 
               return (
@@ -91,11 +93,6 @@ export default function ToursViewPage() {
                         alt={tour.data.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
-                      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-md">
-                        <span className="text-base sm:text-lg font-bold text-gray-900">
-                          From {formatNpr(getStartingPrice(tour.data.price))}
-                        </span>
-                      </div>
                     </div>
 
                     {/* Content */}
@@ -157,4 +154,3 @@ export default function ToursViewPage() {
     </div>
   );
 }
-

@@ -23,7 +23,7 @@ export interface TourData {
   name: string;
   slug: string;
   image: string;
-  price: string; // JSON string array of PriceTier objects
+  "price(min_group_size,max_group_size,price_per_person)": string; // JSON string array of PriceTier objects
   content: string; // HTML string
   duration: string;
   includes: string; // JSON string: e.g. "[\"EV Scooter/Taxi\",\"Entry Fees\"]"

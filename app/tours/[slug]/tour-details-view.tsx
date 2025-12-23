@@ -18,12 +18,15 @@ import { BookingSummary } from "@/components/booking/BookingSummary";
 import { BookingSuccess } from "@/components/booking/BookingSuccess";
 import { TourPackages } from "@/components/home/TourPakages";
 import { Loader } from "@/components/shared/loader";
-import { PriceTier } from "@/types/tours";
+import { PriceTier, TourData } from "@/types/tours";
 
-const formatNpr = (value: number) =>
-  new Intl.NumberFormat("en-NP", {
+const PRICE_FIELD_NAME =
+  "price(min_group_size,max_group_size,price_per_person)" as keyof TourData;
+
+const formatUsd = (value: number) =>
+  new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "NPR",
+    currency: "USD",
     maximumFractionDigits: 0,
   }).format(value);
 
@@ -36,7 +39,9 @@ const parsePriceTiers = (priceString: string): PriceTier[] => {
     // Fallback: try to parse as number for backward compatibility
     const numPrice = Number(priceString);
     if (!isNaN(numPrice) && numPrice > 0) {
-      return [{ min_group_size: 1, max_group_size: 999, price_per_person: numPrice }];
+      return [
+        { min_group_size: 1, max_group_size: 999, price_per_person: numPrice },
+      ];
     }
     return [];
   }
@@ -132,18 +137,22 @@ function TourDetailsViewContent() {
       const tourName = tour.data.name.toLowerCase();
 
       // Calculate price based on selected group size
-      const priceTiers = parsePriceTiers(tour.data.price);
-      let bookingPrice = getStartingPrice(tour.data.price);
-      
+      const priceTiers = parsePriceTiers(tour.data[PRICE_FIELD_NAME] || "");
+      let bookingPrice = getStartingPrice(tour.data[PRICE_FIELD_NAME] || "");
+
       // Find the appropriate price tier for selected group size
       const selectedTier = priceTiers.find(
-        (tier) => selectedGroupSize >= tier.min_group_size && selectedGroupSize <= tier.max_group_size
+        (tier) =>
+          selectedGroupSize >= tier.min_group_size &&
+          selectedGroupSize <= tier.max_group_size
       );
       if (selectedTier) {
         bookingPrice = selectedTier.price_per_person * selectedGroupSize;
       } else if (priceTiers.length > 0) {
         // Fallback to highest tier price
-        bookingPrice = priceTiers[priceTiers.length - 1].price_per_person * selectedGroupSize;
+        bookingPrice =
+          priceTiers[priceTiers.length - 1].price_per_person *
+          selectedGroupSize;
       }
 
       // Prepare booking data matching API format
@@ -191,12 +200,14 @@ function TourDetailsViewContent() {
 
   const includes = JSON.parse(tour.data.includes || "[]") as string[];
   const excludes = tour.data.excludes || "";
-  const priceTiers = parsePriceTiers(tour.data.price);
-  const startingPrice = getStartingPrice(tour.data.price);
-  
+  const priceTiers = parsePriceTiers(tour.data[PRICE_FIELD_NAME] || "");
+  const startingPrice = getStartingPrice(tour.data[PRICE_FIELD_NAME] || "");
+
   // Calculate total price for selected group size
   const selectedTier = priceTiers.find(
-    (tier) => selectedGroupSize >= tier.min_group_size && selectedGroupSize <= tier.max_group_size
+    (tier) =>
+      selectedGroupSize >= tier.min_group_size &&
+      selectedGroupSize <= tier.max_group_size
   );
   const currentPricePerPerson = selectedTier?.price_per_person || startingPrice;
   const totalPrice = currentPricePerPerson * selectedGroupSize;
@@ -243,13 +254,13 @@ function TourDetailsViewContent() {
             <div className="mb-6 sm:mb-7 md:mb-8">
               <div className="flex items-end gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                 <span className="text-3xl sm:text-4xl font-bold text-carent-text">
-                  From {formatNpr(startingPrice)}
+                  From {formatUsd(startingPrice)}
                 </span>
                 <span className="text-gray-500 mb-1 text-sm sm:text-base">
                   /per person
                 </span>
               </div>
-              
+
               {/* Pricing Tiers Table */}
               {priceTiers.length > 0 && (
                 <div className="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-5 border border-gray-200">
@@ -264,11 +275,13 @@ function TourDetailsViewContent() {
                       >
                         <span className="text-gray-600">
                           {tier.min_group_size === tier.max_group_size
-                            ? `${tier.min_group_size} ${tier.min_group_size === 1 ? "person" : "people"}`
+                            ? `${tier.min_group_size} ${
+                                tier.min_group_size === 1 ? "person" : "people"
+                              }`
                             : `${tier.min_group_size}-${tier.max_group_size} people`}
                         </span>
                         <span className="font-semibold text-gray-900">
-                          {formatNpr(tier.price_per_person)}/person
+                          {formatUsd(tier.price_per_person)}/person
                         </span>
                       </div>
                     ))}
@@ -383,19 +396,24 @@ function TourDetailsViewContent() {
                           </label>
                           <select
                             value={selectedGroupSize}
-                            onChange={(e) => setSelectedGroupSize(Number(e.target.value))}
+                            onChange={(e) =>
+                              setSelectedGroupSize(Number(e.target.value))
+                            }
                             className="w-full px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-carent-yellow focus:border-transparent"
                             required
                           >
-                            {Array.from({ length: 10 }, (_, i) => i + 1).map((size) => (
-                              <option key={size} value={size}>
-                                {size} {size === 1 ? "person" : "people"}
-                              </option>
-                            ))}
+                            {Array.from({ length: 10 }, (_, i) => i + 1).map(
+                              (size) => (
+                                <option key={size} value={size}>
+                                  {size} {size === 1 ? "person" : "people"}
+                                </option>
+                              )
+                            )}
                           </select>
                           {selectedTier && (
                             <p className="text-xs sm:text-sm text-gray-500">
-                              Price: {formatNpr(currentPricePerPerson)} per person
+                              Price: {formatUsd(currentPricePerPerson)} per
+                              person
                             </p>
                           )}
                         </div>
@@ -428,7 +446,7 @@ function TourDetailsViewContent() {
                         pricePerDay={currentPricePerPerson}
                         days={selectedGroupSize}
                         total={totalPrice}
-                        formatPrice={formatNpr}
+                        formatPrice={formatUsd}
                         isSubmitting={
                           bookingStatus === "submitting" || isPending
                         }

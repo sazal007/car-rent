@@ -7,10 +7,10 @@ import { useTours } from "@/hooks/use-tours";
 import { Loader } from "@/components/shared/loader";
 import { PriceTier } from "@/types/tours";
 
-const formatNpr = (value: number) =>
-  new Intl.NumberFormat("en-NP", {
+const formatUsd = (value: number) =>
+  new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "NPR",
+    currency: "USD",
     maximumFractionDigits: 0,
   }).format(value);
 
@@ -50,7 +50,7 @@ export const TourPackages: React.FC<TourPackagesProps> = ({
   const filteredTours =
     tours?.results
       .filter((t) => !excludeId || t.id !== excludeId)
-      .slice(0, limit || tours.results.length) || [];
+      .slice(0, limit ?? 3) || [];
 
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
@@ -58,7 +58,7 @@ export const TourPackages: React.FC<TourPackagesProps> = ({
         {/* Header */}
         <div className="max-w-2xl mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
-            Optional Tour Packages
+            Tour Packages
           </h2>
           <p className="text-gray-600 text-sm sm:text-base md:text-lg">
             Curated experiences to help you discover the soul of the city.
