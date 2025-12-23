@@ -26,7 +26,7 @@ export const Categories: React.FC = () => {
               {CATEGORIES.map((cat) => (
                 <Link
                   key={cat.id}
-                  href={`/cars?category=${encodeURIComponent(cat.name)}`}
+                  href={cat.name === "Tours" ? "/tours" : `/cars?category=${encodeURIComponent(cat.name)}`}
                   className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-sm hover:shadow-xl p-4 sm:p-5 md:p-6 flex flex-col items-center gap-3 sm:gap-4 md:gap-5 cursor-pointer group transition-all duration-300 border border-gray-100 hover:border-yellow-400"
                 >
                   <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full overflow-hidden flex-shrink-0 ring-2 sm:ring-3 md:ring-4 ring-gray-100 group-hover:ring-yellow-400 transition-all duration-300">
