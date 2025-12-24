@@ -9,8 +9,11 @@ export const createBooking = async (bookingData: BookingData) => {
 };
 
 export const createTourBooking = async (bookingData: TourBookingData) => {
-  const response = await apiClient.post("/api/collections/booking/data/", {
-    data: bookingData,
-  });
+  const response = await apiClient.post(
+    "/api/collections/tour-bookings/data/",
+    {
+      data: bookingData,
+    }
+  );
   return response.data;
 };

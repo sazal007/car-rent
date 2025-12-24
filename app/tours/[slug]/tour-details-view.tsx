@@ -54,6 +54,17 @@ const getStartingPrice = (priceString: string): number => {
   return Math.max(...tiers.map((tier) => tier.price_per_person));
 };
 
+// Get valid group sizes from price tiers
+const getValidGroupSizes = (priceTiers: PriceTier[]): number[] => {
+  if (priceTiers.length === 0) return [1];
+
+  const minSize = Math.min(...priceTiers.map((tier) => tier.min_group_size));
+  const maxSize = Math.max(...priceTiers.map((tier) => tier.max_group_size));
+
+  // Generate array of valid group sizes from min to max
+  return Array.from({ length: maxSize - minSize + 1 }, (_, i) => minSize + i);
+};
+
 type BookingStatus = "idle" | "submitting" | "success";
 
 function TourDetailsViewContent() {
@@ -78,6 +89,31 @@ function TourDetailsViewContent() {
   // Read URL parameters
   const urlDate = searchParams.get("date");
   const urlGuests = searchParams.get("guests");
+
+  // Initialize selectedGroupSize based on price tiers when tour loads
+  useEffect(() => {
+    if (tour) {
+      const tiers = parsePriceTiers(tour.data[PRICE_FIELD_NAME] || "");
+      if (tiers.length > 0) {
+        const validSizes = getValidGroupSizes(tiers);
+        if (validSizes.length > 0) {
+          setSelectedGroupSize((currentSize) => {
+            // Use URL guests parameter if provided and valid
+            if (urlGuests) {
+              const guestsNum = parseInt(urlGuests, 10);
+              if (!isNaN(guestsNum) && validSizes.includes(guestsNum)) {
+                return guestsNum;
+              }
+            }
+            // Only update if current size is not in valid range
+            return validSizes.includes(currentSize)
+              ? currentSize
+              : validSizes[0];
+          });
+        }
+      }
+    }
+  }, [tour, urlGuests]);
 
   const [formData, setFormData] = useState({
     tourDate: urlDate || "",
@@ -147,6 +183,7 @@ function TourDetailsViewContent() {
           selectedGroupSize <= tier.max_group_size
       );
       if (selectedTier) {
+        // Price = price_per_person * group_size
         bookingPrice = selectedTier.price_per_person * selectedGroupSize;
       } else if (priceTiers.length > 0) {
         // Fallback to highest tier price
@@ -160,11 +197,12 @@ function TourDetailsViewContent() {
         name: formData.fullName,
         "tour date": tourDate,
         "phone number": phoneNumber,
-        email: formData.email,
+        Email: formData.email,
         price: bookingPrice,
         "payment method": formData.paymentMethod,
-        "payment status": "pending",
-        "pakage name": tourName,
+        status: "pending",
+        "package name": tourName,
+        "group size": selectedGroupSize.toString(),
       };
 
       createTourBooking(bookingData, {
@@ -210,6 +248,7 @@ function TourDetailsViewContent() {
       selectedGroupSize <= tier.max_group_size
   );
   const currentPricePerPerson = selectedTier?.price_per_person || startingPrice;
+  // Price = price_per_person * group_size
   const totalPrice = currentPricePerPerson * selectedGroupSize;
 
   return (
@@ -402,13 +441,11 @@ function TourDetailsViewContent() {
                             className="w-full px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-carent-yellow focus:border-transparent"
                             required
                           >
-                            {Array.from({ length: 10 }, (_, i) => i + 1).map(
-                              (size) => (
-                                <option key={size} value={size}>
-                                  {size} {size === 1 ? "person" : "people"}
-                                </option>
-                              )
-                            )}
+                            {getValidGroupSizes(priceTiers).map((size) => (
+                              <option key={size} value={size}>
+                                {size} {size === 1 ? "person" : "people"}
+                              </option>
+                            ))}
                           </select>
                           {selectedTier && (
                             <p className="text-xs sm:text-sm text-gray-500">
@@ -451,6 +488,7 @@ function TourDetailsViewContent() {
                           bookingStatus === "submitting" || isPending
                         }
                         variant="compact"
+                        label={selectedGroupSize === 1 ? "person" : "people"}
                       />
                     </form>
                   )}

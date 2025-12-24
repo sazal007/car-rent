@@ -16,11 +16,12 @@ export interface TourBookingData {
   name: string;
   "tour date": string; // ISO date string (YYYY-MM-DD)
   "phone number": number;
-  email: string;
+  Email: string;
   "payment method"?: string;
-  "payment status"?: string;
-  "pakage name": string;
+  status?: string;
+  "package name": string;
   price: number;
+  "group size": string;
 }
 
 export interface BookingEntry {
