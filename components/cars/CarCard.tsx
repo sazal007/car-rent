@@ -18,17 +18,6 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
-  const formatPrice = (value: number) =>
-    new Intl.NumberFormat("en-NP", {
-      style: "currency",
-      currency: "NPR",
-      maximumFractionDigits: 0,
-    }).format(value);
-
-  const priceLabel = car.category && String(car.category).toLowerCase().includes("tour")
-    ? "Per tour"
-    : "Per day";
-
   return (
     <Link href={`/cars/${car.id}-${slug}`} className="group block h-full">
       <div className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-100">
@@ -43,17 +32,11 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
 
         {/* Content Section */}
         <div className="flex flex-col grow p-4 sm:p-5 md:p-6">
-          {/* Name and Price */}
+          {/* Name */}
           <div className="mb-4 sm:mb-5 md:mb-6">
             <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5 sm:mb-2 group-hover:text-carent-primary transition-colors">
               {car.name}
             </h3>
-            <div className="flex items-baseline gap-1.5 sm:gap-2">
-              <span className="text-xl sm:text-2xl font-bold text-gray-900">
-                {formatPrice(car.price)}
-              </span>
-              <span className="text-xs sm:text-sm text-gray-500">/ {priceLabel}</span>
-            </div>
           </div>
 
           {/* Divider */}

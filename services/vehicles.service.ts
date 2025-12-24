@@ -3,6 +3,7 @@ import {
   Vehicle,
   VehiclesApiResponse,
   VehicleApiResponse,
+  GuidedUnguidedOption,
 } from "@/types/vehicles";
 
 // Helper function to parse JSON strings safely
@@ -83,12 +84,44 @@ const normalizeGallery = (
   return [];
 };
 
+// Helper function to parse guided/unguided options
+const parseGuidedUnguidedOptions = (
+  jsonString: string | null | undefined
+): GuidedUnguidedOption[] => {
+  if (!jsonString) return [];
+
+  try {
+    // Clean up the string: remove extra whitespace and trailing commas
+    let cleaned = jsonString.trim();
+    cleaned = cleaned.replace(/,(\s*[}\]])/g, "$1");
+
+    // Parse the JSON
+    const parsed = JSON.parse(cleaned);
+    if (Array.isArray(parsed)) {
+      return parsed.map((item) => ({
+        price: String(item.price || "").trim(),
+        includes: String(item.includes || "").trim(),
+      }));
+    }
+    return [];
+  } catch (error) {
+    console.warn("Failed to parse guided/unguided options:", jsonString, error);
+    return [];
+  }
+};
+
 // Transform API response to Vehicle format
 const transformVehicle = (apiVehicle: VehicleApiResponse): Vehicle => {
   const { id, data } = apiVehicle;
 
   const features = parseJsonString(data.features);
   const gallery = normalizeGallery(data.gallery);
+  const guidedOptions = parseGuidedUnguidedOptions(
+    data["guided(price, includes)"]
+  );
+  const unguidedOptions = parseGuidedUnguidedOptions(
+    data["unguided(price, includes)"]
+  );
 
   // Debug logging (can be removed in production)
   if (process.env.NODE_ENV === "development") {
@@ -117,6 +150,8 @@ const transformVehicle = (apiVehicle: VehicleApiResponse): Vehicle => {
     features,
     gallery,
     category: data.category,
+    ...(guidedOptions.length > 0 && { guidedOptions }),
+    ...(unguidedOptions.length > 0 && { unguidedOptions }),
   };
 };
 

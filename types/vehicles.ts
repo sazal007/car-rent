@@ -1,4 +1,9 @@
 // API Response Types
+export interface GuidedUnguidedOption {
+  price: string;
+  includes: string;
+}
+
 export interface VehicleData {
   fuel: string;
   name: string;
@@ -16,6 +21,8 @@ export interface VehicleData {
   features: string; // JSON string
   description: string;
   transmission: string;
+  "guided(price, includes)"?: string; // JSON string array
+  "unguided(price, includes)"?: string; // JSON string array
 }
 
 export interface VehicleApiResponse {
@@ -51,4 +58,6 @@ export interface Vehicle {
   features?: string[];
   gallery?: string[];
   category?: string;
+  guidedOptions?: GuidedUnguidedOption[];
+  unguidedOptions?: GuidedUnguidedOption[];
 }
