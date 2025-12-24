@@ -1,63 +1,57 @@
 "use client";
 
 import React, { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { CarFilter } from "@/components/cars/CarFilter";
 import { CarCard } from "@/components/cars/CarCard";
 import { CarPagination } from "@/components/cars/CarPagination";
 import { useVehicles } from "@/hooks/use-vehicles";
+import { useCategories } from "@/hooks/use-categories";
 import { Loader } from "@/components/shared/loader";
 
 const ITEMS_PER_PAGE = 4;
 
 function VehiclesContent() {
-  const { data: vehicles = [], isLoading } = useVehicles();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
+  const activeCategory = categoryParam || "All";
 
-  const [activeCategory, setActiveCategory] = useState(categoryParam || "All");
+  const { data: vehicles = [], isLoading: isLoadingVehicles } = useVehicles(
+    activeCategory === "All" ? undefined : activeCategory
+  );
+  const { data: categoriesData = [], isLoading: isLoadingCategories } =
+    useCategories();
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Extract unique categories from vehicles
+  const isLoading = isLoadingVehicles || isLoadingCategories;
+
+  // Extract category names and filter out "Tours" category (only show vehicle categories)
   const categories = React.useMemo(() => {
-    const uniqueCategories = new Set<string>();
-    vehicles.forEach((vehicle) => {
-      if (vehicle.category && vehicle.category.trim()) {
-        uniqueCategories.add(vehicle.category);
-      }
-    });
-    return Array.from(uniqueCategories).sort();
-  }, [vehicles]);
+    return categoriesData
+      .filter((cat) => {
+        const isTourCategory =
+          cat.slug?.toLowerCase() === "tours" ||
+          cat.name.toLowerCase().includes("tour");
+        return !isTourCategory;
+      })
+      .map((cat) => cat.name);
+  }, [categoriesData]);
 
-  // Update category if URL param changes
-  useEffect(() => {
-    if (categoryParam) {
-      setTimeout(() => {
-        setActiveCategory(categoryParam);
-      }, 0);
+  // Handle category change - update URL
+  const handleCategoryChange = (category: string) => {
+    setCurrentPage(1);
+    if (category === "All") {
+      router.push("/cars");
+    } else {
+      router.push(`/cars?category=${encodeURIComponent(category)}`);
     }
-  }, [categoryParam]);
-
-  // Filter vehicles based on category
-  const filteredCars = vehicles.filter((car) => {
-    if (activeCategory === "All") return true;
-    return car.category === activeCategory;
-  });
+  };
 
   // Calculate pagination
-  const totalPages = Math.ceil(filteredCars.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(vehicles.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentCars = filteredCars.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE
-  );
-
-  // Reset to page 1 when category changes
-  useEffect(() => {
-    setTimeout(() => {
-      setCurrentPage(1);
-    }, 0);
-  }, [activeCategory]);
+  const currentCars = vehicles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -76,7 +70,7 @@ function VehiclesContent() {
       {/* Filter */}
       <CarFilter
         activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
+        onCategoryChange={handleCategoryChange}
         categories={categories}
       />
 
@@ -97,7 +91,7 @@ function VehiclesContent() {
       )}
 
       {/* Pagination */}
-      {filteredCars.length > ITEMS_PER_PAGE && (
+      {vehicles.length > ITEMS_PER_PAGE && (
         <CarPagination
           currentPage={currentPage}
           totalPages={totalPages}

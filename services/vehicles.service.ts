@@ -120,10 +120,15 @@ const transformVehicle = (apiVehicle: VehicleApiResponse): Vehicle => {
   };
 };
 
-export const getVehicles = async (): Promise<Vehicle[]> => {
-  const response = await apiClient.get<VehiclesApiResponse>(
-    "/api/collections/vehicles/data/"
-  );
+export const getVehicles = async (category?: string): Promise<Vehicle[]> => {
+  const url =
+    category && category !== "All"
+      ? `/api/collections/vehicles/data/?category=${encodeURIComponent(
+          category
+        )}`
+      : "/api/collections/vehicles/data/";
+
+  const response = await apiClient.get<VehiclesApiResponse>(url);
   return response.data.results.map(transformVehicle);
 };
 

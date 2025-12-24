@@ -25,7 +25,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       maximumFractionDigits: 0,
     }).format(value);
 
-  const priceLabel = car.category?.toLowerCase().includes("tour")
+  const priceLabel = car.category && String(car.category).toLowerCase().includes("tour")
     ? "Per tour"
     : "Per day";
 

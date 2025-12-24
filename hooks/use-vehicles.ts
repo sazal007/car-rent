@@ -5,10 +5,10 @@ import {
   getVehicleBySlug,
 } from "@/services/vehicles.service";
 
-export const useVehicles = () => {
+export const useVehicles = (category?: string) => {
   return useQuery({
-    queryKey: ["vehicles"],
-    queryFn: getVehicles,
+    queryKey: ["vehicles", category],
+    queryFn: () => getVehicles(category),
     staleTime: 1000 * 60 * 60 * 24, // 24 hours
   });
 };
