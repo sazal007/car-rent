@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "../../constants";
+import Image from "next/image";
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -20,14 +21,13 @@ export const Navbar: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between relative">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 md:gap-4">
-          <div className="w-10 h-10 md:w-14 md:h-14 bg-carent-yellow rounded-full flex items-center justify-center">
-            <div className="w-0 h-0 border-l-[6px] md:border-l-[9px] border-l-transparent border-r-[6px] md:border-r-[9px] border-r-transparent border-b-10 md:border-b-14 border-b-black transform rotate-0" />
-          </div>
-          <span
-            className={`${logoTextColor} text-3xl md:text-5xl font-bold tracking-tight transition-colors duration-300`}
-          >
-            Bato Ma
-          </span>
+          <Image
+            src="/logo/batomabg.png"
+            alt="Carent"
+            width={300}
+            height={100}
+            className="w-full h-full object-contain"
+          />
         </Link>
 
         {/* Desktop Links - Black Pill Container - Visible on LG and up */}

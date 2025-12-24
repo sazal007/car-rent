@@ -11,6 +11,7 @@ import {
   Phone,
   Mail,
 } from "lucide-react";
+import Image from "next/image";
 
 export const Footer: React.FC = () => {
   return (
@@ -20,12 +21,13 @@ export const Footer: React.FC = () => {
           {/* Left Column: Logo, Description & Newsletter */}
           <div className="lg:w-4/12">
             <Link href="/" className="flex items-center gap-3 mb-6 w-fit">
-              <div className="w-12 h-12 bg-carent-yellow rounded-full flex items-center justify-center">
-                <div className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[11px] border-b-black transform rotate-0" />
-              </div>
-              <span className="text-white text-4xl font-medium tracking-tight">
-                Batoma
-              </span>
+              <Image
+                src="/logo/batomabg.png"
+                alt="Carent"
+                width={300}
+                height={100}
+                className="w-full h-full object-contain invert"
+              />
             </Link>
 
             <p className="text-gray-400 text-base mb-8 leading-relaxed max-w-md">
