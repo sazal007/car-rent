@@ -83,6 +83,7 @@ function CarsDetailsViewContent() {
     phone: "",
     licenseFile: null as File | null,
     paymentMethod: "cash" as PaymentMethod,
+    numberOfPersons: 1, // Default to 1 person
   });
 
   // Update serviceType when car loads
@@ -202,6 +203,10 @@ function CarsDetailsViewContent() {
         "return date": returnDate,
         "vehicle name": vehicleName,
         ...(licenseImage && { "license image": licenseImage }),
+        // Include number of persons for taxi bookings
+        ...(car.category?.toLowerCase() === "taxi" && {
+          "number of persons": formData.numberOfPersons,
+        }),
       };
 
       createBooking(bookingData, {
@@ -219,13 +224,49 @@ function CarsDetailsViewContent() {
   };
 
   // Helper to extract numeric price from complex price strings (for taxis)
-  const extractPrice = (priceString: string): number => {
+  const extractPrice = (
+    priceString: string,
+    numberOfPersons: number = 1
+  ): number => {
     // If it's a simple number, parse it
     const simpleNum = parseFloat(priceString);
     if (!isNaN(simpleNum)) return simpleNum;
 
     // For complex strings like "[ max 3 person] - $250 for 1 person , 2 $400, 3 $500"
-    // Extract the first price found
+    // Try to extract price based on number of persons
+
+    // Pattern 1: "$250 for 1 person"
+    const pattern1 = new RegExp(
+      `\\$(\\d+)\\s+for\\s+${numberOfPersons}\\s+person`,
+      "i"
+    );
+    const match1 = priceString.match(pattern1);
+    if (match1 && match1[1]) {
+      return parseFloat(match1[1]) || 0;
+    }
+
+    // Pattern 2: "2 $400" or "3 $500" (after comma, exact match)
+    const pattern2 = new RegExp(
+      `(?:^|,\\s*)${numberOfPersons}\\s+\\$(\\d+)`,
+      "i"
+    );
+    const match2 = priceString.match(pattern2);
+    if (match2 && match2[1]) {
+      return parseFloat(match2[1]) || 0;
+    }
+
+    // Pattern 3: Range like "3/4 $500" - check if numberOfPersons falls in range
+    const rangePattern = /(\d+)\/(\d+)\s+\$(\d+)/g;
+    let rangeMatch;
+    while ((rangeMatch = rangePattern.exec(priceString)) !== null) {
+      const min = parseInt(rangeMatch[1], 10);
+      const max = parseInt(rangeMatch[2], 10);
+      if (numberOfPersons >= min && numberOfPersons <= max) {
+        return parseFloat(rangeMatch[3]) || 0;
+      }
+    }
+
+    // Fallback: Extract the first price found
     const priceMatch = priceString.match(/\$(\d+)/);
     if (priceMatch && priceMatch[1]) {
       return parseFloat(priceMatch[1]) || 0;
@@ -249,7 +290,11 @@ function CarsDetailsViewContent() {
         car.guidedOptions &&
         car.guidedOptions.length > 0
       ) {
-        return extractPrice(car.guidedOptions[0].price);
+        // For taxis, use numberOfPersons to get the correct price
+        return extractPrice(
+          car.guidedOptions[0].price,
+          isTaxi ? formData.numberOfPersons : 1
+        );
       }
       // Unguided options (without guide)
       // For scooters: selfRide = unguided
@@ -260,7 +305,11 @@ function CarsDetailsViewContent() {
         car.unguidedOptions &&
         car.unguidedOptions.length > 0
       ) {
-        return extractPrice(car.unguidedOptions[0].price);
+        // For taxis, use numberOfPersons to get the correct price
+        return extractPrice(
+          car.unguidedOptions[0].price,
+          isTaxi ? formData.numberOfPersons : 1
+        );
       }
     }
 
@@ -415,6 +464,10 @@ function CarsDetailsViewContent() {
                   totals={totals}
                   formatPrice={formatPrice}
                   selectedLabel={selectedLabel}
+                  numberOfPersons={formData.numberOfPersons}
+                  onNumberOfPersonsChange={(value) =>
+                    handleFormDataChange({ numberOfPersons: value })
+                  }
                 />
               )}
             </div>

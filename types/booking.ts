@@ -10,6 +10,7 @@ export interface BookingData {
   "payment status"?: string;
   "return date": string; // ISO date string (YYYY-MM-DD)
   "vehicle name": string;
+  "number of persons"?: number; // For taxi bookings
 }
 
 export interface TourBookingData {

@@ -24,6 +24,7 @@ interface InlineBookingFormProps {
     phone: string;
     licenseFile: File | null;
     paymentMethod: PaymentMethod;
+    numberOfPersons?: number;
   };
   onFormDataChange: (updates: Partial<InlineBookingFormProps["formData"]>) => void;
   onSubmit: (e: React.FormEvent) => void;
@@ -32,6 +33,8 @@ interface InlineBookingFormProps {
   totals: { days: number; total: number } | null;
   formatPrice: (value: number) => string;
   selectedLabel: string;
+  numberOfPersons?: number;
+  onNumberOfPersonsChange?: (value: number) => void;
 }
 
 export const InlineBookingForm: React.FC<InlineBookingFormProps> = ({
@@ -46,19 +49,60 @@ export const InlineBookingForm: React.FC<InlineBookingFormProps> = ({
   totals,
   formatPrice,
   selectedLabel,
+  numberOfPersons = formData.numberOfPersons || 1,
+  onNumberOfPersonsChange,
 }) => {
   if (!isOpen || !vehicle) return null;
 
   const isSelfRideSelected = formData.serviceType === "selfRide";
+  const isTaxi = vehicle.category?.toLowerCase() === "taxi";
+
+  // Helper to extract max persons from price string
+  const getMaxPersons = (priceString: string): number => {
+    const maxMatch = priceString.match(/max\s+(\d+)\s+person/i);
+    if (maxMatch && maxMatch[1]) {
+      return parseInt(maxMatch[1], 10);
+    }
+    // Try to find the highest number in the price string
+    const numbers = priceString.match(/\d+/g);
+    if (numbers) {
+      return Math.max(...numbers.map(n => parseInt(n, 10)));
+    }
+    return 10; // Default max
+  };
 
   // Helper to extract numeric price from complex price strings (for taxis)
-  const extractPrice = (priceString: string): number => {
+  const extractPrice = (priceString: string, persons: number = 1): number => {
     // If it's a simple number, parse it
     const simpleNum = parseFloat(priceString);
     if (!isNaN(simpleNum)) return simpleNum;
 
-    // For complex strings like "[ max 3 person] - $250 for 1 person , 2 $400, 3 $500"
-    // Extract the first price found
+    // Pattern 1: "$250 for 1 person"
+    const pattern1 = new RegExp(`\\$(\\d+)\\s+for\\s+${persons}\\s+person`, 'i');
+    const match1 = priceString.match(pattern1);
+    if (match1 && match1[1]) {
+      return parseFloat(match1[1]) || 0;
+    }
+
+    // Pattern 2: "2 $400" or "3 $500" (after comma, exact match)
+    const pattern2 = new RegExp(`(?:^|,\\s*)${persons}\\s+\\$(\\d+)`, 'i');
+    const match2 = priceString.match(pattern2);
+    if (match2 && match2[1]) {
+      return parseFloat(match2[1]) || 0;
+    }
+
+    // Pattern 3: Range like "3/4 $500" - check if persons falls in range
+    const rangePattern = /(\d+)\/(\d+)\s+\$(\d+)/g;
+    let rangeMatch;
+    while ((rangeMatch = rangePattern.exec(priceString)) !== null) {
+      const min = parseInt(rangeMatch[1], 10);
+      const max = parseInt(rangeMatch[2], 10);
+      if (persons >= min && persons <= max) {
+        return parseFloat(rangeMatch[3]) || 0;
+      }
+    }
+
+    // Fallback: Extract the first price found
     const priceMatch = priceString.match(/\$(\d+)/);
     if (priceMatch && priceMatch[1]) {
       return parseFloat(priceMatch[1]) || 0;
@@ -70,13 +114,12 @@ export const InlineBookingForm: React.FC<InlineBookingFormProps> = ({
   // Get the effective price based on vehicle type and service type
   const getEffectivePrice = (): number => {
     const isScooter = vehicle.category?.toLowerCase() === "scooter";
-    const isTaxi = vehicle.category?.toLowerCase() === "taxi";
 
     // For scooters and taxis with guided/unguided options, use those prices
     if ((isScooter || isTaxi) && vehicle.price === 0) {
       // Guided option (with guide)
       if (formData.serviceType === "guided" && vehicle.guidedOptions && vehicle.guidedOptions.length > 0) {
-        return extractPrice(vehicle.guidedOptions[0].price);
+        return extractPrice(vehicle.guidedOptions[0].price, isTaxi ? numberOfPersons : 1);
       }
       // Unguided options (without guide)
       // For scooters: selfRide = unguided
@@ -86,12 +129,21 @@ export const InlineBookingForm: React.FC<InlineBookingFormProps> = ({
         vehicle.unguidedOptions &&
         vehicle.unguidedOptions.length > 0
       ) {
-        return extractPrice(vehicle.unguidedOptions[0].price);
+        return extractPrice(vehicle.unguidedOptions[0].price, isTaxi ? numberOfPersons : 1);
       }
     }
     
     // For other vehicles or fallback, use the regular price
     return vehicle.price || 0;
+  };
+
+  // Get max persons for taxi
+  const getTaxiMaxPersons = (): number => {
+    if (!isTaxi) return 1;
+    const option = formData.serviceType === "guided" 
+      ? vehicle.guidedOptions?.[0]?.price 
+      : vehicle.unguidedOptions?.[0]?.price;
+    return option ? getMaxPersons(option) : 10;
   };
 
   const effectivePrice = getEffectivePrice();
@@ -134,6 +186,28 @@ export const InlineBookingForm: React.FC<InlineBookingFormProps> = ({
             variant="compact"
             vehicle={vehicle}
           />
+
+          {/* Number of Persons Selector for Taxis */}
+          {isTaxi && onNumberOfPersonsChange && (
+            <div>
+              <label htmlFor="numberOfPersons" className="block text-sm font-medium text-gray-700 mb-2">
+                Number of Persons
+              </label>
+              <select
+                id="numberOfPersons"
+                value={numberOfPersons}
+                onChange={(e) => onNumberOfPersonsChange(parseInt(e.target.value, 10))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-carent-yellow focus:border-carent-yellow outline-none transition-colors"
+                required
+              >
+                {Array.from({ length: getTaxiMaxPersons() }, (_, i) => i + 1).map((num) => (
+                  <option key={num} value={num}>
+                    {num} {num === 1 ? "Person" : "Persons"}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <DatePicker
