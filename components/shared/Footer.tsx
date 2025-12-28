@@ -15,7 +15,7 @@ import Image from "next/image";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-carent-dark text-white pt-20 pb-10">
+    <footer className="bg-slate-50 pt-20 pb-10">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-20 mb-16">
           {/* Left Column: Logo, Description & Newsletter */}
@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
                 alt="Carent"
                 width={300}
                 height={100}
-                className="w-full h-full object-contain invert"
+                className="w-full h-full object-contain"
               />
             </Link>
 
@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
           <div className="lg:w-8/12 flex flex-col sm:flex-row gap-12 sm:gap-16">
             {/* Pages */}
             <div>
-              <h4 className="text-lg font-bold mb-6 text-white">Pages</h4>
+              <h4 className="text-lg font-bold mb-6 ">Pages</h4>
               <ul className="space-y-3 text-gray-400">
                 <li>
                   <Link
@@ -112,7 +112,7 @@ export const Footer: React.FC = () => {
 
             {/* Legal */}
             <div>
-              <h4 className="text-lg font-bold mb-6 text-white">Legal</h4>
+              <h4 className="text-lg font-bold mb-6">Legal</h4>
               <ul className="space-y-3 text-gray-400">
                 <li>
                   <Link
@@ -135,7 +135,7 @@ export const Footer: React.FC = () => {
 
             {/* Location & Contact Info */}
             <div>
-              <h4 className="text-lg font-bold mb-6 text-white">Location</h4>
+              <h4 className="text-lg font-bold mb-6">Location</h4>
               <ul className="space-y-4 text-gray-400">
                 <li className="flex items-start gap-3">
                   <MapPin
@@ -175,7 +175,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-dark-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-gray-400 text-sm">
+          <p className="text-sm">
             © {new Date().getFullYear()} Carent. All rights reserved.
           </p>
           <div className="flex gap-6">
