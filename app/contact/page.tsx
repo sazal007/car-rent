@@ -5,18 +5,27 @@ import { ContactMap } from "@/components/contact/ContactMap";
 
 export default function Contact() {
   return (
-    <div className="bg-white pt-24 sm:pt-32 md:pt-40 lg:pt-56">
-      <ContactHero />
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 pb-12 sm:pb-16 md:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 md:gap-14 lg:gap-16">
-          <div className="order-2 lg:order-1">
+    <div className="bg-white pt-32 sm:pt-40 lg:pt-60 pb-12 sm:pb-16 md:pb-24">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Left Column: Hero and Info */}
+          <div className="lg:col-span-7 space-y-12 sm:space-y-16">
+            <ContactHero />
             <ContactInfo />
           </div>
-          <div className="order-1 lg:order-2">
-            <ContactForm />
+
+          {/* Right Column: Form */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-32 pt-10">
+              <ContactForm />
+            </div>
           </div>
         </div>
-        <ContactMap />
+
+        {/* Bottom Section: Map */}
+        <div className="mt-16 sm:mt-24 md:mt-32">
+          <ContactMap />
+        </div>
       </div>
     </div>
   );

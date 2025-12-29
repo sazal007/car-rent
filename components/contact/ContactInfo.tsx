@@ -1,104 +1,81 @@
+
+
+
 "use client";
 
 import React from "react";
-import { Headphones, MapPin, Hourglass } from "lucide-react";
+import { Phone, MapPin, Clock, Mail } from "lucide-react";
+
+interface ContactDetail {
+  text: string;
+  link?: string;
+}
 
 export const ContactInfo: React.FC = () => {
+  const contactItems = [
+    {
+      icon: Phone,
+      title: "Call Us",
+      details: [
+        { text: "(+977) 9705471232", link: "tel:+9779705471232" },
+      ],
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      details: [
+        { text: "bato1111ma@gmail.com", link: "mailto:bato1111ma@gmail.com" },
+      ],
+    },
+    {
+      icon: MapPin,
+      title: "Visit Us",
+      details: [
+        { text: "Rudramati Marg" },
+        { text: "Kathmandu 44600" },
+      ],
+    },
+    {
+      icon: Clock,
+      title: "Working Hours",
+      details: [
+        { text: "Everyday: 7:00 AM - 9:00 PM" },
+        { text: "Airport pickups: 24/7 on request" },
+      ],
+    },
+  ];
+
   return (
-    <div className="space-y-8 sm:space-y-10 md:space-y-12">
-      <h2 className="text-2xl sm:text-2xl md:text-3xl font-semibold text-carent-text mb-6 sm:mb-7 md:mb-8">
-        Our contact details
-      </h2>
-
-      <div className="flex flex-col gap-6 sm:gap-8 md:gap-10">
-        {/* Support */}
-        <div className="flex gap-3 sm:gap-4">
-          <div className="mt-0.5 sm:mt-1 shrink-0">
-            <Headphones
-              size={24}
-              className="sm:w-7 sm:h-7 text-carent-text"
-              strokeWidth={1.5}
-            />
+    <div className="space-y-6">
+      {contactItems.map((item, index) => (
+        <div key={index} className="flex items-start gap-4">
+          <div className="shrink-0 p-3 bg-gray-50 rounded-xl group-hover:bg-carent-yellow/10 transition-all duration-300">
+            <item.icon className="w-5 h-5 text-gray-900" strokeWidth={1.5} />
           </div>
-          <div>
-            <h3 className="text-lg sm:text-xl font-bold text-carent-text mb-1.5 sm:mb-2">
-              Support
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg font-bold text-gray-900 mb-1">
+              {item.title}
             </h3>
-            <p className="text-gray-600 mb-1 text-sm sm:text-base">
-              bato1111ma@gmail.com
-            </p>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Call: (+977) 9705471232
-            </p>
+            <div className="space-y-1">
+              {item.details.map((detail: ContactDetail, idx) => (
+                detail.link ? (
+                  <a
+                    key={idx}
+                    href={detail.link}
+                    className="block text-sm text-gray-600 hover:text-black hover:underline transition-colors duration-200"
+                  >
+                    {detail.text}
+                  </a>
+                ) : (
+                  <p key={idx} className="text-sm text-gray-600">
+                    {detail.text}
+                  </p>
+                )
+              ))}
+            </div>
           </div>
         </div>
-
-        {/* WhatsApp */}
-        {/* <div className="flex gap-3 sm:gap-4">
-          <div className="mt-0.5 sm:mt-1 shrink-0">
-            <MessageCircle
-              size={24}
-              className="sm:w-7 sm:h-7 text-carent-text"
-              strokeWidth={1.5}
-            />
-          </div>
-          <div>
-            <h3 className="text-lg sm:text-xl font-bold text-carent-text mb-1.5 sm:mb-2">
-              WhatsApp
-            </h3>
-            <p className="text-gray-600 mb-1 text-sm sm:text-base">
-              Chat for quick confirmations
-            </p>
-            <p className="text-gray-600 text-sm sm:text-base">
-              (+977) 980-9876543
-            </p>
-          </div>
-        </div> */}
-
-        {/* Address */}
-        <div className="flex gap-3 sm:gap-4">
-          <div className="mt-0.5 sm:mt-1 shrink-0">
-            <MapPin
-              size={24}
-              className="sm:w-7 sm:h-7 text-carent-text"
-              strokeWidth={1.5}
-            />
-          </div>
-          <div>
-            <h3 className="text-lg sm:text-xl font-bold text-carent-text mb-1.5 sm:mb-2">
-              Address
-            </h3>
-            <p className="text-gray-600 mb-1 text-sm sm:text-base">
-              Rudramati Marg
-            </p>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Kathmandu 44600
-            </p>
-          </div>
-        </div>
-
-        {/* Working Hours */}
-        <div className="flex gap-3 sm:gap-4">
-          <div className="mt-0.5 sm:mt-1 shrink-0">
-            <Hourglass
-              size={24}
-              className="sm:w-7 sm:h-7 text-carent-text"
-              strokeWidth={1.5}
-            />
-          </div>
-          <div>
-            <h3 className="text-lg sm:text-xl font-bold text-carent-text mb-1.5 sm:mb-2">
-              Working hours
-            </h3>
-            <p className="text-gray-600 mb-1 text-sm sm:text-base">
-              Everyday: 7:00 AM - 9:00 PM
-            </p>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Airport pickups: 24/7 on request
-            </p>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
   );
 };

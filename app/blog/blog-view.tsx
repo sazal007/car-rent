@@ -3,6 +3,7 @@
 import { BlogCard } from "@/components/blog/BlogCard";
 import { useGetBlogs } from "@/hooks/use-blogs";
 import { Loader } from "@/components/shared/loader";
+import { BlogContactForm } from "@/components/blog/BlogContactForm";
 
 export default function BlogView() {
   const { data: blogsResponse, isLoading, isError } = useGetBlogs();
@@ -49,8 +50,8 @@ export default function BlogView() {
     <div className="bg-white min-h-screen pt-24 sm:pt-32 md:pt-40 lg:pt-56 pb-12 sm:pb-16 md:pb-24">
       <div className="container mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <div className="text-center mb-10 sm:mb-12 md:mb-16">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-carent-text">
+        <div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-carent-text mb-16">
             Blog
           </h1>
         </div>
@@ -69,6 +70,10 @@ export default function BlogView() {
             ))}
           </div>
         )}
+      </div>
+
+      <div className="mt-20">
+        <BlogContactForm />
       </div>
     </div>
   );
