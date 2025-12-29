@@ -19,6 +19,7 @@ import { ServiceOptions } from "@/components/cars/ServiceOptions";
 import { ServiceType } from "@/components/booking/ServiceTypeSelector";
 import { PaymentMethod } from "@/components/booking/PaymentMethodSelector";
 import { Loader } from "@/components/shared/loader";
+import { BlogContactForm } from "@/components/blog/BlogContactForm";
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("en-US", {
@@ -394,99 +395,85 @@ function CarsDetailsViewContent() {
   }
 
   return (
-    <div key={car.id} className="pt-24 sm:pt-32 md:pt-40 lg:pt-56 bg-white">
-      {/* Top Split Section */}
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 mb-12 sm:mb-16 md:mb-20">
-        <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 relative items-start">
-          {/* Left: Sticky Image */}
-          <div className="lg:w-1/2 w-full lg:sticky lg:top-24 xl:top-36 self-start">
-            <div className="relative h-48 sm:h-64 md:h-80 w-full overflow-hidden bg-white rounded-lg sm:rounded-xl">
-              <Image
-                src={car.image}
-                alt={car.name}
-                width={800}
-                height={600}
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
+    <div key={car.id} className="bg-white pt-24 sm:pt-32 md:pt-40">
+      {/* Full Screen Hero Image */}
+      <div className="relative mx-auto w-[70vw] h-[70vh] overflow-hidden bg-white">
+        <Image
+          src={car.image}
+          alt={car.name}
+          fill
+          priority
+          className="object-contain"
+        />
+      </div>
 
-          {/* Right: Details */}
-          <div className="lg:w-1/2 w-full pt-0 sm:pt-2">
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-carent-text mb-2 sm:mb-3">
-              {car.name}
-            </h1>
-            <p className="text-gray-500 mb-4 sm:mb-5 md:mb-6 font-medium text-sm sm:text-base md:text-lg">
-              {car.brand || "Brand"}
-              <span className="mx-1.5 sm:mx-2 text-gray-300">|</span> {car.type}
-              <span className="mx-1.5 sm:mx-2 text-gray-300">|</span>{" "}
-              {car.year || "2023"}
-            </p>
+      {/* Details Section */}
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 pt-8 sm:pt-12 md:pt-16 mb-12 sm:mb-16 md:mb-20">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-carent-text mb-2 sm:mb-3">
+            {car.name}
+          </h1>
+          <p className="text-gray-500 mb-4 sm:mb-5 md:mb-6 font-medium text-sm sm:text-base md:text-lg">
+            {car.brand || "Brand"}
+            <span className="mx-1.5 sm:mx-2 text-gray-300">|</span> {car.type}
+            <span className="mx-1.5 sm:mx-2 text-gray-300">|</span>{" "}
+            {car.year || "2023"}
+          </p>
 
-            <p className="text-gray-600 leading-relaxed mb-6 sm:mb-7 md:mb-8 text-sm sm:text-base md:text-lg">
-              {car.description ||
-                "Experience the ultimate comfort and performance with our premium rental vehicles. Perfect for any journey."}
-            </p>
+          <p className="text-gray-600 leading-relaxed mb-6 sm:mb-7 md:mb-8 text-sm sm:text-base md:text-lg">
+            {car.description ||
+              "Experience the ultimate comfort and performance with our premium rental vehicles. Perfect for any journey."}
+          </p>
 
-            {/* <div className="flex items-end gap-1.5 sm:gap-2 mb-6 sm:mb-7 md:mb-8">
-              <span className="text-3xl sm:text-4xl font-bold text-carent-text">
-                {formatPrice(getEffectivePrice() || getDisplayPrice())}
-              </span>
-              <span className="text-gray-500 mb-1 text-sm sm:text-base">
-                /{priceUnit}
-              </span>
-            </div> */}
+          {/* Service Options (for scooters) */}
+          <ServiceOptions vehicle={car} />
 
-            {/* Service Options (for scooters) */}
-            <ServiceOptions vehicle={car} />
-
-            {/* Booking Section */}
-            <div className="mb-8 sm:mb-10 md:mb-12">
-              {!showBookingForm ? (
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-stretch animate-in fade-in duration-300">
-                  <Button
-                    onClick={() => setShowBookingForm(true)}
-                    className="w-full sm:w-auto h-12 sm:h-14 text-base sm:text-lg"
-                  >
-                    Book Now
-                  </Button>
-                  <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 px-2 py-2 sm:py-3">
-                    <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
-                      Or call to book
-                    </span>
-                    <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
-                      (+977) 9705471232
-                    </span>
-                  </div>
+          {/* Booking Section */}
+          <div className="mb-8 sm:mb-10 md:mb-12">
+            {!showBookingForm ? (
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-stretch animate-in fade-in duration-300">
+                <Button
+                  onClick={() => setShowBookingForm(true)}
+                  className="w-full sm:w-auto h-12 sm:h-14 text-base sm:text-lg"
+                >
+                  Book Now
+                </Button>
+                <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 px-2 py-2 sm:py-3">
+                  <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
+                    Or call to book
+                  </span>
+                  <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
+                    (+977) 9705471232
+                  </span>
                 </div>
-              ) : (
-                <InlineBookingForm
-                  isOpen={showBookingForm}
-                  onClose={() => {
-                    setShowBookingForm(false);
-                    setBookingStatus("idle");
-                  }}
-                  vehicle={car}
-                  formData={formData}
-                  onFormDataChange={handleFormDataChange}
-                  onSubmit={handleSubmit}
-                  bookingStatus={bookingStatus}
-                  isPending={isPending}
-                  totals={totals}
-                  formatPrice={formatPrice}
-                  selectedLabel={selectedLabel}
-                  numberOfPersons={formData.numberOfPersons}
-                  onNumberOfPersonsChange={(value) =>
-                    handleFormDataChange({ numberOfPersons: value })
-                  }
-                />
-              )}
-            </div>
-
-            <CarSpecs vehicle={car} />
-
-            <CarFeatures vehicle={car} />
+              </div>
+            ) : (
+              <InlineBookingForm
+                isOpen={showBookingForm}
+                onClose={() => {
+                  setShowBookingForm(false);
+                  setBookingStatus("idle");
+                }}
+                vehicle={car}
+                formData={formData}
+                onFormDataChange={handleFormDataChange}
+                onSubmit={handleSubmit}
+                bookingStatus={bookingStatus}
+                isPending={isPending}
+                totals={totals}
+                formatPrice={formatPrice}
+                selectedLabel={selectedLabel}
+                numberOfPersons={formData.numberOfPersons}
+                onNumberOfPersonsChange={(value) =>
+                  handleFormDataChange({ numberOfPersons: value })
+                }
+              />
+            )}
           </div>
+
+          <CarSpecs vehicle={car} />
+
+          <CarFeatures vehicle={car} />
         </div>
       </div>
 
@@ -512,6 +499,7 @@ export default function CarsDetailsView() {
       }
     >
       <CarsDetailsViewContent />
+      <BlogContactForm />
     </Suspense>
   );
 }

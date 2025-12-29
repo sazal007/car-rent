@@ -24,14 +24,14 @@ export const CarGallery: React.FC<CarGalleryProps> = ({ vehicle }) => {
           {galleryImages.map((img, idx) => (
             <div
               key={idx}
-              className="rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden h-48 sm:h-56 md:h-64 hover:opacity-95 transition-opacity"
+              className="rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden h-64 sm:h-80 md:h-96 lg:h-[400px] hover:opacity-95 transition-opacity bg-gray-50"
             >
               <Image
                 src={img}
                 alt={`Gallery ${idx}`}
-                width={600}
-                height={400}
-                className="w-full h-full object-cover"
+                width={800}
+                height={600}
+                className="w-full h-full object-contain p-4 sm:p-6"
               />
             </div>
           ))}

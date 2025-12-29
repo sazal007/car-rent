@@ -19,6 +19,7 @@ import { BookingSuccess } from "@/components/booking/BookingSuccess";
 import { TourPackages } from "@/components/home/TourPakages";
 import { Loader } from "@/components/shared/loader";
 import { PriceTier, TourData } from "@/types/tours";
+import { BlogContactForm } from "@/components/blog/BlogContactForm";
 
 const PRICE_FIELD_NAME =
   "price(min_group_size,max_group_size,price_per_person)" as keyof TourData;
@@ -252,249 +253,238 @@ function TourDetailsViewContent() {
   const totalPrice = currentPricePerPerson * selectedGroupSize;
 
   return (
-    <div key={tour.id} className="pt-24 sm:pt-32 md:pt-40 lg:pt-56 bg-white">
-      {/* Top Split Section */}
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 mb-12 sm:mb-16 md:mb-20">
-        <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 relative items-start">
-          {/* Left: Sticky Image */}
-          <div className="lg:w-1/2 w-full lg:sticky lg:top-24 xl:top-36 self-start">
-            <div className="relative h-48 sm:h-64 md:h-80 w-full overflow-hidden bg-white rounded-lg sm:rounded-xl">
-              <Image
-                src={tour.data.image}
-                alt={tour.data.name}
-                width={800}
-                height={600}
-                className="w-full h-full object-cover"
-              />
-            </div>
+    <div key={tour.id} className="bg-white pt-24 sm:pt-32 ">
+      {/* Full Screen Hero Image */}
+      <div className="relative mx-auto w-[100vw] h-[70vh] overflow-hidden bg-white">
+        <Image
+          src={tour.data.image}
+          alt={tour.data.name}
+          fill
+          priority
+          className="object-cover w-full h-44"
+        />
+      </div>
+
+      {/* Details Section */}
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 pt-8 sm:pt-12 md:pt-16 mb-12 sm:mb-16 md:mb-20">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-carent-text mb-2 sm:mb-3">
+            {tour.data.name}
+          </h1>
+
+          {/* Duration */}
+          <div className="flex items-center gap-2 text-gray-500 mb-4 sm:mb-5 md:mb-6">
+            <Clock size={18} className="sm:w-5 sm:h-5" />
+            <span className="font-medium text-sm sm:text-base md:text-lg">
+              {tour.data.duration}
+            </span>
           </div>
 
-          {/* Right: Details */}
-          <div className="lg:w-1/2 w-full pt-0 sm:pt-2">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carent-text mb-2 sm:mb-3">
-              {tour.data.name}
-            </h1>
+          {/* Description */}
+          <div
+            className="text-gray-600 leading-relaxed mb-6 sm:mb-7 md:mb-8 text-sm sm:text-base md:text-lg [&_pre]:whitespace-normal [&_pre]:bg-transparent [&_pre]:border-0 [&_pre]:p-0 [&_pre]:m-0 [&_code]:text-gray-600 [&_code]:font-normal [&_code]:text-sm [&_code]:sm:text-base"
+            dangerouslySetInnerHTML={{ __html: tour.data.content }}
+          />
 
-            {/* Duration */}
-            <div className="flex items-center gap-2 text-gray-500 mb-4 sm:mb-5 md:mb-6">
-              <Clock size={18} className="sm:w-5 sm:h-5" />
-              <span className="font-medium text-sm sm:text-base md:text-lg">
-                {tour.data.duration}
+          {/* Price */}
+          <div className="mb-6 sm:mb-7 md:mb-8">
+            <div className="flex items-end gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+              <span className="text-3xl sm:text-4xl font-bold text-carent-text">
+                From {formatUsd(startingPrice)}
+              </span>
+              <span className="text-gray-500 mb-1 text-sm sm:text-base">
+                /per person
               </span>
             </div>
 
-            {/* Description */}
-            <div
-              className="text-gray-600 leading-relaxed mb-6 sm:mb-7 md:mb-8 text-sm sm:text-base md:text-lg [&_pre]:whitespace-normal [&_pre]:bg-transparent [&_pre]:border-0 [&_pre]:p-0 [&_pre]:m-0 [&_code]:text-gray-600 [&_code]:font-normal [&_code]:text-sm [&_code]:sm:text-base"
-              dangerouslySetInnerHTML={{ __html: tour.data.content }}
-            />
-
-            {/* Price */}
-            <div className="mb-6 sm:mb-7 md:mb-8">
-              <div className="flex items-end gap-1.5 sm:gap-2 mb-3 sm:mb-4">
-                <span className="text-3xl sm:text-4xl font-bold text-carent-text">
-                  From {formatUsd(startingPrice)}
-                </span>
-                <span className="text-gray-500 mb-1 text-sm sm:text-base">
-                  /per person
-                </span>
-              </div>
-
-              {/* Pricing Tiers Table */}
-              {priceTiers.length > 0 && (
-                <div className="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-5 border border-gray-200">
-                  <h4 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4">
-                    Group Pricing
-                  </h4>
-                  <div className="space-y-2 sm:space-y-2.5">
-                    {priceTiers.map((tier, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between text-sm sm:text-base"
-                      >
-                        <span className="text-gray-600">
-                          {tier.min_group_size === tier.max_group_size
-                            ? `${tier.min_group_size} ${
-                                tier.min_group_size === 1 ? "person" : "people"
-                              }`
-                            : `${tier.min_group_size}-${tier.max_group_size} people`}
-                        </span>
-                        <span className="font-semibold text-gray-900">
-                          {formatUsd(tier.price_per_person)}/person
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Includes Section */}
-            {includes.length > 0 && (
-              <div className="mb-6 sm:mb-7 md:mb-8">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
-                  What&apos;s Included
-                </h3>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
-                  {includes.map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-2 text-gray-600 text-sm sm:text-base"
+            {/* Pricing Tiers Table */}
+            {priceTiers.length > 0 && (
+              <div className="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-5 border border-gray-200">
+                <h4 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4">
+                  Group Pricing
+                </h4>
+                <div className="space-y-2 sm:space-y-2.5">
+                  {priceTiers.map((tier, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between text-sm sm:text-base"
                     >
-                      <Check
-                        size={16}
-                        className="sm:w-4.5 sm:h-4.5 text-carent-yellow shrink-0 mt-0.5"
-                      />
-                      <span className="leading-relaxed">{item}</span>
-                    </li>
+                      <span className="text-gray-600">
+                        {tier.min_group_size === tier.max_group_size
+                          ? `${tier.min_group_size} ${
+                              tier.min_group_size === 1 ? "person" : "people"
+                            }`
+                          : `${tier.min_group_size}-${tier.max_group_size} people`}
+                      </span>
+                      <span className="font-semibold text-gray-900">
+                        {formatUsd(tier.price_per_person)}/person
+                      </span>
+                    </div>
                   ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Excludes Section */}
-            {excludes && (
-              <div className="mb-6 sm:mb-7 md:mb-8">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
-                  What&apos;s Not Included
-                </h3>
-                <div className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                  {excludes}
                 </div>
               </div>
             )}
+          </div>
 
-            {/* Booking Section */}
-            <div className="mb-8 sm:mb-10 md:mb-12">
-              {!showBookingForm ? (
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-stretch animate-in fade-in duration-300">
-                  <Button
-                    onClick={() => setShowBookingForm(true)}
-                    className="w-full sm:w-auto h-12 sm:h-14 text-base sm:text-lg"
+          {/* Includes Section */}
+          {includes.length > 0 && (
+            <div className="mb-6 sm:mb-7 md:mb-8">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
+                What&apos;s Included
+              </h3>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
+                {includes.map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-gray-600 text-sm sm:text-base"
                   >
-                    Book This Tour
-                  </Button>
-                  <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 px-2 py-2 sm:py-3">
-                    <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
-                      Or call to book
-                    </span>
-                    <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
-                      (+977) 9705471232
-                    </span>
-                  </div>
+                    <Check
+                      size={16}
+                      className="sm:w-4.5 sm:h-4.5 text-carent-yellow shrink-0 mt-0.5"
+                    />
+                    <span className="leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Excludes Section */}
+          {excludes && (
+            <div className="mb-6 sm:mb-7 md:mb-8">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
+                What&apos;s Not Included
+              </h3>
+              <div className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                {excludes}
+              </div>
+            </div>
+          )}
+
+          {/* Booking Section */}
+          <div className="mb-8 sm:mb-10 md:mb-12">
+            {!showBookingForm ? (
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-stretch animate-in fade-in duration-300">
+                <Button
+                  onClick={() => setShowBookingForm(true)}
+                  className="w-full sm:w-auto h-12 sm:h-14 text-base sm:text-lg"
+                >
+                  Book This Tour
+                </Button>
+                <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 px-2 py-2 sm:py-3">
+                  <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
+                    Or call to book
+                  </span>
+                  <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
+                    (+977) 9705471232
+                  </span>
                 </div>
-              ) : (
-                <div className="bg-white shadow-xl p-4 sm:p-5 md:p-6 lg:p-8 rounded-lg sm:rounded-xl md:rounded-2xl border border-gray-100 transition-all duration-300 ease-out relative">
-                  <button
-                    onClick={() => {
+              </div>
+            ) : (
+              <div className="bg-white shadow-xl p-4 sm:p-5 md:p-6 lg:p-8 rounded-lg sm:rounded-xl md:rounded-2xl border border-gray-100 transition-all duration-300 ease-out relative">
+                <button
+                  onClick={() => {
+                    setShowBookingForm(false);
+                    setBookingStatus("idle");
+                  }}
+                  className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-black transition-colors focus-visible:outline-none focus-visible:ring-0"
+                  aria-label="Close booking form"
+                >
+                  <X size={20} className="sm:w-6 sm:h-6" />
+                </button>
+
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-carent-text border-b border-gray-100 pb-3 sm:pb-4">
+                  Book This Tour
+                </h3>
+
+                {bookingStatus === "success" ? (
+                  <BookingSuccess
+                    email={formData.email}
+                    phone={formData.phone}
+                    isSelfRide={false}
+                    paymentMethod={formData.paymentMethod}
+                    onClose={() => {
                       setShowBookingForm(false);
                       setBookingStatus("idle");
                     }}
-                    className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-black transition-colors focus-visible:outline-none focus-visible:ring-0"
-                    aria-label="Close booking form"
-                  >
-                    <X size={20} className="sm:w-6 sm:h-6" />
-                  </button>
+                    variant="inline"
+                  />
+                ) : (
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                    <DatePicker
+                      label="Tour Date"
+                      value={formData.tourDate}
+                      onChange={(value) =>
+                        handleFormDataChange({ tourDate: value })
+                      }
+                      type="date"
+                      required
+                    />
 
-                  <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-carent-text border-b border-gray-100 pb-3 sm:pb-4">
-                    Book This Tour
-                  </h3>
+                    {/* Group Size Selector */}
+                    {priceTiers.length > 0 && (
+                      <div className="flex flex-col gap-2">
+                        <label className="text-sm sm:text-base font-medium text-gray-900">
+                          Number of People
+                        </label>
+                        <select
+                          value={selectedGroupSize}
+                          onChange={(e) =>
+                            setSelectedGroupSize(Number(e.target.value))
+                          }
+                          className="w-full px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-carent-yellow focus:border-transparent"
+                          required
+                        >
+                          {getValidGroupSizes(priceTiers).map((size) => (
+                            <option key={size} value={size}>
+                              {size} {size === 1 ? "person" : "people"}
+                            </option>
+                          ))}
+                        </select>
+                        {selectedTier && (
+                          <p className="text-xs sm:text-sm text-gray-500">
+                            Price: {formatUsd(currentPricePerPerson)} per person
+                          </p>
+                        )}
+                      </div>
+                    )}
 
-                  {bookingStatus === "success" ? (
-                    <BookingSuccess
+                    <ContactDetailsForm
+                      fullName={formData.fullName}
                       email={formData.email}
                       phone={formData.phone}
-                      isSelfRide={false}
-                      paymentMethod={formData.paymentMethod}
-                      onClose={() => {
-                        setShowBookingForm(false);
-                        setBookingStatus("idle");
-                      }}
-                      variant="inline"
+                      onFullNameChange={(value) =>
+                        handleFormDataChange({ fullName: value })
+                      }
+                      onEmailChange={(value) =>
+                        handleFormDataChange({ email: value })
+                      }
+                      onPhoneChange={(value) =>
+                        handleFormDataChange({ phone: value })
+                      }
                     />
-                  ) : (
-                    <form
-                      onSubmit={handleSubmit}
-                      className="flex flex-col gap-6"
-                    >
-                      <DatePicker
-                        label="Tour Date"
-                        value={formData.tourDate}
-                        onChange={(value) =>
-                          handleFormDataChange({ tourDate: value })
-                        }
-                        type="date"
-                        required
-                      />
 
-                      {/* Group Size Selector */}
-                      {priceTiers.length > 0 && (
-                        <div className="flex flex-col gap-2">
-                          <label className="text-sm sm:text-base font-medium text-gray-900">
-                            Number of People
-                          </label>
-                          <select
-                            value={selectedGroupSize}
-                            onChange={(e) =>
-                              setSelectedGroupSize(Number(e.target.value))
-                            }
-                            className="w-full px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-carent-yellow focus:border-transparent"
-                            required
-                          >
-                            {getValidGroupSizes(priceTiers).map((size) => (
-                              <option key={size} value={size}>
-                                {size} {size === 1 ? "person" : "people"}
-                              </option>
-                            ))}
-                          </select>
-                          {selectedTier && (
-                            <p className="text-xs sm:text-sm text-gray-500">
-                              Price: {formatUsd(currentPricePerPerson)} per
-                              person
-                            </p>
-                          )}
-                        </div>
-                      )}
+                    <PaymentMethodSelector
+                      value={formData.paymentMethod}
+                      onChange={(value) =>
+                        handleFormDataChange({ paymentMethod: value })
+                      }
+                      variant="compact"
+                    />
 
-                      <ContactDetailsForm
-                        fullName={formData.fullName}
-                        email={formData.email}
-                        phone={formData.phone}
-                        onFullNameChange={(value) =>
-                          handleFormDataChange({ fullName: value })
-                        }
-                        onEmailChange={(value) =>
-                          handleFormDataChange({ email: value })
-                        }
-                        onPhoneChange={(value) =>
-                          handleFormDataChange({ phone: value })
-                        }
-                      />
-
-                      <PaymentMethodSelector
-                        value={formData.paymentMethod}
-                        onChange={(value) =>
-                          handleFormDataChange({ paymentMethod: value })
-                        }
-                        variant="compact"
-                      />
-
-                      <BookingSummary
-                        pricePerDay={currentPricePerPerson}
-                        days={selectedGroupSize}
-                        total={totalPrice}
-                        formatPrice={formatUsd}
-                        isSubmitting={
-                          bookingStatus === "submitting" || isPending
-                        }
-                        variant="compact"
-                        label={selectedGroupSize === 1 ? "person" : "people"}
-                      />
-                    </form>
-                  )}
-                </div>
-              )}
-            </div>
+                    <BookingSummary
+                      pricePerDay={currentPricePerPerson}
+                      days={selectedGroupSize}
+                      total={totalPrice}
+                      formatPrice={formatUsd}
+                      isSubmitting={bookingStatus === "submitting" || isPending}
+                      variant="compact"
+                      label={selectedGroupSize === 1 ? "person" : "people"}
+                    />
+                  </form>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -513,12 +503,13 @@ export default function TourDetailsView() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen pt-36 text-center">
+        <div className="min-h-screen pt-36 text-center flex items-center justify-center">
           <Loader />
         </div>
       }
     >
       <TourDetailsViewContent />
+      <BlogContactForm />
     </Suspense>
   );
 }

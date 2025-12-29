@@ -14,7 +14,7 @@ interface CarCollectionProps {
 }
 
 export const CarCollection: React.FC<CarCollectionProps> = ({
-  title = "Our rental collection",
+  title = "Our Rental Collection",
   limit,
   excludeId,
 }) => {
@@ -81,15 +81,49 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
       <div className="container mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
         <div className="flex flex-row items-end justify-between mb-8 sm:mb-10 md:mb-12 gap-4 sm:gap-5 md:gap-6">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-carent-text max-w-xl leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carent-text max-w-xl leading-tight ">
             {title}
           </h2>
-          <div className="hidden md:block">
-            <Link href="/cars">
-              <Button icon={true} className="text-sm sm:text-base">
-                View all vehicles
-              </Button>
-            </Link>
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Navigation Arrows - Left side of button */}
+            {!isLoading && filteredCars.length > 0 && (
+              <>
+                <button
+                  onClick={() => scroll("left")}
+                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+                  aria-label="Scroll left"
+                >
+                  <ArrowLeft
+                    size={18}
+                    className="sm:w-5 sm:h-5 md:w-6 md:h-6"
+                  />
+                </button>
+                <button
+                  onClick={() => scroll("right")}
+                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+                  aria-label="Scroll right"
+                >
+                  <ArrowRight
+                    size={18}
+                    className="sm:w-5 sm:h-5 md:w-6 md:h-6"
+                  />
+                </button>
+              </>
+            )}
+            {/* View All Button */}
+            <div>
+              <Link href="/cars">
+                <Button
+                  icon={true}
+                  className="text-sm sm:text-base hidden md:inline-flex"
+                >
+                  View all vehicles
+                </Button>
+                <Button className="px-4 sm:px-5 md:px-6 py-2 text-xs sm:text-sm md:hidden">
+                  View all
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -125,36 +159,6 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
             )}
           </div>
         )}
-
-        {/* Bottom Controls */}
-        <div className="flex items-center justify-between mt-4 sm:mt-5 md:mt-6">
-          {/* Navigation Arrows */}
-          <div className="flex gap-3 sm:gap-4">
-            <button
-              onClick={() => scroll("left")}
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
-              aria-label="Scroll left"
-            >
-              <ArrowLeft size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
-              aria-label="Scroll right"
-            >
-              <ArrowRight size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
-            </button>
-          </div>
-
-          {/* Mobile View All Button */}
-          <div className="md:hidden">
-            <Link href="/cars">
-              <Button className="px-4 sm:px-5 md:px-6 py-2 text-xs sm:text-sm">
-                View all
-              </Button>
-            </Link>
-          </div>
-        </div>
       </div>
     </section>
   );

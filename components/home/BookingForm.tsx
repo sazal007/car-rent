@@ -180,11 +180,11 @@ export const BookingForm: React.FC = () => {
   };
 
   return (
-    <section className="py-8 sm:py-10 md:py-12 bg-gray-50">
+    <section className="py-8 sm:py-10 md:py-12">
       <div className="container mx-auto px-3 sm:px-4 md:px-6">
         <form
           onSubmit={handleBookClick}
-          className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-5 md:p-6 flex flex-col lg:flex-row items-stretch gap-4 sm:gap-5 md:gap-6"
+          className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl border border-gray-100 p-4 sm:p-5 md:p-6 flex flex-col lg:flex-row items-stretch gap-4 sm:gap-5 md:gap-6"
         >
           <VehicleSelector
             vehicles={vehicles}

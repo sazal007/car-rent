@@ -22,11 +22,11 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
     <Link href={`/cars/${car.id}-${slug}`} className="group block h-full">
       <div className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-100">
         {/* Car Image */}
-        <div className="relative h-48 sm:h-56 w-full overflow-hidden bg-linear-to-b from-gray-50 to-white">
+        <div className="relative h-52 sm:h-64 md:h-72 lg:h-80 w-full overflow-hidden bg-linear-to-b from-gray-50 to-white">
           <img
             src={car.image}
             alt={car.name}
-            className="w-full h-full object-contain p-4 sm:p-5 md:p-6 transform group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-contain p-6 transform group-hover:scale-110 transition-transform duration-500"
           />
         </div>
 

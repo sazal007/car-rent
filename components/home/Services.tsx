@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CheckCircle, Shield, Map, Car } from "lucide-react";
+import { Shield } from "lucide-react";
 import { Button } from "../shared/Button";
 
 const SERVICES = [
@@ -17,7 +17,6 @@ const SERVICES = [
       label: "Rent a scooter",
       href: "/cars?category=Self-ride%20Scooter",
     },
-    icon: CheckCircle,
   },
   {
     title: "Guided Scooter Ride",
@@ -31,7 +30,6 @@ const SERVICES = [
       label: "Book with guide",
       href: "/cars?category=Guide%20with%20Scooter",
     },
-    icon: Map,
   },
   {
     title: "EV Taxi Service",
@@ -45,16 +43,15 @@ const SERVICES = [
       label: "Book a taxi",
       href: "/cars?category=Ev%20Taxi",
     },
-    icon: Car,
   },
 ];
 
 export const Services: React.FC = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-carent-gray">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="container mx-auto px-3 sm:px-4 md:px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-5 md:gap-6 mb-8 sm:mb-10 md:mb-12">
-          <div className="max-w-2xl">
+        <div className="flex flex-col items-center justify-center gap-4 sm:gap-5 md:gap-6 mb-8 sm:mb-10 md:mb-12">
+          <div className="max-w-5xl text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-carent-text mb-3 sm:mb-4">
               Services built for Kathmandu trips
             </h2>
@@ -69,17 +66,13 @@ export const Services: React.FC = () => {
           {SERVICES.map((service) => (
             <div
               key={service.title}
-              className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-5 sm:p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
+              className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-5 sm:p-6 md:p-8 shadow-sm  transition-shadow duration-300 flex flex-col text-start"
             >
-              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-carent-yellow/20 text-carent-dark flex items-center justify-center shrink-0">
-                  <service.icon size={20} className="sm:w-[22px] sm:h-[22px]" />
-                </div>
-                <div>
+              <div className="flex flex-col items-start justify-start mb-3 sm:mb-4">
+                <div className="">
                   <h3 className="text-lg sm:text-xl font-bold text-carent-text">
                     {service.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-carent-dark">{service.highlight}</p>
                 </div>
               </div>
 
@@ -94,7 +87,10 @@ export const Services: React.FC = () => {
 
               <div className="mt-6 sm:mt-7 md:mt-8">
                 <Link href={service.cta.href}>
-                  <Button className="w-full justify-center text-sm sm:text-base">
+                  <Button
+                    className="w-full justify-center text-sm sm:text-base"
+                    iconPosition="right"
+                  >
                     {service.cta.label}
                   </Button>
                 </Link>
@@ -106,4 +102,3 @@ export const Services: React.FC = () => {
     </section>
   );
 };
-

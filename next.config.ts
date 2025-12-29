@@ -23,6 +23,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "batoma.nepdora.baliyoventures.com",
       },
+      {
+        protocol: "https",
+        hostname: "nepaldrives.com",
+      },
+      {
+        protocol: "https",
+        hostname: "tatacars.sipradi.com.np",
+      },
     ],
   },
 };
