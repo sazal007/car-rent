@@ -455,7 +455,7 @@ function CarsDetailsViewContent() {
                       Or call to book
                     </span>
                     <span className="text-carent-text font-medium text-sm sm:text-base md:text-lg">
-                      (+977) 980-1234567
+                      (+977) 9705471232
                     </span>
                   </div>
                 </div>

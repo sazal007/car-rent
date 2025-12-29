@@ -153,19 +153,19 @@ export const Footer: React.FC = () => {
                 <li className="flex items-center gap-3">
                   <Phone size={20} className="text-carent-yellow shrink-0" />
                   <a
-                    href="tel:+1234567890"
+                    href="tel:+9779705471232"
                     className="hover:text-carent-yellow transition-colors"
                   >
-                    +1 (234) 567-890
+                    (+977) 9705471232
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail size={20} className="text-carent-yellow shrink-0" />
                   <a
-                    href="mailto:info@carent.com"
+                    href="mailto:bato1111ma@gmail.com"
                     className="hover:text-carent-yellow transition-colors"
                   >
-                    info@carent.com
+                    bato1111ma@gmail.com
                   </a>
                 </li>
               </ul>
