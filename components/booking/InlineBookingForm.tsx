@@ -77,6 +77,17 @@ export const InlineBookingForm: React.FC<InlineBookingFormProps> = ({
     const simpleNum = parseFloat(priceString);
     if (!isNaN(simpleNum)) return simpleNum;
 
+    // Pattern 0: "max X person - $Y" format (e.g., "max 3 person -  $400")
+    // If persons is within the max, use that price
+    const maxPersonPattern = /max\s+(\d+)\s+person\s*-\s*\$(\d+)/i;
+    const maxMatch = priceString.match(maxPersonPattern);
+    if (maxMatch && maxMatch[1] && maxMatch[2]) {
+      const maxPersons = parseInt(maxMatch[1], 10);
+      if (persons <= maxPersons) {
+        return parseFloat(maxMatch[2]) || 0;
+      }
+    }
+
     // Pattern 1: "$250 for 1 person"
     const pattern1 = new RegExp(`\\$(\\d+)\\s+for\\s+${persons}\\s+person`, 'i');
     const match1 = priceString.match(pattern1);

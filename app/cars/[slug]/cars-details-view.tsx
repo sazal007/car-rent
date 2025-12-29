@@ -232,8 +232,19 @@ function CarsDetailsViewContent() {
     const simpleNum = parseFloat(priceString);
     if (!isNaN(simpleNum)) return simpleNum;
 
-    // For complex strings like "[ max 3 person] - $250 for 1 person , 2 $400, 3 $500"
+    // For complex strings like "max 3 person -  $400" or "[ max 3 person] - $250 for 1 person , 2 $400, 3 $500"
     // Try to extract price based on number of persons
+
+    // Pattern 0: "max X person - $Y" format (e.g., "max 3 person -  $400")
+    // If numberOfPersons is within the max, use that price
+    const maxPersonPattern = /max\s+(\d+)\s+person\s*-\s*\$(\d+)/i;
+    const maxMatch = priceString.match(maxPersonPattern);
+    if (maxMatch && maxMatch[1] && maxMatch[2]) {
+      const maxPersons = parseInt(maxMatch[1], 10);
+      if (numberOfPersons <= maxPersons) {
+        return parseFloat(maxMatch[2]) || 0;
+      }
+    }
 
     // Pattern 1: "$250 for 1 person"
     const pattern1 = new RegExp(

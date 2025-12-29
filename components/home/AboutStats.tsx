@@ -18,13 +18,15 @@ export const AboutStats: React.FC = () => {
               satisfaction, we strive to make your journey smooth and enjoyable.
             </p>
             <Link href="/about">
-              <Button className="text-sm sm:text-base">Know more about us</Button>
+              <Button className="text-sm sm:text-base">
+                Know more about us
+              </Button>
             </Link>
 
             <div className="grid grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 mt-10 sm:mt-12 md:mt-14 lg:mt-16">
               <div>
                 <span className="block text-3xl sm:text-4xl md:text-5xl font-bold text-carent-text mb-1.5 sm:mb-2">
-                  5K+
+                  1K+
                 </span>
                 <p className="text-xs sm:text-sm text-gray-600">
                   Happy customers who have trusted us
@@ -32,7 +34,7 @@ export const AboutStats: React.FC = () => {
               </div>
               <div>
                 <span className="block text-3xl sm:text-4xl md:text-5xl font-bold text-carent-text mb-1.5 sm:mb-2">
-                  99%
+                  95%
                 </span>
                 <p className="text-xs sm:text-sm text-gray-600">
                   Our customers agree with our offer value

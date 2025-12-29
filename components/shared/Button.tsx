@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
     primary:
       "bg-carent-yellow text-carent-dark hover:bg-yellow-400 cursor-pointer",
     outline:
-      "border border-carent-dark text-carent-dark hover:bg-carent-dark hover:text-white cursor-pointer",
+      "border border-carent-dark text-carent-dark hover:bg-carent-dark  cursor-pointer",
     dark: "bg-carent-dark text-white hover:bg-gray-800 cursor-pointer",
   };
 

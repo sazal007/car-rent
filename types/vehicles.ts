@@ -12,7 +12,7 @@ export interface VehicleData {
   year: string;
   brand: string;
   image: string;
-  price: number;
+  price: number | string; // Can be number or empty string ""
   seats: number;
   content: string;
   gallery: string | string[]; // Can be JSON string or array

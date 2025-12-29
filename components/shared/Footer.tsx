@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
               />
             </Link>
 
-            <p className="text-gray-400 text-base mb-8 leading-relaxed max-w-md">
+            <p className=" text-base mb-8 leading-relaxed max-w-md">
               Your trusted partner for reliable car rentals. We offer a wide
               selection of vehicles to suit your needs, from compact city cars
               to spacious SUVs. Experience quality service and competitive
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
             {/* Pages */}
             <div>
               <h4 className="text-lg font-bold mb-6 ">Pages</h4>
-              <ul className="space-y-3 text-gray-400">
+              <ul className="space-y-3 ">
                 <li>
                   <Link
                     href="/"
@@ -113,7 +113,7 @@ export const Footer: React.FC = () => {
             {/* Legal */}
             <div>
               <h4 className="text-lg font-bold mb-6">Legal</h4>
-              <ul className="space-y-3 text-gray-400">
+              <ul className="space-y-3">
                 <li>
                   <Link
                     href="/terms"
@@ -136,7 +136,7 @@ export const Footer: React.FC = () => {
             {/* Location & Contact Info */}
             <div>
               <h4 className="text-lg font-bold mb-6">Location</h4>
-              <ul className="space-y-4 text-gray-400">
+              <ul className="space-y-4 ">
                 <li className="flex items-start gap-3">
                   <MapPin
                     size={20}
@@ -181,28 +181,28 @@ export const Footer: React.FC = () => {
           <div className="flex gap-6">
             <a
               href="#"
-              className="text-gray-400 hover:text-carent-yellow transition-colors"
+              className=" hover:text-carent-yellow transition-colors"
               aria-label="Facebook"
             >
               <Facebook size={20} />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-carent-yellow transition-colors"
+              className=" hover:text-carent-yellow transition-colors"
               aria-label="Instagram"
             >
               <Instagram size={20} />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-carent-yellow transition-colors"
+              className=" hover:text-carent-yellow transition-colors"
               aria-label="LinkedIn"
             >
               <Linkedin size={20} />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-carent-yellow transition-colors"
+              className=" hover:text-carent-yellow transition-colors"
               aria-label="X (Twitter)"
             >
               <X size={20} />

@@ -19,193 +19,239 @@ export const ServiceOptions: React.FC<ServiceOptionsProps> = ({ vehicle }) => {
   // Show for scooters and taxis with guided/unguided options
   const isScooter = vehicle.category?.toLowerCase() === "scooter";
   const isTaxi = vehicle.category?.toLowerCase() === "taxi";
-  const hasGuidedOptions = vehicle.guidedOptions && vehicle.guidedOptions.length > 0;
-  const hasUnguidedOptions = vehicle.unguidedOptions && vehicle.unguidedOptions.length > 0;
+  const hasGuidedOptions =
+    vehicle.guidedOptions &&
+    vehicle.guidedOptions.length > 0 &&
+    vehicle.guidedOptions[0].price &&
+    vehicle.guidedOptions[0].price.trim() !== "";
+  const hasUnguidedOptions =
+    vehicle.unguidedOptions &&
+    vehicle.unguidedOptions.length > 0 &&
+    vehicle.unguidedOptions[0].price &&
+    vehicle.unguidedOptions[0].price.trim() !== "";
 
   if ((!isScooter && !isTaxi) || (!hasGuidedOptions && !hasUnguidedOptions)) {
     return null;
   }
 
+  // For scooters, determine if it's guided or unguided based on name/slug
+  let showGuidedForScooter = false;
+  let showUnguidedForScooter = false;
+
+  if (isScooter) {
+    const nameLower = vehicle.name?.toLowerCase() || "";
+    const slugLower = vehicle.slug?.toLowerCase() || "";
+    const isGuidedScooter =
+      nameLower.includes("guided") || slugLower.includes("guided");
+    const isUnguidedScooter =
+      nameLower.includes("unguided") || slugLower.includes("unguided");
+
+    // Show only the relevant option based on vehicle type
+    showGuidedForScooter = !!(isGuidedScooter && hasGuidedOptions);
+    showUnguidedForScooter = !!(isUnguidedScooter && hasUnguidedOptions);
+
+    // If neither is explicitly guided/unguided, but has options, show what's available
+    if (!isGuidedScooter && !isUnguidedScooter) {
+      showGuidedForScooter = !!hasGuidedOptions;
+      showUnguidedForScooter = !!hasUnguidedOptions;
+    }
+  }
+
   // Helper to check if price is a complex string (for taxis)
   const isComplexPrice = (price: string): boolean => {
-    return price.includes("[") || price.includes("max") || price.includes("person");
+    return (
+      price.includes("[") || price.includes("max") || price.includes("person")
+    );
   };
 
   // Parse and format complex price strings for taxis
   const parseComplexPrice = (price: string) => {
-    // Extract max persons: "[ max 3 person]" -> "max 3 person"
-    const maxMatch = price.match(/\[([^\]]+)\]/);
-    const maxInfo = maxMatch ? maxMatch[1].trim() : null;
+    // Extract max persons: "[ max 3 person]" -> "max 3 person" OR "max 3 person" -> "max 3 person"
+    let maxInfo: string | null = null;
+    let priceOnly: string = price;
 
-    // Extract individual prices: "$250 for 1 person , 2 $400, 3 $500"
-    const prices: Array<{ persons: string; amount: string }> = [];
-    
-    // Pattern 1: "$250 for 1 person"
-    const pattern1 = /\$(\d+)\s+for\s+(\d+)\s+person/g;
-    let match;
-    while ((match = pattern1.exec(price)) !== null) {
-      prices.push({
-        persons: match[2],
-        amount: match[1],
-      });
+    // Pattern 1: Extract from brackets "[max 3 person]"
+    const bracketMatch = price.match(/\[([^\]]+)\]/);
+    if (bracketMatch) {
+      maxInfo = bracketMatch[1].trim();
+      // Remove the bracket part from price string
+      priceOnly = price.replace(/\[[^\]]+\]\s*,?\s*/i, "").trim();
+    } else {
+      // Pattern 2: Extract "max X person" without brackets
+      const maxMatch = price.match(/(max\s+\d+\s+person)/i);
+      if (maxMatch) {
+        maxInfo = maxMatch[1].trim();
+        // Remove max person part from price string
+        priceOnly = price.replace(/max\s+\d+\s+person\s+/i, "").trim();
+      }
     }
 
-    // Pattern 2: "2 $400" or "3/4 $400" (after comma)
-    const pattern2 = /(\d+(?:\/\d+)?)\s+\$(\d+)/g;
-    while ((match = pattern2.exec(price)) !== null) {
-      prices.push({
-        persons: match[1],
-        amount: match[2],
-      });
-    }
+    // Extract price amount: "$350 for day" or "$350"
+    const priceMatch = priceOnly.match(/\$(\d+)(?:\s+for\s+day)?/i);
+    const priceAmount = priceMatch ? priceMatch[1] : null;
 
-    return { maxInfo, prices };
+    return { maxInfo, priceAmount, priceOnly };
   };
 
   // Render price - either formatted number or complex string
   const renderPrice = (price: string) => {
     if (isComplexPrice(price)) {
-      const { maxInfo, prices } = parseComplexPrice(price);
-      
+      const { maxInfo, priceAmount, priceOnly } = parseComplexPrice(price);
+
       return (
         <div className="w-full">
-          {maxInfo && (
-            <div className="text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
-              {maxInfo}
+          {priceAmount ? (
+            <div className="text-base sm:text-lg font-bold text-carent-text">
+              {formatPrice(parseFloat(priceAmount))} for day
+            </div>
+          ) : (
+            // Fallback: display cleaned price string if parsing fails
+            <div className="text-sm sm:text-base font-medium text-carent-text whitespace-normal leading-relaxed">
+              {priceOnly}
             </div>
           )}
-          <div className="space-y-1.5">
-            {prices.length > 0 ? (
-              prices.map((item, idx) => (
-                <div key={idx} className="flex items-baseline gap-2 flex-wrap">
-                  <span className="text-base sm:text-lg font-bold text-carent-text">
-                    {formatPrice(parseFloat(item.amount))}
-                  </span>
-                  <span className="text-xs sm:text-sm text-gray-600">
-                    for {item.persons} {item.persons === "1" || item.persons.includes("/") ? "person" : "persons"}
-                  </span>
-                </div>
-              ))
-            ) : (
-              // Fallback: display as-is if parsing fails
-              <div className="text-sm sm:text-base font-medium text-carent-text whitespace-normal leading-relaxed">
-                {price}
-              </div>
-            )}
-          </div>
         </div>
       );
     }
     const numPrice = parseFloat(price) || 0;
     return (
-      <div className="text-right">
+      <div>
         <span className="text-xl sm:text-2xl font-bold text-carent-text">
           {formatPrice(numPrice)}
         </span>
-        <span className="text-xs sm:text-sm text-gray-500 block">per tour</span>
+        <span className="text-xs sm:text-sm text-gray-500 block">for day</span>
       </div>
     );
   };
 
   return (
     <div className="mb-6 sm:mb-8 md:mb-10">
-      <h3 className="text-lg sm:text-xl font-semibold text-carent-text mb-4 sm:mb-5">
+      {/* <h3 className="text-lg sm:text-xl font-semibold text-carent-text mb-4 sm:mb-5">
         Service Options
-      </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+      </h3> */}
+      <div
+        className={`grid gap-4 sm:gap-5 md:gap-6 ${
+          isScooter &&
+          ((showGuidedForScooter && !showUnguidedForScooter) ||
+            (!showGuidedForScooter && showUnguidedForScooter))
+            ? "grid-cols-1"
+            : "grid-cols-1 md:grid-cols-2"
+        }`}
+      >
         {/* Guided Option */}
-        {hasGuidedOptions && vehicle.guidedOptions && vehicle.guidedOptions[0] && (
-          <div className="border border-gray-200 rounded-lg sm:rounded-xl p-4 sm:p-5 bg-white hover:border-carent-yellow transition-colors">
-            <div className={`mb-3 sm:mb-4 ${isComplexPrice(vehicle.guidedOptions[0].price) ? 'space-y-3' : 'flex items-start justify-between gap-3'}`}>
-              <div className="flex-1">
-                <h4 className="text-base sm:text-lg font-semibold text-carent-text mb-1">
-                  {isTaxi ? "With Guide" : "Guided Tour"}
-                </h4>
-                <p className="text-xs sm:text-sm text-gray-500">
-                  {isTaxi ? "Guide included" : "Rider/guide included"}
-                </p>
-              </div>
-              <div className={isComplexPrice(vehicle.guidedOptions[0].price) ? 'mt-2' : ''}>
-                {renderPrice(vehicle.guidedOptions[0].price)}
-              </div>
-            </div>
-            {vehicle.guidedOptions[0].includes && (
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
-                  Includes:
-                </p>
-                <div className="space-y-1.5">
-                  {vehicle.guidedOptions[0].includes
-                    .split(",")
-                    .map((item, idx) => {
-                      const trimmed = item.trim();
-                      return trimmed ? (
-                        <div key={idx} className="flex items-start gap-2">
-                          <CheckCircle
-                            size={16}
-                            className="text-carent-text fill-transparent shrink-0 mt-0.5"
-                            strokeWidth={2}
-                          />
-                          <span className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                            {trimmed}
-                          </span>
-                        </div>
-                      ) : null;
-                    })
-                    .filter(Boolean)}
+        {((isScooter && showGuidedForScooter) ||
+          (isTaxi && hasGuidedOptions)) &&
+          vehicle.guidedOptions &&
+          vehicle.guidedOptions[0] && (
+            <div className="border border-gray-200 rounded-lg sm:rounded-xl p-4 sm:p-5 bg-white hover:border-carent-yellow transition-colors">
+              <div className="mb-3 sm:mb-4">
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-carent-text mb-1">
+                    {isTaxi ? "With Guide" : "Guided Tour"}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-gray-500">
+                    {isTaxi ? "Guide included" : "Rider/guide included"}
+                  </p>
+                  {isComplexPrice(vehicle.guidedOptions[0].price) && (
+                    <p className="text-sm sm:text-base font-semibold text-carent-text mt-2">
+                      {
+                        parseComplexPrice(vehicle.guidedOptions[0].price)
+                          .maxInfo
+                      }
+                    </p>
+                  )}
+                </div>
+                <div className="mt-3 sm:mt-4">
+                  {renderPrice(vehicle.guidedOptions[0].price)}
                 </div>
               </div>
-            )}
-          </div>
-        )}
+              {vehicle.guidedOptions[0].includes && (
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
+                    Includes:
+                  </p>
+                  <div className="space-y-1.5">
+                    {vehicle.guidedOptions[0].includes
+                      .split(",")
+                      .map((item, idx) => {
+                        const trimmed = item.trim();
+                        return trimmed ? (
+                          <div key={idx} className="flex items-start gap-2">
+                            <CheckCircle
+                              size={16}
+                              className="text-carent-text fill-transparent shrink-0 mt-0.5"
+                              strokeWidth={2}
+                            />
+                            <span className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                              {trimmed}
+                            </span>
+                          </div>
+                        ) : null;
+                      })
+                      .filter(Boolean)}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
         {/* Unguided Option */}
-        {hasUnguidedOptions && vehicle.unguidedOptions && vehicle.unguidedOptions[0] && (
-          <div className="border border-gray-200 rounded-lg sm:rounded-xl p-4 sm:p-5 bg-white hover:border-carent-yellow transition-colors">
-            <div className={`mb-3 sm:mb-4 ${isComplexPrice(vehicle.unguidedOptions[0].price) ? 'space-y-3' : 'flex items-start justify-between gap-3'}`}>
-              <div className="flex-1">
-                <h4 className="text-base sm:text-lg font-semibold text-carent-text mb-1">
-                  {isTaxi ? "Without Guide" : "Self-Ride Tour"}
-                </h4>
-                <p className="text-xs sm:text-sm text-gray-500">
-                  {isTaxi ? "Driver only" : "License required"}
-                </p>
-              </div>
-              <div className={isComplexPrice(vehicle.unguidedOptions[0].price) ? 'mt-2' : ''}>
-                {renderPrice(vehicle.unguidedOptions[0].price)}
-              </div>
-            </div>
-            {vehicle.unguidedOptions[0].includes && (
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
-                  Includes:
-                </p>
-                <div className="space-y-1.5">
-                  {vehicle.unguidedOptions[0].includes
-                    .split(",")
-                    .map((item, idx) => {
-                      const trimmed = item.trim();
-                      return trimmed ? (
-                        <div key={idx} className="flex items-start gap-2">
-                          <CheckCircle
-                            size={16}
-                            className="text-carent-text fill-transparent shrink-0 mt-0.5"
-                            strokeWidth={2}
-                          />
-                          <span className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                            {trimmed}
-                          </span>
-                        </div>
-                      ) : null;
-                    })
-                    .filter(Boolean)}
+        {((isScooter && showUnguidedForScooter) ||
+          (isTaxi && hasUnguidedOptions)) &&
+          vehicle.unguidedOptions &&
+          vehicle.unguidedOptions[0] && (
+            <div className="border border-gray-200 rounded-lg sm:rounded-xl p-4 sm:p-5 bg-white hover:border-carent-yellow transition-colors">
+              <div className="mb-3 sm:mb-4">
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-carent-text mb-1">
+                    {isTaxi ? "Without Guide" : "Self-Ride Tour"}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-gray-500">
+                    {isTaxi ? "Driver only" : "License required"}
+                  </p>
+                  {isComplexPrice(vehicle.unguidedOptions[0].price) && (
+                    <p className="text-sm sm:text-base font-semibold text-carent-text mt-2">
+                      {
+                        parseComplexPrice(vehicle.unguidedOptions[0].price)
+                          .maxInfo
+                      }
+                    </p>
+                  )}
+                </div>
+                <div className="mt-3 sm:mt-4">
+                  {renderPrice(vehicle.unguidedOptions[0].price)}
                 </div>
               </div>
-            )}
-          </div>
-        )}
+              {vehicle.unguidedOptions[0].includes && (
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
+                    Includes:
+                  </p>
+                  <div className="space-y-1.5">
+                    {vehicle.unguidedOptions[0].includes
+                      .split(",")
+                      .map((item, idx) => {
+                        const trimmed = item.trim();
+                        return trimmed ? (
+                          <div key={idx} className="flex items-start gap-2">
+                            <CheckCircle
+                              size={16}
+                              className="text-carent-text fill-transparent shrink-0 mt-0.5"
+                              strokeWidth={2}
+                            />
+                            <span className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                              {trimmed}
+                            </span>
+                          </div>
+                        ) : null;
+                      })
+                      .filter(Boolean)}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
       </div>
     </div>
   );
 };
-

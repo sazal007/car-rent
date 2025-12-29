@@ -47,7 +47,7 @@ export const Hero: React.FC = () => {
               <Link href="/about">
                 <Button
                   variant="outline"
-                  className="text-xs px-5 py-2.5"
+                  className="text-xs px-5 py-2.5 "
                   icon={false}
                 >
                   Learn More About Us

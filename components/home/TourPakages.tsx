@@ -95,12 +95,12 @@ export const TourPackages: React.FC<TourPackagesProps> = ({
                     </h3>
 
                     {/* Duration */}
-                    <div className="flex items-center gap-2 text-gray-500 mb-3 sm:mb-4">
+                    {/* <div className="flex items-center gap-2 text-gray-500 mb-3 sm:mb-4">
                       <Clock size={16} className="sm:w-[18px] sm:h-[18px]" />
                       <span className="text-xs sm:text-sm font-medium">
                         {tour.data.duration}
                       </span>
-                    </div>
+                    </div> */}
 
                     {/* Description */}
                     <div

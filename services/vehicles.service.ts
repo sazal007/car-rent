@@ -133,11 +133,18 @@ const transformVehicle = (apiVehicle: VehicleApiResponse): Vehicle => {
     }
   }
 
+  // Handle price: convert empty string to 0, ensure it's a number
+  const priceValue = typeof data.price === "string" && data.price.trim() === "" 
+    ? 0 
+    : typeof data.price === "number" 
+    ? data.price 
+    : parseFloat(String(data.price)) || 0;
+
   return {
     id: id.toString(),
     name: data.name,
     type: data.type,
-    price: data.price,
+    price: priceValue,
     image: data.image,
     seats: data.seats,
     transmission: data.transmission as "Manual" | "Automatic",
