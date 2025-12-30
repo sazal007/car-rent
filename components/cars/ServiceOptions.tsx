@@ -52,27 +52,14 @@ export const ServiceOptions: React.FC<ServiceOptionsProps> = ({ vehicle }) => {
     return null;
   }
 
-  // For scooters, determine if it's guided or unguided based on name/slug
+  // For scooters, show both options if available (don't filter by name)
   let showGuidedForScooter = false;
   let showUnguidedForScooter = false;
 
   if (isScooter) {
-    const nameLower = vehicle.name?.toLowerCase() || "";
-    const slugLower = vehicle.slug?.toLowerCase() || "";
-    const isGuidedScooter =
-      nameLower.includes("guided") || slugLower.includes("guided");
-    const isUnguidedScooter =
-      nameLower.includes("unguided") || slugLower.includes("unguided");
-
-    // Show only the relevant option based on vehicle type
-    showGuidedForScooter = !!(isGuidedScooter && hasGuidedOptions);
-    showUnguidedForScooter = !!(isUnguidedScooter && hasUnguidedOptions);
-
-    // If neither is explicitly guided/unguided, but has options, show what's available
-    if (!isGuidedScooter && !isUnguidedScooter) {
-      showGuidedForScooter = !!hasGuidedOptions;
-      showUnguidedForScooter = !!hasUnguidedOptions;
-    }
+    // Show both guided and unguided options if they exist
+    showGuidedForScooter = !!hasGuidedOptions;
+    showUnguidedForScooter = !!hasUnguidedOptions;
   }
 
   // Helper to check if price is a complex string (for taxis)
@@ -149,9 +136,12 @@ export const ServiceOptions: React.FC<ServiceOptionsProps> = ({ vehicle }) => {
       </h3> */}
       <div
         className={`grid gap-4 sm:gap-5 md:gap-6 ${
-          isScooter &&
-          ((showGuidedForScooter && !showUnguidedForScooter) ||
-            (!showGuidedForScooter && showUnguidedForScooter))
+          (isScooter &&
+            ((showGuidedForScooter && !showUnguidedForScooter) ||
+              (!showGuidedForScooter && showUnguidedForScooter))) ||
+          (isTaxi &&
+            ((hasGuidedOptions && !hasUnguidedOptions) ||
+              (!hasGuidedOptions && hasUnguidedOptions)))
             ? "grid-cols-1"
             : "grid-cols-1 md:grid-cols-2"
         }`}

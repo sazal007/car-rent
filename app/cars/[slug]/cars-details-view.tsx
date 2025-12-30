@@ -392,6 +392,36 @@ function CarsDetailsViewContent() {
     setFormData((prev) => ({ ...prev, ...updates }));
   };
 
+  // Helper to extract price from price string for display
+  const extractDisplayPrice = (priceString: string): string => {
+    // If it's a simple number, format it
+    const simpleNum = parseFloat(priceString);
+    if (!isNaN(simpleNum)) {
+      return formatPrice(simpleNum);
+    }
+
+    // For complex strings, extract the first price found
+    const priceMatch = priceString.match(/(?:\$)?(\d+)/);
+    if (priceMatch && priceMatch[1]) {
+      return formatPrice(parseFloat(priceMatch[1]));
+    }
+
+    return priceString; // Fallback to original string
+  };
+
+  // Check if vehicle has guided/unguided options
+  const hasGuidedOptions =
+    car?.guidedOptions &&
+    car.guidedOptions.length > 0 &&
+    car.guidedOptions[0].price &&
+    car.guidedOptions[0].price.trim() !== "";
+  const hasUnguidedOptions =
+    car?.unguidedOptions &&
+    car.unguidedOptions.length > 0 &&
+    car.unguidedOptions[0].price &&
+    car.unguidedOptions[0].price.trim() !== "";
+  const isTaxi = car?.category?.toLowerCase() === "taxi";
+
   if (!car) {
     return (
       <div className="min-h-screen pt-24 sm:pt-32 md:pt-36 text-center px-3 sm:px-4">
@@ -436,7 +466,7 @@ function CarsDetailsViewContent() {
               "Experience the ultimate comfort and performance with our premium rental vehicles. Perfect for any journey."}
           </p>
 
-          {/* Service Options (for scooters) */}
+          {/* Service Options (for scooters and taxis) */}
           <ServiceOptions vehicle={car} />
 
           {/* Booking Section */}
