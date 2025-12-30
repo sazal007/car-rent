@@ -234,11 +234,12 @@ function CarsDetailsViewContent() {
     if (!isNaN(simpleNum)) return simpleNum;
 
     // For complex strings like "max 3 person -  $400" or "[ max 3 person] - $250 for 1 person , 2 $400, 3 $500"
+    // or "[max 4 person] 400" (without $ sign)
     // Try to extract price based on number of persons
 
-    // Pattern 0: "max X person - $Y" format (e.g., "max 3 person -  $400")
+    // Pattern 0: "max X person - $Y" or "max X person - Y" or "[max X person] Y" format
     // If numberOfPersons is within the max, use that price
-    const maxPersonPattern = /max\s+(\d+)\s+person\s*-\s*\$(\d+)/i;
+    const maxPersonPattern = /max\s+(\d+)\s+person\s*-\s*(?:\$)?(\d+)/i;
     const maxMatch = priceString.match(maxPersonPattern);
     if (maxMatch && maxMatch[1] && maxMatch[2]) {
       const maxPersons = parseInt(maxMatch[1], 10);
@@ -247,9 +248,19 @@ function CarsDetailsViewContent() {
       }
     }
 
-    // Pattern 1: "$250 for 1 person"
+    // Pattern 0b: "[max X person] Y" format (e.g., "[max 4 person] 400")
+    const bracketMaxPattern = /\[max\s+(\d+)\s+person\]\s*(?:\$)?(\d+)/i;
+    const bracketMaxMatch = priceString.match(bracketMaxPattern);
+    if (bracketMaxMatch && bracketMaxMatch[1] && bracketMaxMatch[2]) {
+      const maxPersons = parseInt(bracketMaxMatch[1], 10);
+      if (numberOfPersons <= maxPersons) {
+        return parseFloat(bracketMaxMatch[2]) || 0;
+      }
+    }
+
+    // Pattern 1: "$250 for 1 person" or "250 for 1 person"
     const pattern1 = new RegExp(
-      `\\$(\\d+)\\s+for\\s+${numberOfPersons}\\s+person`,
+      `(?:\\$)?(\\d+)\\s+for\\s+${numberOfPersons}\\s+person`,
       "i"
     );
     const match1 = priceString.match(pattern1);
@@ -257,9 +268,9 @@ function CarsDetailsViewContent() {
       return parseFloat(match1[1]) || 0;
     }
 
-    // Pattern 2: "2 $400" or "3 $500" (after comma, exact match)
+    // Pattern 2: "2 $400" or "3 $500" or "2 400" or "3 500" (after comma, exact match)
     const pattern2 = new RegExp(
-      `(?:^|,\\s*)${numberOfPersons}\\s+\\$(\\d+)`,
+      `(?:^|,\\s*)${numberOfPersons}\\s+(?:\\$)?(\\d+)`,
       "i"
     );
     const match2 = priceString.match(pattern2);
@@ -267,8 +278,8 @@ function CarsDetailsViewContent() {
       return parseFloat(match2[1]) || 0;
     }
 
-    // Pattern 3: Range like "3/4 $500" - check if numberOfPersons falls in range
-    const rangePattern = /(\d+)\/(\d+)\s+\$(\d+)/g;
+    // Pattern 3: Range like "3/4 $500" or "3/4 500" - check if numberOfPersons falls in range
+    const rangePattern = /(\d+)\/(\d+)\s+(?:\$)?(\d+)/g;
     let rangeMatch;
     while ((rangeMatch = rangePattern.exec(priceString)) !== null) {
       const min = parseInt(rangeMatch[1], 10);
@@ -278,8 +289,8 @@ function CarsDetailsViewContent() {
       }
     }
 
-    // Fallback: Extract the first price found
-    const priceMatch = priceString.match(/\$(\d+)/);
+    // Fallback: Extract the first price found (with or without $ sign)
+    const priceMatch = priceString.match(/(?:\$)?(\d+)/);
     if (priceMatch && priceMatch[1]) {
       return parseFloat(priceMatch[1]) || 0;
     }

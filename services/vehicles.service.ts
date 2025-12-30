@@ -98,10 +98,12 @@ const parseGuidedUnguidedOptions = (
     // Parse the JSON
     const parsed = JSON.parse(cleaned);
     if (Array.isArray(parsed)) {
-      return parsed.map((item) => ({
-        price: String(item.price || "").trim(),
-        includes: String(item.includes || "").trim(),
-      }));
+      return parsed
+        .map((item) => ({
+          price: String(item.price || "").trim(),
+          includes: String(item.includes || "").trim(),
+        }))
+        .filter((item) => item.price && item.price.length > 0); // Filter out empty prices
     }
     return [];
   } catch (error) {
@@ -116,12 +118,40 @@ const transformVehicle = (apiVehicle: VehicleApiResponse): Vehicle => {
 
   const features = parseJsonString(data.features);
   const gallery = normalizeGallery(data.gallery);
-  const guidedOptions = parseGuidedUnguidedOptions(
-    data["guided(price, includes)"]
-  );
-  const unguidedOptions = parseGuidedUnguidedOptions(
-    data["unguided(price, includes)"]
-  );
+  
+  // Handle case-insensitive field access (API may return "Guided" or "guided")
+  // Check both lowercase and capitalized versions
+  const guidedField = 
+    data["guided(price, includes)"] || 
+    (data as any)["Guided(price, includes)"] ||
+    undefined;
+  const unguidedField = 
+    data["unguided(price, includes)"] || 
+    (data as any)["Unguided(price, includes)"] ||
+    undefined;
+  
+  // Debug logging
+  if (process.env.NODE_ENV === "development") {
+    if (guidedField) {
+      console.log("Found guided field:", guidedField);
+    }
+    if (unguidedField) {
+      console.log("Found unguided field:", unguidedField);
+    }
+  }
+  
+  const guidedOptions = parseGuidedUnguidedOptions(guidedField);
+  const unguidedOptions = parseGuidedUnguidedOptions(unguidedField);
+  
+  // Debug logging for parsed options
+  if (process.env.NODE_ENV === "development") {
+    if (guidedOptions.length > 0) {
+      console.log("Parsed guided options:", JSON.stringify(guidedOptions));
+    }
+    if (unguidedOptions.length > 0) {
+      console.log("Parsed unguided options:", JSON.stringify(unguidedOptions));
+    }
+  }
 
   // Debug logging (can be removed in production)
   if (process.env.NODE_ENV === "development") {

@@ -30,7 +30,25 @@ export const ServiceOptions: React.FC<ServiceOptionsProps> = ({ vehicle }) => {
     vehicle.unguidedOptions[0].price &&
     vehicle.unguidedOptions[0].price.trim() !== "";
 
-  if ((!isScooter && !isTaxi) || (!hasGuidedOptions && !hasUnguidedOptions)) {
+  // Debug logging
+  if (process.env.NODE_ENV === "development") {
+    console.log("ServiceOptions - vehicle category:", vehicle.category);
+    console.log("ServiceOptions - isScooter:", isScooter, "isTaxi:", isTaxi);
+    console.log("ServiceOptions - guidedOptions:", JSON.stringify(vehicle.guidedOptions));
+    console.log("ServiceOptions - unguidedOptions:", JSON.stringify(vehicle.unguidedOptions));
+    console.log("ServiceOptions - hasGuidedOptions:", hasGuidedOptions, "hasUnguidedOptions:", hasUnguidedOptions);
+  }
+
+  const shouldReturnNull = (!isScooter && !isTaxi) || (!hasGuidedOptions && !hasUnguidedOptions);
+  
+  if (process.env.NODE_ENV === "development") {
+    console.log("ServiceOptions - shouldReturnNull:", shouldReturnNull, "reason:", {
+      "!isScooter && !isTaxi": (!isScooter && !isTaxi),
+      "!hasGuidedOptions && !hasUnguidedOptions": (!hasGuidedOptions && !hasUnguidedOptions),
+    });
+  }
+  
+  if (shouldReturnNull) {
     return null;
   }
 
@@ -86,8 +104,8 @@ export const ServiceOptions: React.FC<ServiceOptionsProps> = ({ vehicle }) => {
       }
     }
 
-    // Extract price amount: "$350 for day" or "$350"
-    const priceMatch = priceOnly.match(/\$(\d+)(?:\s+for\s+day)?/i);
+    // Extract price amount: "$350 for day" or "$350" or "350" (without $ sign)
+    const priceMatch = priceOnly.match(/(?:\$)?(\d+)(?:\s+for\s+day)?/i);
     const priceAmount = priceMatch ? priceMatch[1] : null;
 
     return { maxInfo, priceAmount, priceOnly };

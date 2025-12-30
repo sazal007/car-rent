@@ -23,6 +23,8 @@ export interface VehicleData {
   transmission: string;
   "guided(price, includes)"?: string; // JSON string array
   "unguided(price, includes)"?: string; // JSON string array
+  "Guided(price, includes)"?: string; // JSON string array (API may return with capital G)
+  "Unguided(price, includes)"?: string; // JSON string array (API may return with capital U)
 }
 
 export interface VehicleApiResponse {
