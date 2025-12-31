@@ -17,7 +17,6 @@ import { TermsAndConditions } from "@/components/cars/TermsAndConditions";
 import { CarFeedback } from "@/components/cars/CarFeedback";
 import { ServiceOptions } from "@/components/cars/ServiceOptions";
 import { ServiceType } from "@/components/booking/ServiceTypeSelector";
-import { PaymentMethod } from "@/components/booking/PaymentMethodSelector";
 import { Loader } from "@/components/shared/loader";
 import { BlogContactForm } from "@/components/blog/BlogContactForm";
 
@@ -83,7 +82,6 @@ function CarsDetailsViewContent() {
     email: "",
     phone: "",
     licenseFile: null as File | null,
-    paymentMethod: "cash" as PaymentMethod,
     numberOfPersons: 1, // Default to 1 person
   });
 
@@ -199,8 +197,6 @@ function CarsDetailsViewContent() {
         "phone number": phoneNumber,
         email: formData.email,
         price: bookingPrice,
-        "payment method": formData.paymentMethod,
-        "payment status": "pending",
         "return date": returnDate,
         "vehicle name": vehicleName,
         ...(licenseImage && { "license image": licenseImage }),

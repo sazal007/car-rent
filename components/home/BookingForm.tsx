@@ -10,7 +10,6 @@ import { VehicleSelector } from "../booking/VehicleSelector";
 import { DatePicker } from "../booking/DatePicker";
 import { BookingDialog } from "../booking/BookingDialog";
 import { ServiceType } from "../booking/ServiceTypeSelector";
-import { PaymentMethod } from "../booking/PaymentMethodSelector";
 
 type BookingStatus = "idle" | "submitting" | "success";
 
@@ -40,7 +39,6 @@ export const BookingForm: React.FC = () => {
     email: "",
     phone: "",
     licenseFile: null as File | null,
-    paymentMethod: "cash" as PaymentMethod,
   });
 
   useEffect(() => {
@@ -144,8 +142,6 @@ export const BookingForm: React.FC = () => {
         "phone number": phoneNumber,
         email: formData.email,
         price: totals.total,
-        "payment method": formData.paymentMethod,
-        "payment status": "pending",
         "return date": returnDateStr,
         "vehicle name": vehicleName,
         ...(licenseImage && { "license image": licenseImage }),
@@ -235,7 +231,6 @@ export const BookingForm: React.FC = () => {
             email: "",
             phone: "",
             licenseFile: null,
-            paymentMethod: "cash",
           });
           setDepartureDate("");
           setReturnDate("");

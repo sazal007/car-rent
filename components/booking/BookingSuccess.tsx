@@ -8,7 +8,6 @@ interface BookingSuccessProps {
   email: string;
   phone: string;
   isSelfRide: boolean;
-  paymentMethod: "cash" | "digital" | "card";
   onClose: () => void;
   variant?: "dialog" | "inline";
 }
@@ -17,7 +16,6 @@ export const BookingSuccess: React.FC<BookingSuccessProps> = ({
   email,
   phone,
   isSelfRide,
-  paymentMethod,
   onClose,
   variant = "dialog",
 }) => {
@@ -53,15 +51,6 @@ export const BookingSuccess: React.FC<BookingSuccessProps> = ({
                 <span>Bring your original license and ID</span>
               </li>
             )}
-            {paymentMethod === "cash" && (
-              <li className="flex items-start gap-2">
-                <CheckCircle
-                  size={16}
-                  className="text-green-600 mt-0.5 shrink-0"
-                />
-                <span>Have exact cash ready upon arrival</span>
-              </li>
-            )}
           </ul>
         </div>
         <Button onClick={onClose} variant="outline" icon={false} className="px-8">
@@ -92,9 +81,6 @@ export const BookingSuccess: React.FC<BookingSuccessProps> = ({
             <li>
               Bring your original license and ID for verification.
             </li>
-          )}
-          {paymentMethod === "cash" && (
-            <li>Please have exact cash ready upon arrival.</li>
           )}
         </ul>
       </div>

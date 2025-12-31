@@ -5,12 +5,16 @@ import Link from "next/link";
 import { Button } from "../shared/Button";
 import { useVehicles } from "@/hooks/use-vehicles";
 import { Vehicle } from "@/types/vehicles";
+import { BookingDialogModal } from "../booking/BookingDialogModal";
 
 export const Hero: React.FC = () => {
   const { data: vehicles = [], isLoading } = useVehicles();
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const displayedVehicles = vehicles.slice(0, 6); // Show first 6 vehicles
+
+  // Booking dialog state
+  const [showBookingDialog, setShowBookingDialog] = useState(false);
 
   useEffect(() => {
     if (
@@ -63,9 +67,9 @@ export const Hero: React.FC = () => {
             The eco-friendly way to see the city. Choose self-ride freedom,
             guided tours, or professional taxi service.
           </p>
-          <Link href="/cars">
-            <Button>Book your ride now</Button>
-          </Link>
+          <Button onClick={() => setShowBookingDialog(true)}>
+            Book your ride now
+          </Button>
         </div>
       </div>
 
@@ -128,6 +132,12 @@ export const Hero: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Booking Dialog */}
+      <BookingDialogModal
+        isOpen={showBookingDialog}
+        onClose={() => setShowBookingDialog(false)}
+      />
     </section>
   );
 };

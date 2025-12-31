@@ -10,10 +10,6 @@ import { TourBookingData } from "@/types/booking";
 import { Clock, Check, X } from "lucide-react";
 import { DatePicker } from "@/components/booking/DatePicker";
 import { ContactDetailsForm } from "@/components/booking/ContactDetailsForm";
-import {
-  PaymentMethodSelector,
-  PaymentMethod,
-} from "@/components/booking/PaymentMethodSelector";
 import { BookingSummary } from "@/components/booking/BookingSummary";
 import { BookingSuccess } from "@/components/booking/BookingSuccess";
 import { TourPackages } from "@/components/home/TourPakages";
@@ -121,7 +117,6 @@ function TourDetailsViewContent() {
     fullName: "",
     email: "",
     phone: "",
-    paymentMethod: "cash" as PaymentMethod,
   });
 
   // Update dates when URL params change
@@ -200,7 +195,6 @@ function TourDetailsViewContent() {
         "phone number": phoneNumber,
         Email: formData.email,
         price: bookingPrice,
-        "payment method": formData.paymentMethod,
         status: "pending",
         "package name": tourName,
         "group size": selectedGroupSize.toString(),
@@ -255,13 +249,15 @@ function TourDetailsViewContent() {
   return (
     <div key={tour.id} className="bg-white pt-24 sm:pt-32 ">
       {/* Full Screen Hero Image */}
-      <div className="relative mx-auto w-[100vw] h-[70vh] overflow-hidden bg-white">
+      <div className="relative mx-auto w-screen h-[70vh] overflow-hidden bg-white">
         <Image
           src={tour.data.image}
           alt={tour.data.name}
           fill
           priority
-          className="object-cover w-full h-44"
+          quality={100}
+          sizes="100vw"
+          className="object-cover"
         />
       </div>
 
@@ -402,7 +398,6 @@ function TourDetailsViewContent() {
                     email={formData.email}
                     phone={formData.phone}
                     isSelfRide={false}
-                    paymentMethod={formData.paymentMethod}
                     onClose={() => {
                       setShowBookingForm(false);
                       setBookingStatus("idle");
@@ -464,13 +459,6 @@ function TourDetailsViewContent() {
                       }
                     />
 
-                    <PaymentMethodSelector
-                      value={formData.paymentMethod}
-                      onChange={(value) =>
-                        handleFormDataChange({ paymentMethod: value })
-                      }
-                      variant="compact"
-                    />
 
                     <BookingSummary
                       pricePerDay={currentPricePerPerson}

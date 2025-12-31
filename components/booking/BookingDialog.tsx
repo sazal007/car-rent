@@ -4,7 +4,6 @@ import React from "react";
 import { X } from "lucide-react";
 import { Vehicle } from "@/types/vehicles";
 import { ServiceTypeSelector, ServiceType } from "./ServiceTypeSelector";
-import { PaymentMethodSelector, PaymentMethod } from "./PaymentMethodSelector";
 import { LicenseUpload } from "./LicenseUpload";
 import { ContactDetailsForm } from "./ContactDetailsForm";
 import { DatePicker } from "./DatePicker";
@@ -23,7 +22,6 @@ interface BookingDialogProps {
     email: string;
     phone: string;
     licenseFile: File | null;
-    paymentMethod: PaymentMethod;
   };
   onFormDataChange: (updates: Partial<BookingDialogProps["formData"]>) => void;
   onSubmit: (e: React.FormEvent) => void;
@@ -78,7 +76,6 @@ export const BookingDialog: React.FC<BookingDialogProps> = ({
               email={formData.email}
               phone={formData.phone}
               isSelfRide={isSelfRideSelected}
-              paymentMethod={formData.paymentMethod}
               onClose={onClose}
               variant="dialog"
             />
@@ -125,10 +122,6 @@ export const BookingDialog: React.FC<BookingDialogProps> = ({
                 onPhoneChange={(value) => onFormDataChange({ phone: value })}
               />
 
-              <PaymentMethodSelector
-                value={formData.paymentMethod}
-                onChange={(value) => onFormDataChange({ paymentMethod: value })}
-              />
 
               {totals && (
                 <BookingSummary

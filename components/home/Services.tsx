@@ -1,12 +1,14 @@
 "use client";
 
-import Link from "next/link";
+import { useState } from "react";
 import { Shield } from "lucide-react";
 import { Button } from "../shared/Button";
+import { BookingDialogModal } from "../booking/BookingDialogModal";
 
 const SERVICES = [
   {
     title: "Self-Ride EV Scooter",
+    categoryName: "Scooter",
     highlight: "License required • Helmet included",
     points: [
       "Premium EV scooters with long battery life",
@@ -15,11 +17,11 @@ const SERVICES = [
     ],
     cta: {
       label: "Rent a scooter",
-      href: "/cars?category=Self-ride%20Scooter",
     },
   },
   {
     title: "Guided Scooter Ride",
+    categoryName: "Scooter",
     highlight: "No license needed • Local rider/guide",
     points: [
       "Hop on with a licensed rider who knows the city",
@@ -28,11 +30,11 @@ const SERVICES = [
     ],
     cta: {
       label: "Book with guide",
-      href: "/cars?category=Guide%20with%20Scooter",
     },
   },
   {
     title: "EV Taxi Service",
+    categoryName: "Taxi",
     highlight: "Comfortable EV sedans & SUVs",
     points: [
       "Airport pickup/drop, half-day or full-day hires",
@@ -41,12 +43,27 @@ const SERVICES = [
     ],
     cta: {
       label: "Book a taxi",
-      href: "/cars?category=Ev%20Taxi",
     },
   },
 ];
 
 export const Services: React.FC = () => {
+  const [showBookingDialog, setShowBookingDialog] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  // Map category names to actual category values used in the system
+  const getCategoryValue = (categoryName: string): string => {
+    const name = categoryName.toLowerCase();
+    if (name === "scooter") return "Scooter";
+    if (name === "taxi") return "Taxi";
+    return categoryName;
+  };
+
+  const handleBookClick = (categoryName: string) => {
+    setSelectedCategory(getCategoryValue(categoryName));
+    setShowBookingDialog(true);
+  };
+
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="container mx-auto px-3 sm:px-4 md:px-6">
@@ -86,19 +103,28 @@ export const Services: React.FC = () => {
               </ul>
 
               <div className="mt-6 sm:mt-7 md:mt-8">
-                <Link href={service.cta.href}>
-                  <Button
-                    className="w-full justify-center text-sm sm:text-base"
-                    iconPosition="right"
-                  >
-                    {service.cta.label}
-                  </Button>
-                </Link>
+                <Button
+                  onClick={() => handleBookClick(service.categoryName)}
+                  className="w-full justify-center text-sm sm:text-base"
+                  iconPosition="right"
+                >
+                  {service.cta.label}
+                </Button>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Booking Dialog */}
+      <BookingDialogModal
+        isOpen={showBookingDialog}
+        onClose={() => {
+          setShowBookingDialog(false);
+          setSelectedCategory(null);
+        }}
+        preselectedCategory={selectedCategory}
+      />
     </section>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Car, ChevronDown } from "lucide-react";
 import { Vehicle } from "@/types/vehicles";
 
@@ -20,6 +20,38 @@ export const VehicleSelector: React.FC<VehicleSelectorProps> = ({
   formatPrice,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
+
+  useEffect(() => {
+    if (showDropdown && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setDropdownPosition({
+        top: rect.bottom + 8, // 8px gap below button
+        left: rect.left,
+        width: rect.width,
+      });
+    }
+  }, [showDropdown]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [showDropdown]);
 
   return (
     <div className="flex-1 relative">
@@ -27,6 +59,7 @@ export const VehicleSelector: React.FC<VehicleSelectorProps> = ({
         Select Vehicle
       </label>
       <button
+        ref={buttonRef}
         type="button"
         onClick={() => setShowDropdown(!showDropdown)}
         className="w-full flex items-center justify-between gap-3 p-4 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors bg-white"
@@ -41,9 +74,11 @@ export const VehicleSelector: React.FC<VehicleSelectorProps> = ({
             }
           >
             {selectedVehicle
-              ? `${selectedVehicle.name} - ${formatPrice(
-                  selectedVehicle.price
-                )}/day`
+              ? selectedVehicle.price > 0
+                ? `${selectedVehicle.name} - ${formatPrice(
+                    selectedVehicle.price
+                  )}/day`
+                : selectedVehicle.name
               : "Choose a vehicle"}
           </span>
         </div>
@@ -57,10 +92,19 @@ export const VehicleSelector: React.FC<VehicleSelectorProps> = ({
       {showDropdown && (
         <>
           <div
-            className="fixed inset-0 z-10"
+            className="fixed inset-0 z-[55] bg-transparent"
             onClick={() => setShowDropdown(false)}
           />
-          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-200 max-h-80 overflow-y-auto z-20">
+          <div
+            ref={dropdownRef}
+            className="fixed bg-white rounded-xl shadow-xl border border-gray-200 max-h-80 overflow-y-auto z-[60]"
+            style={{
+              top: `${dropdownPosition.top}px`,
+              left: `${dropdownPosition.left}px`,
+              width: `${dropdownPosition.width || 300}px`,
+              minWidth: '200px',
+            }}
+          >
             {isLoading ? (
               <div className="p-6 text-center text-gray-500">
                 Loading vehicles...
@@ -84,22 +128,24 @@ export const VehicleSelector: React.FC<VehicleSelectorProps> = ({
                       : ""
                   }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="font-semibold text-gray-900">
-                        {vehicle.name}
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <div className="font-semibold text-gray-900">
+                          {vehicle.name}
+                        </div>
+                        <div className="text-sm text-gray-500 mt-1">
+                          {vehicle.seats} seats • {vehicle.transmission}
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-500 mt-1">
-                        {vehicle.seats} seats • {vehicle.transmission}
-                      </div>
+                      {vehicle.price > 0 && (
+                        <div className="text-right ml-4">
+                          <div className="font-bold text-gray-900">
+                            {formatPrice(vehicle.price)}
+                          </div>
+                          <div className="text-xs text-gray-500">/day</div>
+                        </div>
+                      )}
                     </div>
-                    <div className="text-right ml-4">
-                      <div className="font-bold text-gray-900">
-                        {formatPrice(vehicle.price)}
-                      </div>
-                      <div className="text-xs text-gray-500">/day</div>
-                    </div>
-                  </div>
                 </button>
               ))
             )}

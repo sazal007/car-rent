@@ -4,7 +4,6 @@ import React from "react";
 import { X } from "lucide-react";
 import { Vehicle } from "@/types/vehicles";
 import { ServiceTypeSelector, ServiceType } from "./ServiceTypeSelector";
-import { PaymentMethodSelector, PaymentMethod } from "./PaymentMethodSelector";
 import { LicenseUpload } from "./LicenseUpload";
 import { ContactDetailsForm } from "./ContactDetailsForm";
 import { DatePicker } from "./DatePicker";
@@ -23,7 +22,6 @@ interface InlineBookingFormProps {
     email: string;
     phone: string;
     licenseFile: File | null;
-    paymentMethod: PaymentMethod;
     numberOfPersons?: number;
   };
   onFormDataChange: (updates: Partial<InlineBookingFormProps["formData"]>) => void;
@@ -195,7 +193,6 @@ export const InlineBookingForm: React.FC<InlineBookingFormProps> = ({
           email={formData.email}
           phone={formData.phone}
           isSelfRide={isSelfRideSelected}
-          paymentMethod={formData.paymentMethod}
           onClose={onClose}
           variant="inline"
         />
@@ -266,11 +263,6 @@ export const InlineBookingForm: React.FC<InlineBookingFormProps> = ({
             onPhoneChange={(value) => onFormDataChange({ phone: value })}
           />
 
-          <PaymentMethodSelector
-            value={formData.paymentMethod}
-            onChange={(value) => onFormDataChange({ paymentMethod: value })}
-            variant="compact"
-          />
 
           {totals ? (
             <BookingSummary
