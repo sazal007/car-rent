@@ -4,8 +4,7 @@ import { getVehicles } from "@/services/vehicles.service";
 import { getTours } from "@/services/tours.service";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://batomatours.com/";
+  const baseUrl = "https://batomatours.com";
 
   // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
