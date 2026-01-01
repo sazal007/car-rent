@@ -43,7 +43,7 @@ export const Hero: React.FC = () => {
   }, [displayedVehicles.length]);
 
   return (
-    <section className="relative h-screen min-h-[700px] w-full flex items-center">
+    <section className="relative h-screen w-full flex items-center">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -55,27 +55,30 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 relative z-10 pt-24 sm:pt-32 md:pt-40">
+      <div className="container mx-auto px-2.5 sm:px-4 md:px-6 relative z-10 pt-16 sm:pt-24 md:pt-32 lg:pt-40">
         <div className="max-w-xl">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-4 sm:mb-5 md:mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-[1.1] mb-3 sm:mb-4 md:mb-5 lg:mb-6">
             Explore Kathmandu <br />
-            <span className="text-carent-yellow text-xl sm:text-2xl md:text-3xl lg:text-4xl block mt-1 sm:mt-2">
+            <span className="text-carent-yellow text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl block mt-1 sm:mt-2">
               With Premium EV Scooters & Comfortable Taxis.
             </span>
           </h1>
-          <p className="text-gray-200 text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 md:mb-10 max-w-lg leading-relaxed">
+          <p className="text-gray-200 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl mb-4 sm:mb-6 md:mb-8 lg:mb-10 max-w-lg leading-relaxed">
             The eco-friendly way to see the city. Choose self-ride freedom,
             guided tours, or professional taxi service.
           </p>
-          <Button onClick={() => setShowBookingDialog(true)}>
+          <Button
+            onClick={() => setShowBookingDialog(true)}
+            className="text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3"
+          >
             Book your ride now
           </Button>
         </div>
       </div>
 
-      {/* Vehicle Carousel - Bottom Right */}
+      {/* Vehicle Carousel - Bottom Right - Hidden on mobile */}
       {!isLoading && displayedVehicles.length > 0 && (
-        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-28 lg:right-28 z-20 w-[280px] sm:w-[320px] md:w-[360px]">
+        <div className="hidden md:block absolute bottom-4 right-4 md:bottom-8 md:right-8 lg:bottom-28 lg:right-28 z-20 w-[320px] md:w-[360px]">
           {/* Carousel Container */}
           <div className="bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-gray-100">
             {/* Cards Container */}

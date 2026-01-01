@@ -94,26 +94,26 @@ export const ServiceTypeSelector: React.FC<ServiceTypeSelectorProps> = ({
   const serviceOptions = getServiceOptions();
 
   return (
-    <div className="space-y-3">
-      <h4 className="font-semibold text-gray-900 border-b border-gray-100 pb-2">
+    <div className="space-y-2 sm:space-y-3">
+      <h4 className="text-sm sm:text-base font-semibold text-gray-900 border-b border-gray-100 pb-1.5 sm:pb-2">
         Choose Service
       </h4>
-      <div className={`grid grid-cols-1 ${serviceOptions.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3'} gap-3`}>
+      <div className={`grid grid-cols-1 ${serviceOptions.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3'} gap-2 sm:gap-3`}>
         {serviceOptions.map((option) => (
           <button
             type="button"
             key={option.id}
             onClick={() => onChange(option.id)}
-            className={`p-3 rounded-lg border text-left transition-all ${
+            className={`p-2.5 sm:p-3 rounded-lg border text-left transition-all ${
               value === option.id
                 ? "border-carent-yellow bg-carent-yellow/10"
                 : "border-gray-200 hover:border-gray-300"
             }`}
           >
-            <span className="block font-medium text-carent-text">
+            <span className="block font-medium text-carent-text text-xs sm:text-sm md:text-base">
               {variant === "compact" ? option.compactLabel : option.label}
             </span>
-            <span className="text-xs text-gray-500">
+            <span className="text-[10px] sm:text-xs text-gray-500">
               {variant === "compact" ? option.compactDesc : option.desc}
             </span>
           </button>

@@ -40,8 +40,7 @@ export const BookingDialogModal: React.FC<BookingDialogModalProps> = ({
   // Filter vehicles by category if preselectedCategory is provided
   const availableVehicles = preselectedCategory
     ? vehicles.filter(
-        (v) =>
-          v.category?.toLowerCase() === preselectedCategory.toLowerCase()
+        (v) => v.category?.toLowerCase() === preselectedCategory.toLowerCase()
       )
     : vehicles;
 
@@ -396,17 +395,17 @@ export const BookingDialogModal: React.FC<BookingDialogModalProps> = ({
         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
         onClick={handleClose}
       />
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-visible">
-        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto overflow-x-visible relative">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-2.5 md:p-3 lg:p-4 overflow-visible">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl p-3 sm:p-4 md:p-5 lg:p-6 xl:p-8 max-w-2xl w-full max-h-[98vh] sm:max-h-[95vh] md:max-h-[90vh] overflow-y-auto overflow-x-hidden relative">
           <button
             onClick={handleClose}
-            className="absolute top-6 right-6 text-gray-400 hover:text-gray-900 transition-colors"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 text-gray-400 hover:text-gray-900 transition-colors z-10"
             aria-label="Close"
           >
-            <X size={24} />
+            <X size={20} className="sm:w-6 sm:h-6" />
           </button>
 
-          <h3 className="text-2xl font-bold mb-6 text-gray-900">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-5 md:mb-6 text-gray-900 pr-8 sm:pr-10">
             {selectedVehicle ? selectedLabel : "Book Your Ride"}
           </h3>
 
@@ -421,13 +420,10 @@ export const BookingDialogModal: React.FC<BookingDialogModalProps> = ({
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="space-y-6 overflow-visible"
+              className="space-y-4 sm:space-y-5 md:space-y-6 overflow-visible"
             >
               {/* Vehicle Selection */}
-              <div
-                className="relative overflow-visible"
-                style={{ zIndex: 60 }}
-              >
+              <div className="relative overflow-visible" style={{ zIndex: 60 }}>
                 <VehicleSelector
                   vehicles={preselectedCategory ? availableVehicles : vehicles}
                   selectedVehicle={selectedVehicle}
@@ -453,7 +449,7 @@ export const BookingDialogModal: React.FC<BookingDialogModalProps> = ({
                     <div>
                       <label
                         htmlFor="numberOfPersons"
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2"
                       >
                         Number of Persons
                       </label>
@@ -465,7 +461,7 @@ export const BookingDialogModal: React.FC<BookingDialogModalProps> = ({
                             numberOfPersons: parseInt(e.target.value, 10),
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-carent-yellow focus:border-carent-yellow outline-none transition-colors"
+                        className="w-full px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-carent-yellow focus:border-carent-yellow outline-none transition-colors"
                         required
                       >
                         {Array.from(
@@ -480,7 +476,7 @@ export const BookingDialogModal: React.FC<BookingDialogModalProps> = ({
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                     <DatePicker
                       label="Pickup Date & Time"
                       value={formData.pickupDate}
@@ -526,21 +522,18 @@ export const BookingDialogModal: React.FC<BookingDialogModalProps> = ({
                     }
                   />
 
-
                   {totals ? (
                     <BookingSummary
                       pricePerDay={effectivePrice}
                       days={showDaysBreakdown}
                       total={totals.total}
                       formatPrice={formatPrice}
-                      isSubmitting={
-                        bookingStatus === "submitting" || isPending
-                      }
+                      isSubmitting={bookingStatus === "submitting" || isPending}
                       variant="compact"
                       label={isScooterTour ? "tour" : undefined}
                     />
                   ) : (
-                    <div className="text-center py-2 text-gray-400 text-sm">
+                    <div className="text-center py-2 text-gray-400 text-xs sm:text-sm">
                       Select dates to see price
                     </div>
                   )}
@@ -553,4 +546,3 @@ export const BookingDialogModal: React.FC<BookingDialogModalProps> = ({
     </>
   );
 };
-

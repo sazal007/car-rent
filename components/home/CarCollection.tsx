@@ -31,11 +31,12 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
     if (sliderRef.current) {
       const { current } = sliderRef;
       // Calculate scroll amount based on viewport width (one card per screen)
-      // Account for padding: 24px on mobile (12px each side), 32px on sm (16px each side)
+      // Account for padding: 20px on 320px (10px each side), 24px on mobile (12px each side), 32px on sm (16px each side)
+      const isSmallMobile = window.innerWidth < 375;
       const isMobile = window.innerWidth < 640;
-      const padding = isMobile ? 24 : 32;
+      const padding = isSmallMobile ? 20 : isMobile ? 24 : 32;
       const cardWidth = window.innerWidth - padding;
-      const gap = isMobile ? 24 : 28; // gap-6 = 24px, gap-7 = 28px
+      const gap = isSmallMobile ? 16 : isMobile ? 24 : 28; // gap-4 = 16px, gap-6 = 24px, gap-7 = 28px
       const scrollAmount = cardWidth + gap;
 
       const targetScroll =
@@ -76,51 +77,45 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
   return (
     <section
       id="cars"
-      className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden"
+      className="py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-white overflow-hidden"
     >
-      <div className="container mx-auto px-3 sm:px-4 md:px-6">
+      <div className="container mx-auto px-2.5 sm:px-3 md:px-4 lg:px-6">
         {/* Header */}
-        <div className="flex flex-row items-end justify-between mb-8 sm:mb-10 md:mb-12 gap-4 sm:gap-5 md:gap-6">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carent-text max-w-xl leading-tight ">
+        <div className="flex flex-row items-end justify-between mb-6 sm:mb-8 md:mb-10 lg:mb-12 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-carent-text max-w-xl leading-tight">
             {title}
           </h2>
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
             {/* Navigation Arrows - Left side of button */}
             {!isLoading && filteredCars.length > 0 && (
               <>
                 <button
                   onClick={() => scroll("left")}
-                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+                  className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300 shrink-0"
                   aria-label="Scroll left"
                 >
                   <ArrowLeft
-                    size={18}
-                    className="sm:w-5 sm:h-5 md:w-6 md:h-6"
+                    size={16}
+                    className="sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 lg:w-6 lg:h-6"
                   />
                 </button>
                 <button
                   onClick={() => scroll("right")}
-                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+                  className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full border border-gray-200 flex items-center justify-center text-carent-text hover:bg-black hover:text-white hover:border-black transition-all duration-300 shrink-0"
                   aria-label="Scroll right"
                 >
                   <ArrowRight
-                    size={18}
-                    className="sm:w-5 sm:h-5 md:w-6 md:h-6"
+                    size={16}
+                    className="sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 lg:w-6 lg:h-6"
                   />
                 </button>
               </>
             )}
-            {/* View All Button */}
-            <div>
+            {/* View All Button - Hidden on mobile */}
+            <div className="shrink-0 hidden md:block">
               <Link href="/cars">
-                <Button
-                  icon={true}
-                  className="text-sm sm:text-base hidden md:inline-flex"
-                >
+                <Button icon={true} className="text-sm sm:text-base">
                   View all vehicles
-                </Button>
-                <Button className="px-4 sm:px-5 md:px-6 py-2 text-xs sm:text-sm md:hidden">
-                  View all
                 </Button>
               </Link>
             </div>
@@ -129,13 +124,13 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
 
         {/* Cars Slider */}
         {isLoading ? (
-          <div className="text-center py-20 flex items-center justify-center">
+          <div className="text-center py-16 sm:py-20 flex items-center justify-center">
             <Loader />
           </div>
         ) : (
           <div
             ref={sliderRef}
-            className="flex gap-6 sm:gap-7 md:gap-8 overflow-x-auto no-scrollbar pb-6 sm:pb-7 md:pb-8 -mx-3 sm:-mx-4 px-3 sm:px-4 md:-mx-6 md:px-6 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory"
+            className="flex gap-4 sm:gap-6 md:gap-7 lg:gap-8 overflow-x-auto no-scrollbar pb-4 sm:pb-6 md:pb-7 lg:pb-8 -mx-2.5 sm:-mx-3 md:-mx-4 px-2.5 sm:px-3 md:px-4 lg:-mx-6 lg:px-6 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory"
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
@@ -145,14 +140,14 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
               filteredCars.map((car) => (
                 <div
                   key={car.id}
-                  className="w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] md:w-[400px] lg:w-[450px] shrink-0 snap-center"
+                  className="w-[calc(100vw-20px)] sm:w-[calc(100vw-24px)] md:w-[calc(100vw-32px)] lg:w-[400px] xl:w-[450px] shrink-0 snap-center"
                 >
                   <CarCard car={car} />
                 </div>
               ))
             ) : (
-              <div className="text-center py-12 sm:py-16 md:py-20 w-full">
-                <p className="text-gray-500 text-sm sm:text-base md:text-lg">
+              <div className="text-center py-10 sm:py-12 md:py-16 lg:py-20 w-full">
+                <p className="text-gray-500 text-xs sm:text-sm md:text-base lg:text-lg">
                   No vehicles available.
                 </p>
               </div>
