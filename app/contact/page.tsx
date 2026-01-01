@@ -2,6 +2,19 @@ import { ContactHero } from "@/components/contact/ContactHero";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactInfo } from "@/components/contact/ContactInfo";
 import { ContactMap } from "@/components/contact/ContactMap";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Get in touch with Batoma for EV rentals, tours, and inquiries. We're here to help you with your transportation needs in Kathmandu.",
+  openGraph: {
+    title: "Contact Batoma - EV Rental Support",
+    description:
+      "Contact Batoma for electric vehicle rentals, guided tours, and customer support. Available 24/7 for your convenience.",
+    url: "/contact",
+  },
+};
 
 export default function Contact() {
   return (

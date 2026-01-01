@@ -13,9 +13,69 @@ const bricolageGrotesque = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: "Batoma - Your Trusted EV Rental Partner",
+  title: {
+    default: "Batoma - Your Trusted EV Rental Partner",
+    template: "%s | Batoma",
+  },
   description:
-    "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services.",
+    "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services in Kathmandu, Nepal. Electric scooters, taxis, and guided tours.",
+  keywords: [
+    "EV rental",
+    "electric vehicle rental",
+    "scooter rental",
+    "car rental Nepal",
+    "Kathmandu tours",
+    "electric taxi",
+    "guided tours",
+    "Batoma",
+  ],
+  authors: [{ name: "Batoma" }],
+  creator: "Batoma",
+  publisher: "Batoma",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://batoma.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "Batoma",
+    title: "Batoma - Your Trusted EV Rental Partner",
+    description:
+      "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services in Kathmandu, Nepal.",
+    images: [
+      {
+        url: "/logo/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Batoma - EV Rental Services",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Batoma - Your Trusted EV Rental Partner",
+    description:
+      "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services in Kathmandu, Nepal.",
+    images: ["/logo/logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    // Add your verification codes here when available
+    // google: "your-google-verification-code",
+    // yandex: "your-yandex-verification-code",
+  },
 };
 
 export default function RootLayout({

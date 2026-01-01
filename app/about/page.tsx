@@ -3,6 +3,19 @@ import { AboutStats } from "@/components/about/AboutStats";
 import { AboutShowcase } from "@/components/about/AboutShowcase";
 import { AboutMissionValues } from "@/components/about/AboutMissionValues";
 import { AboutGallery } from "@/components/about/AboutGallery";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn about Batoma - Kathmandu's leading electric vehicle rental service. Our mission, values, and commitment to sustainable transportation.",
+  openGraph: {
+    title: "About Batoma - Sustainable EV Rental Services",
+    description:
+      "Discover Batoma's mission to provide sustainable, safe, and reliable electric vehicle rentals in Kathmandu, Nepal.",
+    url: "/about",
+  },
+};
 
 export default function About() {
   return (

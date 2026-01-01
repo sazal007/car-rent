@@ -1,4 +1,15 @@
 import { TERMS_SECTIONS } from "@/constants";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions",
+  description:
+    "Read Batoma's terms and conditions for electric vehicle rentals, tours, and services.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function Terms() {
   return (

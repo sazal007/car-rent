@@ -1,5 +1,4 @@
 import { Hero } from "../components/home/Hero";
-import { Features } from "@/components/home/Features";
 import { CarCollection } from "@/components/home/CarCollection";
 import { Categories } from "@/components/home/Categories";
 import { Steps } from "@/components/home/Steps";
@@ -10,6 +9,19 @@ import { Services } from "@/components/home/Services";
 import { BookingForm } from "@/components/home/BookingForm";
 import FeaturesSection2 from "@/components/home/features2";
 import { BlogContactForm } from "@/components/blog/BlogContactForm";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "Batoma offers electric vehicle rentals in Kathmandu, Nepal. Rent EV scooters, taxis, and join guided tours. Sustainable, safe, and reliable transportation solutions.",
+  openGraph: {
+    title: "Batoma - Electric Vehicle Rentals in Kathmandu",
+    description:
+      "Rent electric scooters, taxis, and join guided tours in Kathmandu. Sustainable transportation with 24/7 support.",
+    url: "/",
+  },
+};
 
 export default function Home() {
   return (
