@@ -8,6 +8,7 @@ import { CarPagination } from "@/components/cars/CarPagination";
 import { useVehicles } from "@/hooks/use-vehicles";
 import { useCategories } from "@/hooks/use-categories";
 import { Loader } from "@/components/shared/loader";
+import { BlogContactForm } from "@/components/blog/BlogContactForm";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -105,12 +106,15 @@ function VehiclesContent() {
 export default function CarsViewPage() {
   return (
     <div className="pt-24 sm:pt-32 md:pt-40 lg:pt-56 pb-12 sm:pb-16 md:pb-20 bg-white">
-      <div className="container mx-auto px-3 sm:px-4 md:px-6">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 mb-40">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-carent-text mb-3 sm:mb-4">
-            Our Collections
+            Bato Ma - Rental Categories
           </h1>
+          <p>
+            Select and choose from wide range of categories based on your needs.
+          </p>
         </div>
 
         {/* Content with Suspense */}
@@ -124,6 +128,7 @@ export default function CarsViewPage() {
           <VehiclesContent />
         </Suspense>
       </div>
+      <BlogContactForm />
     </div>
   );
 }

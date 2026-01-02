@@ -11,15 +11,14 @@ export const AboutStats: React.FC = () => {
         <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 lg:gap-20 items-center">
           <div className="lg:w-1/2">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-carent-text mb-4 sm:mb-5 md:mb-6">
-              Driving excellence in car rental services
+    Excellent Rental services with self drive and guided tours.
             </h2>
             <p className="text-gray-600 mb-6 sm:mb-8 md:mb-10 leading-relaxed text-sm sm:text-base">
-              With a diverse fleet of vehicles and a commitment to customer
-              satisfaction, we strive to make your journey smooth and enjoyable.
+            With a drivers categories of vechicle from two wheelers EV scooters, four wheelers EV taxi & premium EV SUV's. Our mission is to provide affordable rental services to our customers so they can travel hassle free. Book now and Explore Kathmandu with Bato Ma.
             </p>
             <Link href="/about">
               <Button className="text-sm sm:text-base">
-                Know more about us
+                Know more about Bato Ma
               </Button>
             </Link>
 
@@ -47,7 +46,7 @@ export const AboutStats: React.FC = () => {
             <div className="rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px]">
               <img
                 src="/images/roads.jpg"
-                alt="Luxury car rear view"
+                alt="Kathmandu Valley View through Luxury SUV Booked in Bato Ma"
                 className="w-full h-full object-cover"
               />
             </div>

@@ -62,7 +62,7 @@ export const TourPackages: React.FC<TourPackagesProps> = ({
               Tour Packages
             </h2>
             <p className="text-gray-600 text-sm sm:text-base md:text-lg">
-              Curated experiences to help you discover the soul of the city.
+              Tour Packages Booked by travel expert in kathmandu.
             </p>
           </div>
         </div>

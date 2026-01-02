@@ -31,10 +31,8 @@ export const Footer: React.FC = () => {
             </Link>
 
             <p className="text-gray-400 text-base mb-8 leading-relaxed max-w-md">
-              Your trusted partner for reliable car rentals. We offer a wide
-              selection of vehicles to suit your needs, from compact city cars
-              to spacious SUVs. Experience quality service and competitive
-              rates.
+              Your trusted partner for reliable rental of EV's scooter , Ev's Taxis and SUV's in Kathmandu.
+              We offer a wide selection of vehicles to suit your needs, from compact city cars to spacious SUVs. Experience quality service and competitive rates.
             </p>
 
             <h3 className="text-xl font-semibold mb-4">

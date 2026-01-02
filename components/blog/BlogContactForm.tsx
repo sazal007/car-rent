@@ -60,10 +60,18 @@ export const BlogContactForm = () => {
             <div className="hidden md:block from-carent-yellow to-yellow-500 pointer-events-none absolute top-80 -left-20 z-50 h-40 w-40 rounded-full bg-linear-to-tr opacity-90 blur-3xl"></div>
             <div className="hidden md:block from-carent-yellow to-yellow-500 pointer-events-none absolute top-80 -right-20 z-50 h-40 w-40 rounded-full bg-linear-to-tr opacity-90 blur-3xl"></div>
             {/* Gradients - hidden on mobile */}
-
             <div className="max-w-xl mx-auto text-center px-2 relative z-20">
+                <div className="flex justify-center mb-6">
+                    <div className="relative w-40 h-40 sm:w-40 sm:h-32 overflow-hidden   ">
+                        <img
+                            src="/contact-image.png"
+                            alt="Contact Bato Ma"
+                            className="object-cover"
+                        />
+                    </div>
+                </div>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-carent-dark">
-                    Get in touch with us.
+                    Contact Batoma Tours Today
                 </h1>
                 <p className="text-gray-800 font-semibold text-md">
                     Scooter <span className="text-yellow-500 text-xs">|</span> Car{" "}

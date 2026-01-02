@@ -32,10 +32,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Batoma" }],
   creator: "Batoma",
   publisher: "Batoma",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://batoma.com"),
-  alternates: {
-    canonical: "/",
-  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://batomatours.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -46,7 +43,7 @@ export const metadata: Metadata = {
       "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services in Kathmandu, Nepal.",
     images: [
       {
-        url: "/logo/logo.png",
+        url: "/images/kathmandu-himals.jpg",
         width: 1200,
         height: 630,
         alt: "Batoma - EV Rental Services",
@@ -58,7 +55,7 @@ export const metadata: Metadata = {
     title: "Batoma - Your Trusted EV Rental Partner",
     description:
       "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services in Kathmandu, Nepal.",
-    images: ["/logo/logo.png"],
+    images: ["/images/kathmandu-himals.jpg"],
   },
   robots: {
     index: true,
@@ -70,11 +67,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    // Add your verification codes here when available
-    // google: "your-google-verification-code",
-    // yandex: "your-yandex-verification-code",
   },
 };
 

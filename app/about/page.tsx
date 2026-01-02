@@ -4,6 +4,7 @@ import { AboutShowcase } from "@/components/about/AboutShowcase";
 import { AboutMissionValues } from "@/components/about/AboutMissionValues";
 import { AboutGallery } from "@/components/about/AboutGallery";
 import type { Metadata } from "next";
+import { BlogContactForm } from "@/components/blog/BlogContactForm";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -25,6 +26,7 @@ export default function About() {
       <AboutShowcase />
       <AboutMissionValues />
       <AboutGallery />
+      <BlogContactForm />
       {/* <AboutTeam /> */}
     </>
   );

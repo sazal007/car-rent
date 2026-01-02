@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Read Batoma's privacy policy to understand how we collect, use, and protect your personal information.",
+    "Read Bato Ma's privacy policy to understand how we collect, use, and protect your personal information.",
   robots: {
     index: false,
     follow: false,

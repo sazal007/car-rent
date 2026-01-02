@@ -55,12 +55,12 @@ export const Categories: React.FC = () => {
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl">
         {/* Title Section - Centered like Services */}
         <div className="flex flex-col items-center justify-center gap-4 sm:gap-5 md:gap-6 mb-8 sm:mb-10 md:mb-12">
-          <div className="max-w-2xl text-center">
+          <div className="max-w-3xl text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-carent-text mb-3 sm:mb-4">
-              Our Rental Categories
+              Rental Categories in Bato Ma
             </h2>
             <p className="text-gray-600 text-sm sm:text-base md:text-lg">
-              Choose from our diverse range of rental options
+              Choose whether you want to rent a scooter, taxi, or tour packages
             </p>
           </div>
         </div>

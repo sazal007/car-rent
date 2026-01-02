@@ -17,7 +17,7 @@ export const Steps: React.FC = () => {
       {/* Right Content */}
       <div className="lg:w-1/2 w-full bg-carent-dark text-white p-6 sm:p-8 md:p-10 lg:p-12 xl:p-20 flex flex-col justify-center">
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 sm:mb-10 md:mb-12">
-          Rent your car in 3 easy steps
+          Rent your vehicle in 3 easy steps
         </h2>
 
         <div className="space-y-6 sm:space-y-8 md:space-y-10">
@@ -26,9 +26,9 @@ export const Steps: React.FC = () => {
               01
             </div>
             <div>
-              <h3 className="text-lg sm:text-xl font-medium mb-1.5 sm:mb-2">Choose your car</h3>
+              <h3 className="text-lg sm:text-xl font-medium mb-1.5 sm:mb-2">Choose your vehicle</h3>
               <p className="text-gray-400 leading-relaxed text-sm sm:text-base">
-                Browse our wide selection of vehicles, from compact city cars to
+                Browse our wide selection of vehicles, from compact city vehicles to
                 spacious SUVs. Pick the perfect ride that suits your needs.
               </p>
             </div>
@@ -41,7 +41,7 @@ export const Steps: React.FC = () => {
             <div>
               <h3 className="text-lg sm:text-xl font-medium mb-1.5 sm:mb-2">Book online</h3>
               <p className="text-gray-400 leading-relaxed text-sm sm:text-base">
-                Reserve your car in just a few clicks with our user-friendly
+                Reserve your vehicle in just a few clicks with our user-friendly
                 booking system. Select your dates, and locations, and confirm
                 your reservation instantly.
               </p>
@@ -55,7 +55,7 @@ export const Steps: React.FC = () => {
             <div>
               <h3 className="text-lg sm:text-xl font-medium mb-1.5 sm:mb-2">Pick up & drive</h3>
               <p className="text-gray-400 leading-relaxed text-sm sm:text-base">
-                Head to the nearest pickup location and grab your keys. Enjoy a
+                Head to the nearest pickup location and grab your vehicle. Enjoy a
                 smooth ride through the city with our reliable and
                 well-maintained vehicles.
               </p>

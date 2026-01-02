@@ -7,6 +7,7 @@ import { Clock, Check } from "lucide-react";
 import { useTours } from "@/hooks/use-tours";
 import { Loader } from "@/components/shared/loader";
 import { PriceTier } from "@/types/tours";
+import { BlogContactForm } from "@/components/blog/BlogContactForm";
 
 const formatUsd = (value: number) =>
   new Intl.NumberFormat("en-US", {
@@ -55,12 +56,12 @@ export default function ToursViewPage() {
     <div className="bg-white min-h-screen pt-24 sm:pt-32 md:pt-40 lg:pt-56 pb-12 sm:pb-16 md:pb-20">
       <div className="container mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <div className="max-w-2xl mb-8 sm:mb-10 md:mb-12">
+        <div className="max-w-5xl mb-8 sm:mb-10 md:mb-12">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-carent-text mb-2 sm:mb-3">
-            Tour Packages
+            Tour Packages from Bato Ma Tours
           </h1>
           <p className="text-gray-600 text-sm sm:text-base md:text-lg">
-            Curated experiences to help you discover the soul of the city.
+            Customize tours package with experience travel guides , dinner , breakfast , lauch every thinks included.
           </p>
         </div>
 
@@ -151,6 +152,7 @@ export default function ToursViewPage() {
           </div>
         )}
       </div>
+      <BlogContactForm />
     </div>
   );
 }

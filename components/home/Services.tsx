@@ -11,7 +11,7 @@ const SERVICES = [
     categoryName: "Scooter",
     highlight: "License required • Helmet included",
     points: [
-      "Premium EV scooters with long battery life",
+      "Premium EV scooters with long battery life 100km+ mileage",
       "Best for solo or couple rides around Kathmandu",
       "Upload license during booking, pickup in minutes",
     ],
@@ -33,7 +33,7 @@ const SERVICES = [
     },
   },
   {
-    title: "EV Taxi Service",
+    title: "EV Taxi & SUV Service",
     categoryName: "Taxi",
     highlight: "Comfortable EV sedans & SUVs",
     points: [
@@ -70,11 +70,11 @@ export const Services: React.FC = () => {
         <div className="flex flex-col items-center justify-center gap-4 sm:gap-5 md:gap-6 mb-8 sm:mb-10 md:mb-12">
           <div className="max-w-5xl text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-carent-text mb-3 sm:mb-4">
-              Services built for Kathmandu trips
+              Best Rental Services In Kathmandu
             </h2>
             <p className="text-gray-600 text-sm sm:text-base md:text-lg">
               Choose self-ride freedom, a guided scooter for stress-free
-              exploring, or a comfortable EV taxi for family journeys.
+              exploring, or a comfortable EV taxi for family trips.
             </p>
           </div>
         </div>

@@ -21,200 +21,7 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-export const CARS: Car[] = [
-  {
-    id: "1",
-    name: "EV Scooter - City Lite",
-    type: "EV Scooter",
-    brand: "NIU",
-    year: 2024,
-    fuel: "Electric",
-    price: 1800,
-    image:
-      "https://images.unsplash.com/photo-1554223789-df81106a45ed?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Nvb3RlcnxlbnwwfHwwfHx8MA%3D%3D",
-    seats: 2,
-    transmission: "Automatic",
-    luggage: 1,
-    description:
-      "Ideal for solo or couple city rides. Lightweight EV scooter with strong pickup, easy handling, and a comfortable seat height.",
-    features: [
-      "90-110 km range",
-      "Dual disc brakes",
-      "LED headlamp",
-      "USB charging port",
-      "Helmet included",
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
-    ],
-    category: "Self-ride Scooter",
-  },
-  {
-    id: "2",
-    name: "EV Scooter - Dual Battery",
-    type: "EV Scooter",
-    brand: "Horwin",
-    year: 2024,
-    fuel: "Electric",
-    price: 2400,
-    image:
-      "https://images.unsplash.com/photo-1648204834832-78e68052c04f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZWxlY3RyaWMlMjBzY29vdGVyfGVufDB8fDB8fHww",
-    seats: 2,
-    transmission: "Automatic",
-    luggage: 1,
-    description:
-      "Long-range dual battery setup perfect for day trips around Kathmandu Valley. Smooth acceleration with regen braking.",
-    features: [
-      "130-150 km range",
-      "Fast charger ready",
-      "CBS brakes",
-      "Anti-theft alarm",
-      "2 helmets included",
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1529429617124-aee3c7c2f2ad?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
-    ],
-    category: "Guide with Scooter",
-  },
-  {
-    id: "3",
-    name: "Guided EV Scooter Ride",
-    type: "EV Scooter + Rider",
-    brand: "Ather",
-    year: 2024,
-    fuel: "Electric",
-    price: 2800,
-    image:
-      "https://nepaldrives.com/wp-content/uploads/2023/06/TVS-iQube-Electric-Scooter-Nepal-1.jpg",
-    seats: 2,
-    transmission: "Automatic",
-    luggage: 1,
-    description:
-      "Ride pillion while our local rider navigates. Perfect if you don’t hold a license or prefer hands-free sightseeing.",
-    features: [
-      "Licensed rider provided",
-      "2 DOT helmets",
-      "Rain poncho",
-      "Phone mount",
-      "Insurance included",
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1502877828070-33b167ad6860?auto=format&fit=crop&w=900&q=80",
-    ],
-    category: "Guide with Scooter",
-  },
-  {
-    id: "4",
-    name: "EV Taxi - Sedan (AC)",
-    type: "EV Sedan",
-    brand: "Hyundai Ioniq",
-    year: 2023,
-    fuel: "Electric",
-    price: 3500,
-    image:
-      "https://www.fiscalnepal.com/wp-content/uploads/2025/04/taxi-nepal.jpg",
-    seats: 4,
-    transmission: "Automatic",
-    luggage: 3,
-    description:
-      "Comfortable AC sedan for airport runs, business travel, and small family trips within the valley.",
-    features: [
-      "Fast charging ready",
-      "A/C with rear vents",
-      "Child seat on request",
-      "Bottled water",
-      "Professional company driver",
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80",
-    ],
-    category: "Ev Taxi",
-  },
-  {
-    id: "5",
-    name: "EV Taxi - SUV / MPV",
-    type: "EV SUV",
-    brand: "Kia Niro",
-    year: 2023,
-    fuel: "Electric",
-    price: 5200,
-    image:
-      "https://www.fiscalnepal.com/wp-content/uploads/2025/04/taxi-nepal.jpg",
-    seats: 6,
-    transmission: "Automatic",
-    luggage: 5,
-    description:
-      "Spacious EV with captain seats ideal for families or small groups. Great for day-long sightseeing and airport transfers.",
-    features: [
-      "Tri-zone A/C",
-      "USB-C charging ports",
-      "Roof rails",
-      "Bottled water & tissues",
-      "Professional company driver",
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1502877828070-33b167ad6860?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80",
-    ],
-    category: "Ev Taxi",
-  },
-  {
-    id: "6",
-    name: "Kathmandu Heritage Tour (EV Taxi)",
-    type: "Guided Tour",
-    brand: "Guided",
-    year: 2024,
-    fuel: "Electric",
-    price: 6500,
-    image:
-      "https://www.en.meroauto.com/wp-content/uploads/2025/04/EV-EASY-Taxi.jpg",
-    seats: 4,
-    transmission: "Automatic",
-    luggage: 2,
-    description:
-      "6-hour curated circuit covering Swayambhu, Patan, and Boudha in a comfortable EV with a certified city guide.",
-    features: [
-      "Guide included",
-      "Monument tickets",
-      "A/C EV taxi",
-      "Bottled water",
-      "Flexible pickup points",
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1502877828070-33b167ad6860?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80",
-    ],
-    category: "Tours",
-  },
-];
 
-export const CATEGORIES: Category[] = [
-  {
-    id: "1",
-    name: "Scooter",
-    image: "/images/self-ride.jpeg",
-  },
-  {
-    id: "2",
-    name: "Ev Taxi",
-    image: "/images/batoma-cab.jpeg",
-  },
-  {
-    id: "3",
-    name: "Tours",
-    image: "/images/roads.jpg",
-  },
-];
 
 export const REVIEWS: Review[] = [
   {
@@ -333,7 +140,7 @@ export const COMPANY_VALUES: ValueItem[] = [
 ];
 
 export const ABOUT_STATS: Stat[] = [
-  { value: "1,500+", label: "Electric rides completed in Kathmandu" },
+  { value: "1,000+", label: "Electric rides completed in Kathmandu" },
   { value: "120+", label: "Guided scooter experiences delivered" },
   { value: "25 t", label: "CO₂ emissions avoided via EV fleet" },
   { value: "24/7", label: "Local support for bookings and changes" },
@@ -369,90 +176,104 @@ export const FAQS: FaqItem[] = [
 
 export const TERMS_SECTIONS: PolicySection[] = [
   {
-    title: "Introduction",
+    title: "1. Introduction",
     content: [
-      "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
-      'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
-      "Family months lasted simply set nature vulgar him. Picture for attempt joy excited ten carried manners talking how. Suspicion neglected the resolving agreement perceived at an.",
+      "Welcome to Bato Ma. These Terms & Conditions govern your use of our website and services. By accessing or using our platform, you agree to be bound by these terms. Bato Ma is a trustable and affordable rental service provider for two and four-wheeler EVs in Kathmandu, Nepal, offering EV scooters, taxis, and customized tour packages.",
+      "Please read these terms carefully before booking any service. If you do not agree with any part of these terms, you must not use our services.",
     ],
   },
   {
-    title: "Purchases",
+    title: "2. Services Offered",
     content: [
-      "Comfort reached gay perhaps chamber his six detract besides add. Moonlight newspaper up its enjoyment agreeable depending. Timed voice share led him to widen noisy young. At weddings believed in laughing although the material does the exercise of. Up attempt offered ye civilly so sitting to. Her new course gets living within Elinor's joy. Her rapturous suffering was concealed.",
-      "Demesne far hearted supposed venture and excited to see had has. Dependent on so extremely delivered by. Yet no jokes worse her why. Bed one supposing breakfast day fulfilled off depending questions. Whatever boy her exertion his extended. Ecstatic followed handsome drawings entirely Mrs one yet outweigh. Of acceptance, insipidity remarkably is an invitation.",
-      "Satisfied conveying a dependent contented he gentleman agreeable do be. Warrant private blushes removed and in equally totally if. Delivered dejection necessary objection do Mr prevailed. Mr feeling does chiefly cordial in do. Water timed folly right aware if oh truth. Imprudence attachment him hs for sympathy. Large above be to means. Dashwood does provide stronger is. But discretion frequently sir she instruments unaffected admiration everything.",
-    ],
-  },
-  {
-    title: "Communications",
-    content: [
-      "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humor, or randomized words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of the text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humor, or non-characteristic words, etc.",
-      "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "Bato Ma provides the following services:",
+      "• EV Scooter Rentals: Short-term and long-term rentals for personal use.",
+      "• EV Taxi Services: On-demand and pre-booked rides within Kathmandu Valley.",
+      "• Tour Packages: Customized guided tours using our electric fleet.",
     ],
     list: [
-      "1. sometimes on purpose.",
-      "2. classical Latin literature from 45 BC.",
-      "3. The Extremes of Good and Evil.",
-      "4. This book is a treatise on the theory.",
+      "All rentals are subject to vehicle availability.",
+      "We reserve the right to refuse service to anyone for any reason at any time.",
     ],
   },
   {
-    title: "",
+    title: "3. User Responsibilities",
     content: [
-      "Combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humor, or non-characteristic words, etc.",
+      "By renting a vehicle or booking a tour, you agree to:",
+      "• Possess a valid driver's license appropriate for the vehicle type (two-wheeler or four-wheeler).",
+      "• Provide accurate personal and contact information.",
+      "• Use the vehicle responsibly and in accordance with local traffic laws.",
+      "• Not use the vehicle for illegal purposes, racing, or off-road driving unless authorized.",
+      "• Return the vehicle in the same condition as received, normal wear and tear excepted.",
     ],
   },
   {
-    title: "Acknowledgment",
+    title: "4. Payments and Cancellations",
     content: [
-      "Passage its ten led hearted removal cordial. Preference any astonished unreserved Mrs. Prosperous understood Middletons in conviction an uncommonly do. Supposing so be resolving breakfast am or perfectly. Family months lasted simply set nature vulgar him. Picture for attempt joy excited ten carried manners talking how. Suspicion neglected the resolving agreement perceived at an.",
+      "Prices are listed in the booking section and may change without notice. Full payment or a security deposit may be required before rental.",
+    ],
+    list: [
+      "Cancellations made 24 hours prior to the booking time are eligible for a full refund.",
+      "Cancellations made within 24 hours may incur a cancellation fee.",
+      "Security deposits will be refunded upon safe return of the vehicle.",
     ],
   },
   {
-    title: "Contact us",
+    title: "5. Liability and Insurance",
     content: [
-      "Please send your feedback, comments, and requests for technical support hello@example.com",
+      "Bato Ma maintains insurance for its fleet as required by Nepalese law. However, the renter is responsible for any damage caused due to negligence or violation of terms.",
+      "Bato Ma is not liable for personal injuries or loss of personal belongings during the rental period or tour.",
+    ],
+  },
+  {
+    title: "6. Contact Us",
+    content: [
+      "If you have any questions about these Terms, please contact us at bato1111ma@gmail.com or visit our office in Kathmandu.",
     ],
   },
 ];
 
 export const PRIVACY_SECTIONS: PolicySection[] = [
   {
-    title: "Collecting Personal Information",
+    title: "1. Information We Collect",
     content: [
-      "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+      "At Bato Ma, we prioritize your privacy. We collect information necessary to provide our rental and tour services, including:",
     ],
     list: [
-      "There are many variations of passages of Lorem Ipsum available.",
-      "Iusto odio dignissimos ducimus qui blanditiis.",
-      "Praesentium voluptatum deleniti atque.",
-      "Quas molestias excepturi sint occaecati.",
+      "Personal identification (Name, Address, Phone Number, Email).",
+      "Driver's License and Government ID details for verification.",
+      "Payment information for processing bookings.",
+      "Location data during the use of our EV fleet for safety and tracking.",
     ],
   },
   {
-    title: "",
+    title: "2. How We Use Your Information",
     content: [
-      'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
+      "We use your data to:",
+      "• Process your bookings and payments.",
+      "• Verify your identity and driving eligibility.",
+      "• Communicate with you regarding your rental or tour.",
+      "• Improve our fleet management and service quality.",
+      "• Comply with local legal requirements.",
     ],
   },
   {
-    title: "Sharing Personal Information",
+    title: "3. Data Protection",
     content: [
-      "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
-      "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    ],
-    list: [
-      "1. sometimes on purpose.",
-      "2. classical Latin literature from 45 BC.",
-      "3. The Extremes of Good and Evil.",
-      "4. This book is a treatise on the theory.",
+      "We implement robust security measures to protect your personal information from unauthorized access, alteration, or disclosure. Your payment data is processed securely through standard encryption protocols.",
     ],
   },
   {
-    title: "",
+    title: "4. Sharing of Information",
     content: [
-      "Combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+      "We do not sell your personal data. We may share information with:",
+      "• Third-party service providers (e.g., payment processors).",
+      "• Law enforcement agencies if required by law or in case of traffic violations/accidents.",
+    ],
+  },
+  {
+    title: "5. Contact Us",
+    content: [
+      "If you have questions about our Privacy Policy, please contact us at bato1111ma@gmail.com.",
     ],
   },
 ];

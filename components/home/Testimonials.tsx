@@ -16,9 +16,12 @@ export const Testimonials: React.FC = () => {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-4xl font-semibold text-center mb-16 text-carent-text">
-          Feedback from satisfied renters
+        <h2 className="text-4xl font-semibold text-center  text-carent-text">
+          Hear from  experience of people who rented Bato Ma.
         </h2>
+        <p className="text-lg text-center text-gray-600 mb-16">
+          See what our customers say about their experience with Bato Ma.
+        </p>
 
         {/* Masonry Layout approximation using CSS columns */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-4 sm:gap-5 md:gap-6 space-y-4 sm:space-y-5 md:space-y-6">
