@@ -2,13 +2,15 @@ import BlogView from "./blog-view";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bato Ma Blog - Travel Tips & EV Living",
+  title: "Bato Ma Blog | EV Travel Tips & Rental Guides",
   description:
-    "Read the latest articles about electric vehicles, travel tips, and guides for exploring Kathmandu. Stay informed about EV rentals and sustainable transportation.",
+    "Explore Bato Ma’s blog for EV travel tips, rental guides, and insights on exploring Kathmandu with electric scooters and taxis.",
+
   openGraph: {
-    title: "Blog - Bato Ma EV Rental",
+    title: "Bato Ma Blog | EV Travel & Rental Insights",
     description:
-      "Discover travel tips, EV guides, and insights about exploring Kathmandu with electric vehicles.",
+      "Read helpful EV travel tips, rental guides, and stories for exploring Kathmandu with Bato Ma.",
+    type: "website",
   },
 };
 

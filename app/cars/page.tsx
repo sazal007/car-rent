@@ -1,14 +1,16 @@
-import CarsViewPage from "./cars-view";
 import type { Metadata } from "next";
+import CarsViewPage from "./cars-view";
 
 export const metadata: Metadata = {
-  title: "Our EV Fleet - Rent Scooters & Taxis in Kathmandu",
+  title: "Rental Categories | EV Scooters & Taxis in Kathmandu",
   description:
-    "Browse our fleet of electric vehicles for rent in Kathmandu. Choose from EV scooters, sedans, SUVs, and guided tours. Book online today!",
+    "Explore Bato Ma’s EV rental categories in Kathmandu. Choose from electric scooters, taxis, and tour-friendly vehicles for a smooth and eco-friendly ride.",
+
   openGraph: {
-    title: "Electric Vehicle Rentals - Bato Ma",
+    title: "Rental Categories | Bato Ma EV Rentals",
     description:
-      "Rent electric scooters, taxis, and join guided tours in Kathmandu. Browse our fleet and book your perfect EV rental.",
+      "Browse electric scooters and taxis for rent in Kathmandu with Bato Ma. Find the right EV and book your ride easily.",
+    type: "website",
   },
 };
 

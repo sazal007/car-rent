@@ -1,14 +1,16 @@
-import FaqView from "./faq-view";
 import type { Metadata } from "next";
+import FaqView from "./faq-view";
 
 export const metadata: Metadata = {
-  title: "Bato Ma FAQ - Everything About Ev Scooter , Taxi & Customize Tour Packages",
+  title: "FAQ | EV Scooter, Taxi & Tour Rentals – Bato Ma",
   description:
-    "Frequently asked questions about Bato Ma EV rentals. Learn about licenses, booking, safety gear, cancellation policies, and more.",
+    "Find answers to common questions about Bato Ma EV rentals, including booking, licenses, safety, cancellations, and guided tours in Kathmandu.",
+
   openGraph: {
-    title: "Frequently Asked Questions - Bato Ma",
+    title: "FAQ | Bato Ma EV Rentals",
     description:
-      "Find answers to common questions about electric vehicle rentals, bookings, safety, and tours in Kathmandu.",
+      "Get clear answers to frequently asked questions about EV scooter and taxi rentals, bookings, and tours with Bato Ma.",
+    type: "website",
   },
 };
 

@@ -8,6 +8,7 @@ import { useGetBlogBySlug, useGetBlogs } from "@/hooks/use-blogs";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Button } from "@/components/shared/Button";
 import { sanitizeContent } from "@/lib/html-sanitizer";
+import { BlogContactForm } from "@/components/blog/BlogContactForm";
 
 export default function BlogDetailView() {
   const params = useParams();
@@ -110,7 +111,7 @@ export default function BlogDetailView() {
 
       {/* Recent Blog Section */}
       {recentPosts.length > 0 && (
-        <div className="container mx-auto px-3 sm:px-4 md:px-6 mt-16 sm:mt-20 md:mt-24 lg:mt-32">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 mt-16 sm:mt-20 md:mt-24 lg:mt-32 mb-16 sm:mb-20 md:mb-24 lg:mb-32">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-10 md:mb-12 text-carent-text border-b border-gray-200 pb-3 sm:pb-4">
             Recent Blog
           </h2>
@@ -121,6 +122,7 @@ export default function BlogDetailView() {
           </div>
         </div>
       )}
+      <BlogContactForm />
     </div>
   );
 }

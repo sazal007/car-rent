@@ -1,14 +1,16 @@
-import ToursViewPage from "./tours-view";
 import type { Metadata } from "next";
+import ToursViewPage from "./tours-view";
 
 export const metadata: Metadata = {
-  title: "Guided EV Tours - Explore Kathmandu with Bato Ma",
+  title: "Tour Packages | Explore Kathmandu with Bato Ma",
   description:
-    "Explore Kathmandu with our guided electric vehicle tours. Heritage sites, food tours, and evening city rides. Book your adventure today!",
+    "Explore Kathmandu with Bato Ma’s guided EV tour packages. Discover heritage sites, food spots, and city rides with electric vehicles.",
+
   openGraph: {
-    title: "Guided Tours in Kathmandu - Bato Ma",
+    title: "Tour Packages | Bato Ma EV Tours",
     description:
-      "Join our guided EV tours in Kathmandu. Visit heritage sites, enjoy food tours, and experience the city on electric vehicles.",
+      "Book guided electric vehicle tours in Kathmandu with Bato Ma. Enjoy heritage tours, food tours, and city experiences.",
+    type: "website",
   },
 };
 

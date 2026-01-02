@@ -2,9 +2,10 @@ import { TERMS_SECTIONS } from "@/constants";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bato Ma : Terms & Conditions",
+  title: "Privacy Policy | Bato Ma",
   description:
-    "Read Bato Ma's terms and conditions for electric vehicle rentals, tours, and services.",
+    "Learn how Bato Ma collects, uses, and protects your personal information when using our EV rental and tour services.",
+
   robots: {
     index: false,
     follow: false,

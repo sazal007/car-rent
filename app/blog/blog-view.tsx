@@ -31,7 +31,7 @@ export default function BlogView() {
         <div className="container mx-auto px-3 sm:px-4 md:px-6">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-carent-text">
-              Blog
+              Bato Ma - Read Our Blog
             </h1>
           </div>
           <div className="flex justify-center items-center py-12 sm:py-16 md:py-20">
@@ -52,7 +52,7 @@ export default function BlogView() {
         {/* Header */}
         <div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-carent-text mb-16">
-            Blog
+            Bato Ma - Read Our Blog
           </h1>
         </div>
 

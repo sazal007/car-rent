@@ -10,15 +10,16 @@ import { BookingForm } from "@/components/home/BookingForm";
 import FeaturesSection2 from "@/components/home/features2";
 import { BlogContactForm } from "@/components/blog/BlogContactForm";
 import type { Metadata } from "next";
+import FaqView from "./faq/faq-view";
 
 export const metadata: Metadata = {
-  title: "Bato Ma - Rent Ev Scooter , Taxi & Customize Tour Packages With Bato Ma",
+  title: "Bato Ma | Rent EV Scooters & Taxis in Kathmandu",
   description:
-    "Bato Ma offers electric vehicle rentals in Kathmandu, Nepal. Rent EV scooters, taxis, and join guided tours. Sustainable, safe, and reliable transportation solutions.",
+    "Eco-friendly electric vehicle rentals and guided tours in Kathmandu. Choose from EV scooters, taxis, and custom tour packages for a sustainable travel experience.",
   openGraph: {
-    title: "Bato Ma - Electric Vehicle Rentals in Kathmandu",
+    title: "Bato Ma | Rent EV Scooters & Taxis in Kathmandu",
     description:
-      "Rent electric scooters, taxis, and join guided tours in Kathmandu. Sustainable transportation with 24/7 support.",
+      "Eco-friendly electric vehicle rentals and guided tours in Kathmandu. Join us for a sustainable travel experience.",
   },
 };
 
@@ -37,6 +38,7 @@ export default function Home() {
       <Steps />
       <Testimonials />
       <BlogContactForm />
+      <FaqView />
     </>
   );
 }
