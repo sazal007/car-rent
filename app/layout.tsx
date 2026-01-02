@@ -14,8 +14,8 @@ const bricolageGrotesque = Bricolage_Grotesque({
 
 export const metadata: Metadata = {
   title: {
-    default: "Batoma - Your Trusted EV Rental Partner",
-    template: "%s | Batoma",
+    default: "Bato Ma - Your Trusted EV Rental Partner",
+    template: "%s | Bato Ma",
   },
   description:
     "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services in Kathmandu, Nepal. Electric scooters, taxis, and guided tours.",
@@ -27,18 +27,18 @@ export const metadata: Metadata = {
     "Kathmandu tours",
     "electric taxi",
     "guided tours",
-    "Batoma",
+    "Bato Ma",
   ],
-  authors: [{ name: "Batoma" }],
-  creator: "Batoma",
-  publisher: "Batoma",
+  authors: [{ name: "Bato Ma" }],
+  creator: "Bato Ma",
+  publisher: "Bato Ma",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://batomatours.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "/",
-    siteName: "Batoma",
-    title: "Batoma - Your Trusted EV Rental Partner",
+    siteName: "Bato Ma",
+    title: "Bato Ma - Your Trusted EV Rental Partner",
     description:
       "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services in Kathmandu, Nepal.",
     images: [
@@ -46,13 +46,13 @@ export const metadata: Metadata = {
         url: "/images/kathmandu-himals.jpg",
         width: 1200,
         height: 630,
-        alt: "Batoma - EV Rental Services",
+        alt: "Bato Ma - EV Rental Services",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Batoma - Your Trusted EV Rental Partner",
+    title: "Bato Ma - Your Trusted EV Rental Partner",
     description:
       "Book your perfect rental EV with ease. Quick, affordable, and reliable EV rental services in Kathmandu, Nepal.",
     images: ["/images/kathmandu-himals.jpg"],

@@ -5,14 +5,13 @@ import { ContactMap } from "@/components/contact/ContactMap";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
+  title: "Contact Bato Ma - 24/7 EV Support & Bookings",
   description:
-    "Get in touch with Batoma for EV rentals, tours, and inquiries. We're here to help you with your transportation needs in Kathmandu.",
+    "Get in touch with Bato Ma for EV rentals, tours, and inquiries. We're here to help you with your transportation needs in Kathmandu.",
   openGraph: {
-    title: "Contact Batoma - EV Rental Support",
+    title: "Contact Bato Ma - EV Rental Support",
     description:
-      "Contact Batoma for electric vehicle rentals, guided tours, and customer support. Available 24/7 for your convenience.",
-    url: "/contact",
+      "Contact Bato Ma for electric vehicle rentals, guided tours, and customer support. Available 24/7 for your convenience.",
   },
 };
 

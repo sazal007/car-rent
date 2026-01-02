@@ -12,14 +12,13 @@ import { BlogContactForm } from "@/components/blog/BlogContactForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Bato Ma - Rent Ev Scooter , Taxi & Customize Tour Packages With Bato Ma",
   description:
-    "Batoma offers electric vehicle rentals in Kathmandu, Nepal. Rent EV scooters, taxis, and join guided tours. Sustainable, safe, and reliable transportation solutions.",
+    "Bato Ma offers electric vehicle rentals in Kathmandu, Nepal. Rent EV scooters, taxis, and join guided tours. Sustainable, safe, and reliable transportation solutions.",
   openGraph: {
-    title: "Batoma - Electric Vehicle Rentals in Kathmandu",
+    title: "Bato Ma - Electric Vehicle Rentals in Kathmandu",
     description:
       "Rent electric scooters, taxis, and join guided tours in Kathmandu. Sustainable transportation with 24/7 support.",
-    url: "/",
   },
 };
 

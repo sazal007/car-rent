@@ -2,7 +2,7 @@ import { TERMS_SECTIONS } from "@/constants";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions",
+  title: "Bato Ma : Terms & Conditions",
   description:
     "Read Bato Ma's terms and conditions for electric vehicle rentals, tours, and services.",
   robots: {

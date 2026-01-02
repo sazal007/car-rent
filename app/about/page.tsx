@@ -7,14 +7,13 @@ import type { Metadata } from "next";
 import { BlogContactForm } from "@/components/blog/BlogContactForm";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About Bato Ma - Leading Sustainable EV Rentals",
   description:
-    "Learn about Batoma - Kathmandu's leading electric vehicle rental service. Our mission, values, and commitment to sustainable transportation.",
+    "Learn about Bato Ma - Kathmandu's leading electric vehicle rental service. Our mission, values, and commitment to sustainable transportation.",
   openGraph: {
-    title: "About Batoma - Sustainable EV Rental Services",
+    title: "About Bato Ma - Sustainable EV Rental Services",
     description:
-      "Discover Batoma's mission to provide sustainable, safe, and reliable electric vehicle rentals in Kathmandu, Nepal.",
-    url: "/about",
+      "Discover Bato Ma's mission to provide sustainable, safe, and reliable electric vehicle rentals in Kathmandu, Nepal.",
   },
 };
 
