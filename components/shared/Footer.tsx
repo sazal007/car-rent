@@ -75,7 +75,7 @@ export const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    href="/cars"
+                    href="/rentals"
                     className="hover:text-carent-yellow transition-colors"
                   >
                     Cars

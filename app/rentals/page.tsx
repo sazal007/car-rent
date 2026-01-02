@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CarsViewPage from "./cars-view";
+import CarsViewPage from "./rentals-view";
 
 export const metadata: Metadata = {
   title: "Rental Categories | EV Scooters & Taxis in Kathmandu",

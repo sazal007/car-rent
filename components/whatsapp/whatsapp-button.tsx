@@ -55,7 +55,7 @@ export function WhatsAppButton({
         onMouseLeave={() => setIsHovered(false)}
         aria-label="Contact us on WhatsApp"
         icon={false}
-        className={`relative h-12 w-12 rounded-full bg-[#2ea218] p-0 shadow-lg hover:bg-[#2ea218] flex items-center justify-center ${className}`}
+        className={`relative h-12 w-12 rounded-full bg-[#2ea218]! p-0 shadow-lg hover:bg-[#2ea218]! flex items-center justify-center ${className}`}
       >
         <div className="text-white flex items-center justify-center">
           {icon || defaultWhatsAppIcon}

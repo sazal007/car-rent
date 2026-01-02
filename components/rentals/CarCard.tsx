@@ -19,7 +19,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       .replace(/(^-|-$)/g, "");
 
   return (
-    <Link href={`/cars/${car.id}-${slug}`} className="group block h-full">
+    <Link href={`/rentals/${car.id}-${slug}`} className="group block h-full">
       <div className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-100">
         {/* Car Image */}
         <div className="relative h-52 sm:h-64 md:h-72 lg:h-80 w-full overflow-hidden bg-linear-to-b from-gray-50 to-white">
