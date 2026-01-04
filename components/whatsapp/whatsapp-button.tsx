@@ -47,7 +47,7 @@ export function WhatsAppButton({
   );
 
   return (
-    <div className="fixed right-6 bottom-6">
+    <div className="fixed right-6 bottom-6 z-[9999]">
       {/* WhatsApp Button */}
       <Button
         onClick={handleWhatsAppClick}
