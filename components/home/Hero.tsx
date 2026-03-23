@@ -50,7 +50,7 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 sm:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 sm:py-20 lg:py-24 mt-32">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 xl:gap-20 items-center">
 
           {/* Left Column - Content */}
@@ -58,14 +58,14 @@ export const Hero: React.FC = () => {
 
             {/* Heading */}
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white leading-tight">
                 Rent Ev Scooter , Taxi & Customize Tour Packages With Bato Ma.
               </h1>
             </div>
 
             {/* Description */}
             <div className="space-y-3">
-              <p className="text-gray-300 text-sm sm:text-base lg:text-lg xl:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-gray-300 text-sm sm:text-sm lg:text-base xl:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Bato Ma is a trustable and affordable rental service provider for two and four wheelers Ev's in Kathmandu, Nepal. Book with us and get the best experience.
               </p>
             </div>
@@ -92,7 +92,7 @@ export const Hero: React.FC = () => {
               </Button>
 
               <Link
-                href="/cars"
+                href="/rentals"
                 className="inline-flex items-center justify-center gap-2 bg-gray-800/80 hover:bg-gray-700 border border-gray-600 text-white font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-sm sm:text-base transition-colors duration-200 w-full sm:w-auto"
               >
                 Explore Rentals
@@ -112,7 +112,7 @@ export const Hero: React.FC = () => {
                   {displayedVehicles.map((vehicle: Vehicle, index) => (
                     <Link
                       key={vehicle.id}
-                      href={`/cars/${vehicle.id}-${vehicle.slug}`}
+                      href={`/rentals/${vehicle.id}-${vehicle.slug}`}
                       className={`absolute inset-0 transition-opacity duration-500 ${index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
                         }`}
                     >

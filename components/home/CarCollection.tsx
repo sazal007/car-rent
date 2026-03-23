@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "../shared/Button";
-import { CarCard } from "../cars/CarCard";
+import { CarCard } from "../rentals/CarCard";
 import { useVehicles } from "@/hooks/use-vehicles";
 import { ArrowLeft, ArrowRight, Loader } from "lucide-react";
 
@@ -113,7 +113,7 @@ export const CarCollection: React.FC<CarCollectionProps> = ({
             )}
             {/* View All Button - Hidden on mobile */}
             <div className="shrink-0 hidden md:block">
-              <Link href="/cars">
+              <Link href="/rentals">
                 <Button icon={true} className="text-sm sm:text-base">
                   View all vehicles
                 </Button>

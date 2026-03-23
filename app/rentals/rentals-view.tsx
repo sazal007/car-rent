@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { CarFilter } from "@/components/cars/CarFilter";
-import { CarCard } from "@/components/cars/CarCard";
-import { CarPagination } from "@/components/cars/CarPagination";
+import { CarFilter } from "@/components/rentals/CarFilter";
+import { CarCard } from "@/components/rentals/CarCard";
+import { CarPagination } from "@/components/rentals/CarPagination";
 import { useVehicles } from "@/hooks/use-vehicles";
 import { useCategories } from "@/hooks/use-categories";
 import { Loader } from "@/components/shared/loader";
@@ -43,9 +43,9 @@ function VehiclesContent() {
   const handleCategoryChange = (category: string) => {
     setCurrentPage(1);
     if (category === "All") {
-      router.push("/cars");
+      router.push("/rentals");
     } else {
-      router.push(`/cars?category=${encodeURIComponent(category)}`);
+      router.push(`/rentals?category=${encodeURIComponent(category)}`);
     }
   };
 

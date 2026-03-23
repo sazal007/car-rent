@@ -10,12 +10,12 @@ import { useVehicleBySlug } from "@/hooks/use-vehicles";
 import { BookingData } from "@/types/booking";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { InlineBookingForm } from "@/components/booking/InlineBookingForm";
-import { CarSpecs } from "@/components/cars/CarSpecs";
-import { CarFeatures } from "@/components/cars/CarFeatures";
-import { CarGallery } from "@/components/cars/CarGallery";
-import { TermsAndConditions } from "@/components/cars/TermsAndConditions";
-import { CarFeedback } from "@/components/cars/CarFeedback";
-import { ServiceOptions } from "@/components/cars/ServiceOptions";
+import { CarSpecs } from "@/components/rentals/CarSpecs";
+import { CarFeatures } from "@/components/rentals/CarFeatures";
+import { CarGallery } from "@/components/rentals/CarGallery";
+import { TermsAndConditions } from "@/components/rentals/TermsAndConditions";
+import { CarFeedback } from "@/components/rentals/CarFeedback";
+import { ServiceOptions } from "@/components/rentals/ServiceOptions";
 import { ServiceType } from "@/components/booking/ServiceTypeSelector";
 import { Loader } from "@/components/shared/loader";
 import { BlogContactForm } from "@/components/blog/BlogContactForm";
@@ -378,8 +378,8 @@ function CarsDetailsViewContent() {
     return formData.serviceType === "selfRide"
       ? "Rent Scooter"
       : formData.serviceType === "taxi"
-      ? "Book Taxi"
-      : "Guided Scooter";
+        ? "Book Taxi"
+        : "Guided Scooter";
   };
 
   const selectedLabel = getSelectedLabel();
@@ -424,7 +424,7 @@ function CarsDetailsViewContent() {
         <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
           Car not found
         </h2>
-        <Button onClick={() => router.push("/cars")} className="mt-4 sm:mt-6">
+        <Button onClick={() => router.push("/rentals")} className="mt-4 sm:mt-6">
           Go Back
         </Button>
       </div>

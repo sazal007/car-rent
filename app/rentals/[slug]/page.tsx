@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getVehicleBySlug } from "@/services/vehicles.service";
-import CarsDetailsView from "./cars-details-view";
+import CarsDetailsView from "./rentals-details-view";
 
 type Props = {
   params: Promise<{ slug: string }>;

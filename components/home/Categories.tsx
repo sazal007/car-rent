@@ -80,7 +80,7 @@ export const Categories: React.FC = () => {
                   cat.name.toLowerCase().includes("tour");
                 const href = isTourCategory
                   ? "/tours"
-                  : `/cars?category=${encodeURIComponent(cat.name)}`;
+                  : `/rentals?category=${encodeURIComponent(cat.name)}`;
 
                 return (
                   <Link
