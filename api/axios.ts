@@ -6,6 +6,7 @@ export const apiClient = axios.create({
   baseURL,
   headers: {
     "Content-Type": "application/json",
+    "X-Tenant-Domain": "batoma.nepdora.com",
   },
 });
 
@@ -79,7 +80,7 @@ apiClient.interceptors.response.use(
     };
 
     return Promise.reject(normalizedError);
-  }
+  },
 );
 
 export default apiClient;
