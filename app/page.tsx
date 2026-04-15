@@ -8,7 +8,7 @@ import { TourPackages } from "@/components/home/TourPakages";
 import { Services } from "@/components/home/Services";
 import { BookingForm } from "@/components/home/BookingForm";
 import FeaturesSection2 from "@/components/home/features2";
-import { BlogContactForm } from "@/components/blog/BlogContactForm";
+import { ContactForm } from "@/components/blog/BlogContactForm";
 import type { Metadata } from "next";
 import FaqView from "./faq/faq-view";
 import Script from "next/script";
@@ -16,34 +16,34 @@ import Script from "next/script";
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Bato Ma",
-  "url": "https://batomatours.com",
-  "potentialAction": {
+  name: "Bato Ma",
+  url: "https://batomatours.com",
+  potentialAction: {
     "@type": "SearchAction",
-    "target": "https://batomatours.com/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+    target: "https://batomatours.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
 };
 
 const corporationSchema = {
   "@context": "https://schema.org",
   "@type": "Corporation",
-  "name": "Bato Ma",
-  "url": "https://batomatours.com",
-  "logo": "https://batomatours.com/logo/logowhite.svg",
-  "contactPoint": {
+  name: "Bato Ma",
+  url: "https://batomatours.com",
+  logo: "https://batomatours.com/logo/logowhite.svg",
+  contactPoint: {
     "@type": "ContactPoint",
-    "telephone": "+9779705471232",
-    "contactType": "customer service",
-    "email": "bato1111ma@gmail.com",
-    "areaServed": "NP",
-    "availableLanguage": ["en", "ne"]
+    telephone: "+9779705471232",
+    contactType: "customer service",
+    email: "bato1111ma@gmail.com",
+    areaServed: "NP",
+    availableLanguage: ["en", "ne"],
   },
-  "sameAs": [
+  sameAs: [
     "https://facebook.com/batoma",
     "https://instagram.com/batoma",
-    "https://linkedin.com/company/batoma"
-  ]
+    "https://linkedin.com/company/batoma",
+  ],
 };
 
 export const metadata: Metadata = {
@@ -71,7 +71,7 @@ export default function Home() {
       <TourPackages />
       <Steps />
       <Testimonials />
-      <BlogContactForm />
+      <ContactForm />
       <FaqView />
       <Script
         id="schema-website"
