@@ -17,7 +17,7 @@ const fadeInUp: Variants = {
     },
 };
 
-export const ContactForm = () => {
+export const BlogContactForm = () => {
     const { mutate: submitContact, isPending } = useSubmitContactForm();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
